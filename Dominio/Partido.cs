@@ -13,7 +13,6 @@ namespace Dominio
         public bool esFinalizada { get; set; }
 
         //public List<Incidencia> incidencias;\
-        public int tipoPartido { get; set; }
 
         public void ValidarSelecciones()
         {

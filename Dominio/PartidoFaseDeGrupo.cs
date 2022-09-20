@@ -9,6 +9,13 @@ namespace Dominio
         #region Atributos PartidoFaseDeGrupo
         #endregion
         #region Metodos PartidoFaseDeGrupo
+        public PartidoFaseDeGrupo(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora)
+        {
+            this.seleccion1 = pSeleccion1;
+            this.seleccion2 = pSeleccion2;
+            this.fechaHora = pFechaHora;
+            this.esFinalizada = false;
+        }
         #endregion
     }
 }

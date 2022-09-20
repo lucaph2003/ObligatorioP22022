@@ -6,7 +6,28 @@ namespace Dominio
 {
     class Mundial
     {
-        List<Pais> paises = new List<Pais>();
-        List<Seleccion> selecciones = new List<Seleccion>();
+        private static Mundial _instancia;
+
+        public List<Jugador> jugadores { get; } = new List<Jugador>();
+        public List<Seleccion> selecciones { get; } = new List<Seleccion>();
+
+        public static Mundial ObtenerInstancia
+        {
+            get
+            {
+                if (_instancia == null)
+                {
+                    _instancia = new Mundial();
+                }
+                return _instancia;
+            }
+        }
+
+        private Mundial()
+        {
+
+        }
+
+
     }
 }

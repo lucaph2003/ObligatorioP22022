@@ -1,4 +1,5 @@
 ﻿using System;
+using Dominio;
 
 namespace Mundial
 {

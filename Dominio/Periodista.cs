@@ -11,7 +11,13 @@ namespace Dominio
         public string password { get; set; }
         #endregion
         #region Metodos Periodista
-
+        public Periodista(string pNombre,string pApellido,string pEmail,string pPassword)
+        {
+            this.nombre = pNombre;
+            this.apellido = pApellido;
+            this.email = pEmail;
+            this.password = pPassword;
+        }
         public override void ValidarDatos()
         {
             if (this.nombre != null && this.apellido != null && this.email != null)

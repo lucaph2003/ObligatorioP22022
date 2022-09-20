@@ -13,11 +13,25 @@ namespace Dominio
         public int pieHabil { get; set; }
         public int valorMercado { get; set; }
         public Seleccion seleccion { get; set; }
-        public string puesto { get; set; }
+        public int puesto { get; set; }
         public string categoria { get; set; }
         public static int montoCategoria { get; set; }
         #endregion
         #region Metodos Jugador
+
+        public Jugador(string pNombre,string pApellido,int pDorsal,DateTime pFechaNacimiento,decimal pAltura,int pPieHabil,int pValorMercado,Seleccion pSeleccion,int pPuesto)
+        {
+            this.nombre = pNombre;
+            this.apellido = pApellido;
+            this.dorsal = pDorsal;
+            this.fechaNacimiento = pFechaNacimiento;
+            this.altura = pAltura;
+            this.pieHabil = pPieHabil;
+            this.valorMercado = pValorMercado;
+            this.seleccion = pSeleccion;
+            this.puesto = pPuesto;
+            CalcularCategoria();
+        }
         public override void ValidarDatos()
         {
             if(this.nombre != null &&this.apellido != null&&this.dorsal >= 0 && this.fechaNacimiento != null && this.altura > 0 && this.pieHabil > 0 && this.valorMercado >= 0 && this.seleccion != null && this.puesto != null)

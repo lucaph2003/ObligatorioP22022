@@ -6,8 +6,11 @@ namespace Dominio
 {
     class Periodista : Persona
     {
+        #region Atributos Periodista
         public string email { get; set; }
         public string password { get; set; }
+        #endregion
+        #region Metodos Periodista
 
         public override void ValidarDatos()
         {
@@ -38,5 +41,6 @@ namespace Dominio
                 throw new Exception("La contrasenia debe ser mayor a 8 caracteres");
             }
         }
+        #endregion
     }
 }

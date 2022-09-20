@@ -6,6 +6,7 @@ namespace Dominio
 {
     class Partido
     {
+        #region Atributos Partido
         public int id { get; set; }
         public Seleccion seleccion1 { get; set; }
         public Seleccion seleccion2 { get; set; }
@@ -13,6 +14,8 @@ namespace Dominio
         public bool esFinalizada { get; set; }
 
         //public List<Incidencia> incidencias;\
+        #endregion
+        #region Metodos Partido
 
         public void ValidarSelecciones()
         {
@@ -23,5 +26,6 @@ namespace Dominio
         {
 
         }
+        #endregion
     }
 }

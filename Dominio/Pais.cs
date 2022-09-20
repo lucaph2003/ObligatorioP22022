@@ -6,11 +6,13 @@ namespace Dominio
 {
     class Pais
     {
+        #region Atributos Pais
         public int id { get; set; }
         public string nombre { get; set; }
         public string codigo { get; set; }
         public static int contador = 0;
-
+        #endregion
+        #region Metodos Pais
         public Pais()
         {
             this.id = contador++;
@@ -33,5 +35,6 @@ namespace Dominio
             }
             return esCorrecto;
         }
+        #endregion
     }
 }

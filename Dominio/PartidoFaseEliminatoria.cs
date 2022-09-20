@@ -6,6 +6,10 @@ namespace Dominio
 {
     class PartidoFaseEliminatoria : Partido
     {
+        #region Atributos PartidoFaseEliminatoria
+        #endregion
+        #region Metodos PartidoFaseEliminatoria
+        #endregion
 
     }
 }

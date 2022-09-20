@@ -6,6 +6,7 @@ namespace Dominio
 {
     class Jugador : Persona
     {
+        #region Atributos Jugador
         public int dorsal { get; set; }
         public DateTime fechaNacimiento { get; set; }
         public decimal altura { get; set; }
@@ -15,7 +16,8 @@ namespace Dominio
         public string puesto { get; set; }
         public string categoria { get; set; }
         public static int montoCategoria { get; set; }
-
+        #endregion
+        #region Metodos Jugador
         public override void ValidarDatos()
         {
             if(this.nombre != null &&this.apellido != null&&this.dorsal >= 0 && this.fechaNacimiento != null && this.altura > 0 && this.pieHabil > 0 && this.valorMercado >= 0 && this.seleccion != null && this.puesto != null)
@@ -46,5 +48,6 @@ namespace Dominio
                 this.categoria = "VIP";
             }
         }
+        #endregion
     }
 }

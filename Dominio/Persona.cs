@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Persona
+    public abstract class Persona
     {
         #region Atributos Persona
         public int id { get; set; }
@@ -12,10 +12,7 @@ namespace Dominio
         public string apellido { get; set; }
         #endregion
         #region Metodos Persona
-        public virtual void ValidarDatos()
-        {
-
-        }
+        public abstract void ValidarDatos();
         #endregion
     }
 }

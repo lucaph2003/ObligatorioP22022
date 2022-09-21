@@ -13,7 +13,8 @@ namespace Dominio
         public DateTime fechaHora { get; set; }
         public bool esFinalizada { get; set; }
 
-        //public List<Incidencia> incidencias;\
+        //public List<Incidencia> incidencias;
+
         public static int contador = 0;
         #endregion
         #region Metodos Partido

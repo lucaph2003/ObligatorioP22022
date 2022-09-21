@@ -7,6 +7,7 @@ namespace Dominio
     class PartidoFaseDeGrupo : Partido
     {
         #region Atributos PartidoFaseDeGrupo
+        //prueba
         #endregion
         #region Metodos PartidoFaseDeGrupo
         public PartidoFaseDeGrupo(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora)

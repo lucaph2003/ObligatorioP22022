@@ -18,13 +18,12 @@ namespace Dominio
         public string puesto { get; set; }
         public string categoria { get; set; }
         public static int montoCategoria { get; set; }
-        public static int contador { get; set; } = 872;
         #endregion
         #region Metodos Jugador
 
         public Jugador(int pId, string pDorsal, string pNombreCompleto,DateTime pFechaNacimiento,double pAltura,string pPieHabil,int pValorMercado,string pMoneda,Pais pPais,string pPuesto):base(pNombreCompleto)
         {
-            this.id = contador++;
+            this.id = pId;
             this.dorsal = pDorsal;
             this.fechaNacimiento = pFechaNacimiento;
             this.altura = pAltura;
@@ -37,11 +36,7 @@ namespace Dominio
         }
         public override void Validar()
         {
-            if(this.nombreCompleto != null &&this.dorsal !=null && this.fechaNacimiento != null && this.altura > 0.0 && this.pieHabil != null && this.valorMercado >= 0 && this.pais != null && this.puesto != null)
-            {
-
-            }
-            else
+            if(this.nombreCompleto == null || this.dorsal == null || this.fechaNacimiento == null || this.altura < 0.0 && this.pieHabil == null || this.valorMercado <= 0 || this.pais == null || this.puesto == null)
             {
                 throw new Exception("Los datos deben estar completos");
             }

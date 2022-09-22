@@ -43,12 +43,12 @@ namespace Dominio
                 throw e;
             }
         }
-
-        public void AltaSeleccion(Seleccion pSeleccion)
+        public void AltaPeriodista(Periodista pPeriodista)
         {
             try
             {
-                Selecciones.Add(pSeleccion);
+                pPeriodista.Validar();
+                Periodistas.Add(pPeriodista);
             }
             catch (Exception e)
             {
@@ -56,13 +56,11 @@ namespace Dominio
             }
         }
 
-        public void AgregarPeriodista(string nombre, string apellido, string email, string password)
+        public void AltaSeleccion(Seleccion pSeleccion)
         {
             try
             {
-                Periodista periodista = new Periodista(nombre, apellido, email, password);
-                periodista.Validar();
-                Periodistas.Add(periodista);
+                Selecciones.Add(pSeleccion);
             }
             catch (Exception e)
             {
@@ -85,9 +83,6 @@ namespace Dominio
 
 
         /// Retorna el País a partir del nombre.
-        /// </summary>
-        /// <param name="nombre"></param>
-        /// <returns>Objeto país</returns>
         private Pais GetPais(string nombre)
         {
 
@@ -121,9 +116,6 @@ namespace Dominio
 
 
         /// Retorna todos los jugadores de una selección, a partir del país del jugador.
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns>Lista de jugadores del país seleccionado</returns>
         private List<Jugador> JugadoresDe(Pais p)
         {
             List<Jugador> _misJugadores = new List<Jugador>();
@@ -140,7 +132,6 @@ namespace Dominio
 
         public void PrecargaPaises()
         {
-            ///Precarga Paises
             AltaPais(new Pais("Catar", "QAT"));
             AltaPais(new Pais("Dinamarca", "DNK"));
             AltaPais(new Pais("Brasil", "BRA"));
@@ -177,7 +168,6 @@ namespace Dominio
        
         public void PrecargaJugadores()
         {
-            ///Precarga Jugadores
             AltaJugador(new Jugador(1, "23", "Emiliano Martínez", DateTime.Parse("1992-09-02"), 1.95, "derecho", 28000000, "EUR", GetPais("Argentina"), "Portero"));
             AltaJugador(new Jugador(2, "12", "Gerónimo Rulli", DateTime.Parse("1992-05-20"), 1.89, "derecho", 6000000, "EUR", GetPais("Argentina"), "Portero"));
             AltaJugador(new Jugador(3, "1", "Franco Armani", DateTime.Parse("1986-10-16"), 1.89, "derecho", 3500000, "EUR", GetPais("Argentina"), "Portero"));

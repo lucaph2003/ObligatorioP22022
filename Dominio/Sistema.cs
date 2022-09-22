@@ -6,12 +6,8 @@ namespace Dominio
 {
     public class Sistema
     {
+        #region Singleton
         private static Sistema _instancia;
-
-        public List<Jugador> Jugadores { get; } = new List<Jugador>();
-        public List<Periodista> Periodistas { get; } = new List<Periodista>();
-        public List<Seleccion> Selecciones { get; } = new List<Seleccion>();
-        public List<Pais> Paises { get; } = new List<Pais>();
 
         public static Sistema ObtenerInstancia
         {
@@ -29,8 +25,16 @@ namespace Dominio
         {
 
         }
+        #endregion
 
+        #region declaracion e inicializacion de Listas
+        public List<Jugador> Jugadores { get; } = new List<Jugador>();
+        public List<Periodista> Periodistas { get; } = new List<Periodista>();
+        public List<Seleccion> Selecciones { get; } = new List<Seleccion>();
+        public List<Pais> Paises { get; } = new List<Pais>();
+        #endregion
 
+        #region Metodos de Alta
         public void AltaJugador(Jugador pJugador)
         {
             try
@@ -80,9 +84,10 @@ namespace Dominio
                 throw e;
            }
         }
+        #endregion
 
 
-        /// Retorna el País a partir del nombre.
+        // Retorna el País a partir del nombre.
         private Pais GetPais(string nombre)
         {
 
@@ -95,7 +100,6 @@ namespace Dominio
             }
             return null;
         }
-
 
         private void PrecargaSelecciones()
         {
@@ -115,7 +119,7 @@ namespace Dominio
         }
 
 
-        /// Retorna todos los jugadores de una selección, a partir del país del jugador.
+        // Retorna todos los jugadores de una selección, a partir del país del jugador.
         private List<Jugador> JugadoresDe(Pais p)
         {
             List<Jugador> _misJugadores = new List<Jugador>();
@@ -130,6 +134,7 @@ namespace Dominio
             return _misJugadores;
         }
 
+        #region Precarga de Datos
         public void PrecargaPaises()
         {
             AltaPais(new Pais("Catar", "QAT"));
@@ -1040,7 +1045,7 @@ namespace Dominio
             AltaJugador(new Jugador(870, "7", "Anthony Contreras", DateTime.Parse("2000-01-29"), 1.8, "derecho", 350000, "EUR", GetPais("Costa Rica"), "Delantero centro"));
             AltaJugador(new Jugador(871, "11", "Johan Venegas", DateTime.Parse("1988-11-27"), 1.83, "derecho", 325000, "EUR", GetPais("Costa Rica"), "Delantero centro"));
         }
-
+        #endregion
 
 
     }

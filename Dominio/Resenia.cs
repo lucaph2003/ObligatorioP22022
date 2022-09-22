@@ -15,6 +15,14 @@ namespace Dominio
 
         #endregion
         #region Metodos Resenia
+        public Resenia(Periodista pPeriodista,DateTime pFecha,Partido pPartido, string pTitulo, string pContenido)
+        {
+            this.periodista = pPeriodista;
+            this.fecha = pFecha;
+            this.partido = pPartido;
+            this.titulo = pTitulo;
+            this.contenido = pContenido;
+        }
         #endregion
 
     }

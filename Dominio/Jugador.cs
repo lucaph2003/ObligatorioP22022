@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Jugador : Persona
+    class Jugador : Persona 
     {
         #region Atributos Jugador
         public int dorsal { get; set; }
@@ -12,29 +12,27 @@ namespace Dominio
         public decimal altura { get; set; }
         public int pieHabil { get; set; }
         public int valorMercado { get; set; }
-        public Seleccion seleccion { get; set; }
+        public Pais pais { get; set; }
         public int puesto { get; set; }
         public string categoria { get; set; }
         public static int montoCategoria { get; set; }
         #endregion
         #region Metodos Jugador
 
-        public Jugador(string pNombre,string pApellido,int pDorsal,DateTime pFechaNacimiento,decimal pAltura,int pPieHabil,int pValorMercado,Seleccion pSeleccion,int pPuesto)
+        public Jugador(string pNombre,string pApellido,int pDorsal,DateTime pFechaNacimiento,decimal pAltura,int pPieHabil,int pValorMercado,Pais pPais,int pPuesto):base(pNombre,pApellido)
         {
-            this.nombre = pNombre;
-            this.apellido = pApellido;
             this.dorsal = pDorsal;
             this.fechaNacimiento = pFechaNacimiento;
             this.altura = pAltura;
             this.pieHabil = pPieHabil;
             this.valorMercado = pValorMercado;
-            this.seleccion = pSeleccion;
+            this.pais = pPais;
             this.puesto = pPuesto;
             CalcularCategoria();
         }
-        public override void ValidarDatos()
+        public override void Validar()
         {
-            if(this.nombre != null &&this.apellido != null&&this.dorsal >= 0 && this.fechaNacimiento != null && this.altura > 0 && this.pieHabil > 0 && this.valorMercado >= 0 && this.seleccion != null && this.puesto != null)
+            if(this.nombre != null &&this.apellido != null&&this.dorsal >= 0 && this.fechaNacimiento != null && this.altura > 0 && this.pieHabil > 0 && this.valorMercado >= 0 && this.pais != null && this.puesto != 0)
             {
 
             }

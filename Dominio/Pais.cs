@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Pais
+    class Pais : IValidable
     {
         #region Atributos Pais
         public int id { get; set; }
@@ -13,9 +13,17 @@ namespace Dominio
         public static int contador = 0;
         #endregion
         #region Metodos Pais
-        public Pais()
+        public Pais(string pNombre, string pCodigo)
         {
             this.id = contador++;
+            this.nombre = pNombre;
+            this.codigo = pCodigo;
+        }
+
+        public override void Validar()
+        {
+            ValidarPais();
+            ValidarCodigo();
         }
 
         public void ValidarPais()

@@ -7,15 +7,14 @@ namespace Dominio
     class PartidoFaseDeGrupo : Partido
     {
         #region Atributos PartidoFaseDeGrupo
-        //prueba
+        public char grupo { get; set; }
+        
         #endregion
         #region Metodos PartidoFaseDeGrupo
-        public PartidoFaseDeGrupo(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora)
+        public PartidoFaseDeGrupo(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora,char pGrupo) : base(pSeleccion1, pSeleccion2, pFechaHora)
         {
-            this.seleccion1 = pSeleccion1;
-            this.seleccion2 = pSeleccion2;
-            this.fechaHora = pFechaHora;
-            this.esFinalizada = false;
+            this.grupo = pGrupo;
+            
         }
         #endregion
     }

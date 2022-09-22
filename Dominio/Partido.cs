@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Partido
+    class Partido 
     {
         #region Atributos Partido
         public int id { get; set; }
@@ -17,10 +17,15 @@ namespace Dominio
         public static int contador = 0;
         #endregion
         #region Metodos Partido
-        public Partido()
+        public Partido(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora)
         {
+            this.seleccion1 = pSeleccion1;
+            this.seleccion2 = pSeleccion2;
+            this.fechaHora = pFechaHora;
+            this.esFinalizada = false;
             this.id = contador++;
         }
+
         public void ValidarSelecciones()
         {
             if(seleccion1 == null || seleccion2 == null || seleccion1.Equals(seleccion2))

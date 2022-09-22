@@ -12,11 +12,8 @@ namespace Dominio
         public int etapa { get; set; }
         #endregion
         #region Metodos PartidoFaseEliminatoria
-        public PartidoFaseEliminatoria(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFecha,int pEtapa)
+        public PartidoFaseEliminatoria(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora, int pEtapa):base(pSeleccion1,pSeleccion2, pFechaHora)
         {
-            this.seleccion1 = pSeleccion1;
-            this.seleccion2 = pSeleccion2;
-            this.fechaHora = pFecha;
             this.etapa = pEtapa;
         }
 

@@ -19,12 +19,19 @@ namespace Dominio
 
         public void ValidarPais()
         {
-
+            if(this.pais == null)
+            {
+                throw new Exception("Ingresa un pais que no este vacio");
+            }
         }
 
         public void ValidarJugadores()
         {
-
+            int cantidadJugadores = jugadores.Count;
+            if(cantidadJugadores < 11 )
+            {
+                throw new Exception("Debe ingresar al menos 11 jugadores");
+            }
         }
         #endregion
     }

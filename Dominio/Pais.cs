@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Dominio
 {
-    class Pais : IValidable
+    public class Pais : IValidable
     {
         #region Atributos Pais
         public int id { get; set; }
         public string nombre { get; set; }
         public string codigo { get; set; }
-        public static int contador = 0;
+        public static int contador { get; set; } = 0;
         #endregion
         #region Metodos Pais
         public Pais(string pNombre, string pCodigo)

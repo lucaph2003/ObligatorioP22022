@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Periodista : Persona
+    public class Periodista : Persona
     {
         #region Atributos Periodista
         public string email { get; set; }
@@ -13,7 +13,7 @@ namespace Dominio
         #region Metodos Periodista
         public Periodista(string pNombre,string pApellido,string pEmail,string pPassword) :base(pNombre,pApellido)
         {
-            this.email = pEmail;
+            this.email =pEmail;
             this.password = pPassword;
         }
         public override void Validar()

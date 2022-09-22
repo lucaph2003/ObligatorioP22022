@@ -20,10 +20,17 @@ namespace Dominio
             this.codigo = pCodigo;
         }
 
-        public override void Validar()
+        public void Validar()
         {
-            ValidarPais();
-            ValidarCodigo();
+            try
+            {
+                ValidarPais();
+                ValidarCodigo();
+            }catch(Exception e)
+            {
+                throw e;
+            }
+           
         }
 
         public void ValidarPais()

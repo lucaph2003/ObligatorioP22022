@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Partido 
+    public class Partido 
     {
         #region Atributos Partido
         public int id { get; set; }

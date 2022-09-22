@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Resenia
+    public class Resenia
     {
         #region Atributos Resenia
         public Periodista periodista { get; set; }

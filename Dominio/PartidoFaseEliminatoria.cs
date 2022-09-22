@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class PartidoFaseEliminatoria : Partido
+    public class PartidoFaseEliminatoria : Partido
     {
         #region Atributos PartidoFaseEliminatoria
         public bool alargue { get; set; }

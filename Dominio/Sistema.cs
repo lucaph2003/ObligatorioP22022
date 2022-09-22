@@ -32,6 +32,8 @@ namespace Dominio
         public List<Periodista> Periodistas { get; } = new List<Periodista>();
         public List<Seleccion> Selecciones { get; } = new List<Seleccion>();
         public List<Pais> Paises { get; } = new List<Pais>();
+        public List<PartidoFaseDeGrupo> PartidosFaseDeGrupos { get; } = new List<PartidoFaseDeGrupo>();
+        public List<PartidoFaseEliminatoria> PartidosFaseEliminatoria { get; } = new List<PartidoFaseEliminatoria>();
         #endregion
 
         #region Metodos de Alta
@@ -83,6 +85,31 @@ namespace Dominio
             {
                 throw e;
            }
+        }
+
+        public void AltaPartidoFaseDeGrupos(PartidoFaseDeGrupo pPartido)
+        {
+            try
+            {
+                
+                PartidosFaseDeGrupos.Add(pPartido);
+            }catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public void AltaPartidoFaseEliminatoria(PartidoFaseEliminatoria pPartido)
+        {
+            try
+            {
+
+                PartidosFaseEliminatoria.Add(pPartido);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
         #endregion
 

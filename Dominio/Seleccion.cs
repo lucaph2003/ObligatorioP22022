@@ -4,17 +4,18 @@ using System.Text;
 
 namespace Dominio
 {
-    class Seleccion
+    public class Seleccion
     {
         #region Atributos Seleccion
         public Pais pais { get; set; }
-        public List<Jugador> jugadores { get; set; }
+        public List<Jugador> Jugadores { get; set; }
         #endregion
 
         #region Metodos Seleccion
-        public Seleccion()
+        public Seleccion(Pais pPais)
         {
-            jugadores = new List<Jugador>();
+            this.pais = pPais;
+            Jugadores = new List<Jugador>();
         }
 
         public void ValidarPais()
@@ -27,11 +28,16 @@ namespace Dominio
 
         public void ValidarJugadores()
         {
-            int cantidadJugadores = jugadores.Count;
+            int cantidadJugadores = Jugadores.Count;
             if(cantidadJugadores < 11 )
             {
                 throw new Exception("Debe ingresar al menos 11 jugadores");
             }
+        }
+
+        public void AgregarJugador(Jugador pJugador)
+        {
+            Jugadores.Add(pJugador);
         }
         #endregion
     }

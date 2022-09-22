@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Jugador : Persona 
+    public class Jugador : Persona 
     {
         #region Atributos Jugador
         public int dorsal { get; set; }

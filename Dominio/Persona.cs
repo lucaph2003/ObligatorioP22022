@@ -13,14 +13,10 @@ namespace Dominio
         public static int contador = 0;
         #endregion
         #region Metodos Persona
-        public Persona(string pNombre,string pApellido)
+        public virtual void ValidarDatos()
         {
-            this.id = contador++;
-            this.nombre = pNombre;
-            this.apellido = pApellido;
 
         }
-        public abstract void Validar();
         #endregion
     }
 }

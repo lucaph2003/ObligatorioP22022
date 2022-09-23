@@ -60,6 +60,11 @@ namespace Dominio
                 this.categoria = "VIP";
             }
         }
+
+        public static void CambiarMonto(int pNuevoMonto)
+        {
+            montoCategoria = pNuevoMonto;
+        }
         #endregion
     }
 }

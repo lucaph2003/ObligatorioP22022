@@ -153,6 +153,20 @@ namespace Dominio
             }
             return periodistas;
         }
+
+        public void CambiarMontoJugador(int monto)
+        {
+            if (monto > 0)
+            {
+                Jugador.CambiarMonto(monto);
+            }
+        }
+
+        public void AgregarIncidencia(Incidencia incidencia)
+        {
+
+        }
+
         #endregion
 
         #region Precarga de Datos

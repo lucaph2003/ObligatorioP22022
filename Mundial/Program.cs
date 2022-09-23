@@ -93,7 +93,17 @@ namespace Mundial
 
         public static void CambiarMontoCategoria(Sistema sistema)
         {
-
+            try
+            {
+                Console.WriteLine("Ingresa el nuevo monto: ");
+                int monto = int.Parse(Console.ReadLine());
+                sistema.CambiarMontoJugador(monto);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
 
     }

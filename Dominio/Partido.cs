@@ -13,13 +13,14 @@ namespace Dominio
         public DateTime fechaHora { get; set; }
         public bool esFinalizada { get; set; }
 
-        //public List<Incidencia> incidencias;\
+        public List<Incidencia> Incidencias { get; set; };
 
         public static int contador = 0;
         #endregion
         #region Metodos Partido
         public Partido(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora)
         {
+            Incidencias = new List<Incidencia>();
             this.seleccion1 = pSeleccion1;
             this.seleccion2 = pSeleccion2;
             this.fechaHora = pFechaHora;
@@ -43,6 +44,11 @@ namespace Dominio
             {
                 throw new Exception("Debe ingresar fecha entre el 20/11/2022 hasta 18/12/2022");
             }
+        }
+
+        public void AgregarIncidencia(Incidencia incidencia)
+        {
+            Incidencias.Add(incidencia);
         }
         #endregion
     }

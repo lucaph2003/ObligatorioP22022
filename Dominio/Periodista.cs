@@ -18,7 +18,7 @@ namespace Dominio
         }
         public override void Validar()
         {
-            if (this.nombreCompleto != null  && this.email != null)
+            if (this.nombreCompleto.Length > 1  && this.email.Length > 1 && this.password.Length > 1)
             {
                 ValidarEmail();
                 ValidarPassword();
@@ -32,9 +32,9 @@ namespace Dominio
 
         public void ValidarEmail()
         {
-            if (!this.email.Contains("@") && this.email.StartsWith("@") && this.email.EndsWith("@"))
+            if (!this.email.Contains("@") || this.email.StartsWith("@") || this.email.EndsWith("@"))
             {
-                throw new Exception("El Mail esta mal escrito");
+                throw new Exception("El email debe contener @ y no puede estar en el principio ni final");
             }
         }
 
@@ -44,6 +44,11 @@ namespace Dominio
             {
                 throw new Exception("La contrasenia debe ser mayor a 8 caracteres");
             }
+        }
+
+        public override string ToString()
+        {
+            return this.nombreCompleto + " /n"+ this.email;
         }
         #endregion
     }

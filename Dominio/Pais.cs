@@ -12,6 +12,8 @@ namespace Dominio
         public string codigo { get; set; }
         public static int contador { get; set; } = 0;
         #endregion
+
+
         #region Metodos Pais
         public Pais(string pNombre, string pCodigo)
         {
@@ -26,7 +28,8 @@ namespace Dominio
             {
                 ValidarPais();
                 ValidarCodigo();
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
                 throw e;
             }

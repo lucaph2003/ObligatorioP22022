@@ -113,7 +113,7 @@ namespace Dominio
         }
         #endregion
 
-
+        #region Metodos de retorno
         // Retorna el País a partir del nombre.
         private Pais GetPais(string nombre)
         {
@@ -127,24 +127,6 @@ namespace Dominio
             }
             return null;
         }
-
-        private void PrecargaSelecciones()
-        {
-
-            //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
-            foreach (Pais p in Paises)
-            {
-                // 1 - Se crea una seleccion por cada país en la lista.
-                Seleccion selNueva = new Seleccion(p);
-                List<Jugador> misJugadores = JugadoresDe(p);
-                foreach (Jugador j in misJugadores)
-                {
-                    selNueva.AgregarJugador(j);
-                }
-                AltaSeleccion(selNueva);
-            }
-        }
-
 
         // Retorna todos los jugadores de una selección, a partir del país del jugador.
         private List<Jugador> JugadoresDe(Pais p)
@@ -161,7 +143,36 @@ namespace Dominio
             return _misJugadores;
         }
 
+        public List<Periodista> ObtenerPeriodistas()
+        {
+            List<Periodista> periodistas = new List<Periodista>();
+            foreach (Periodista p in Periodistas)
+            {
+                periodistas.Add(p);
+                
+            }
+            return periodistas;
+        }
+        #endregion
+
         #region Precarga de Datos
+        public void PrecargaSelecciones()
+        {
+
+            //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
+            foreach (Pais p in Paises)
+            {
+                // 1 - Se crea una seleccion por cada país en la lista.
+                Seleccion selNueva = new Seleccion(p);
+                List<Jugador> misJugadores = JugadoresDe(p);
+                foreach (Jugador j in misJugadores)
+                {
+                    selNueva.AgregarJugador(j);
+                }
+                AltaSeleccion(selNueva);
+            }
+        }
+
         public void PrecargaPaises()
         {
             AltaPais(new Pais("Catar", "QAT"));
@@ -1074,8 +1085,5 @@ namespace Dominio
         }
         #endregion
 
-
     }
-
-
 }

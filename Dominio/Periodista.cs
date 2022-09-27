@@ -48,7 +48,7 @@ namespace Dominio
 
         public override string ToString()
         {
-            return this.nombreCompleto + " /n"+ this.email;
+            return $"Nombre: {this.nombreCompleto}" + "\n" + $"Correo Electronico: {this.email}";
         }
         #endregion
     }

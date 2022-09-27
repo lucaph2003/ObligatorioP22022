@@ -15,9 +15,20 @@ namespace Mundial
                 Console.WriteLine("Bienvenidos al Mundial Qatar2022! ! !");
                 Console.WriteLine("");
                 Console.WriteLine("Porfavor ingrese una opcion para continuar...");
+                Console.WriteLine("");
+                Console.WriteLine("###Seccion Periodistas###");
                 Console.WriteLine("1-Dar de alta a periodista");
                 Console.WriteLine("2-Listar Periodista");
-                Console.WriteLine("3-Ingresar Monto Referencia para categorias de jugadores");
+                Console.WriteLine("");
+                Console.WriteLine("###Seccion Jugadores###");
+                Console.WriteLine("3-Listar partidos de jugador");
+                Console.WriteLine("4-Ingresar Monto Referencia para categorias de jugadores");
+                Console.WriteLine("5-Listar jugadores expulsados");
+                Console.WriteLine("6-Listar jugadores que hayan convertido gol");
+                Console.WriteLine("");
+                Console.WriteLine("###Seccion Selecciones###");
+                Console.WriteLine("7-Mostrar partido con mas goles, Busqueda por seleccion");
+                Console.WriteLine("8-VerIncidencias");
                 Console.WriteLine("0-Salir");
                 op = int.Parse(Console.ReadLine());
                 switch (op)
@@ -29,7 +40,22 @@ namespace Mundial
                         MostrarPeriodistas(sistema);
                         break;
                     case 3:
+                        ListarPartidosJugador(sistema);
+                        break;
+                    case 4:
                         CambiarMontoCategoria(sistema);
+                        break;
+                    case 5:
+                        ListarJugadoresExpulsados(sistema);
+                        break;
+                    case 6:
+                        ListarJugadoresGol(sistema);
+                        break;
+                    case 7:
+                        SeleccionPartidoMasGoles(sistema);
+                        break;
+                    case 8:
+                        VerIncidencias(sistema);
                         break;
                     case 0:
                         break;
@@ -104,6 +130,31 @@ namespace Mundial
                 Console.WriteLine(e.Message);
             }
             
+        }
+
+        public static void ListarPartidosJugador(Sistema sistema)
+        {
+            Console.WriteLine("Ingrese el id del jugador");
+            int idJugador = int.Parse(Console.ReadLine());
+            
+
+        }
+        public static void ListarJugadoresExpulsados(Sistema sistema)
+        {
+
+        }
+        public static void ListarJugadoresGol(Sistema sistema)
+        {
+
+        }
+        public static void SeleccionPartidoMasGoles(Sistema sistema)
+        {
+
+        }
+
+        public static void VerIncidencias(Sistema sistema)
+        {
+            Console.WriteLine(sistema.VerIncidencia());
         }
 
     }

@@ -23,7 +23,7 @@ namespace Dominio
 
         private Sistema()
         {
-
+            RealizarPrecargaDatos();
         }
         #endregion
 
@@ -46,7 +46,7 @@ namespace Dominio
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine(e.Message);
             }
         }
         public void AltaPeriodista(Periodista pPeriodista)
@@ -84,16 +84,16 @@ namespace Dominio
             catch (Exception e)
             {
                 throw e;
-           }
+            }
         }
 
         public void AltaPartidoFaseDeGrupos(PartidoFaseDeGrupo pPartido)
         {
             try
             {
-                
+
                 PartidosFaseDeGrupos.Add(pPartido);
-            }catch (Exception e)
+            } catch (Exception e)
             {
                 throw e;
             }
@@ -128,6 +128,48 @@ namespace Dominio
             return null;
         }
 
+        // Retorna el Jugador a partir del id.
+        private Jugador GetJugador(int idJugador)
+        {
+            foreach (Jugador j in Jugadores)
+            {
+                if (j.id.Equals(idJugador))
+                {
+                    return j;
+                }
+            }
+            return null;
+        }
+
+        // Retorna el Partido a partir del id.
+        private Partido GetPartido(int idPartido)
+        {
+
+            foreach (Partido p in PartidosFaseDeGrupos)
+            {
+                if (p.id.Equals(idPartido))
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
+        // Retorna el País a partir del nombre.
+        private Seleccion GetSeleccion(string nombre)
+        {
+
+            foreach (Seleccion s in Selecciones)
+            {
+                if (s.pais.nombre.Equals(nombre))
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
+
         // Retorna todos los jugadores de una selección, a partir del país del jugador.
         private List<Jugador> JugadoresDe(Pais p)
         {
@@ -149,10 +191,16 @@ namespace Dominio
             foreach (Periodista p in Periodistas)
             {
                 periodistas.Add(p);
-                
+
             }
             return periodistas;
         }
+
+        //public List<Partidos> verPartidosJugador(int idJugador)
+        //{
+        //    Jugador jugador = GetJugador(idJugador);
+
+        //}
 
         public void CambiarMontoJugador(int monto)
         {
@@ -162,9 +210,15 @@ namespace Dominio
             }
         }
 
-        public void AgregarIncidencia(Incidencia incidencia)
+        public void AgregarIncidencia(Partido partido,Incidencia incidencia)
         {
+            partido.AgregarIncidencia(incidencia);
 
+        }
+        public string VerIncidencia()
+        {
+            Partido p = GetPartido(1);
+            return p.verIncidencias();
         }
 
         #endregion
@@ -185,6 +239,46 @@ namespace Dominio
                 }
                 AltaSeleccion(selNueva);
             }
+        }
+        public void PrecargaPeriodista()
+        {
+            AltaPeriodista(new Periodista("Alberto Kesman", "KesmanAlberto@gmail.com", "Kesman123"));
+            AltaPeriodista(new Periodista("Jorge Da Silveira", "DaSilveira@gmail.com", "toto1234"));
+        }
+        public void PrecargaPartidosFaseDeGrupos()
+        {
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("Arabia Saudita"), DateTime.Parse("2022-11-22 10:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Mexico"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-22 13:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Arabia Saudita"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-26 10:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("Mexico"), DateTime.Parse("2022-11-26 16:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-30 16:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Arabia Saudita"), GetSeleccion("Mexico"), DateTime.Parse("2022-11-30 16:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-11-24 10:00:00"), 'H'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Ghana"), DateTime.Parse("2022-11-24 13:00:00"), 'H'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-11-28 10:00:00"), 'H'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Uruguay"), DateTime.Parse("2022-11-28 16:00:00"), 'H'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Uruguay"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
+        }
+
+        public void PrecargaIncidencias()
+        {
+            AgregarIncidencia(GetPartido(1),new Incidencia("Gol",  82,  GetJugador(7)));
+        }
+
+        public void PrecargaPartidosFaseEliminatoria()
+        {
+
+        }
+
+        public void RealizarPrecargaDatos()
+        {
+            PrecargaPaises();
+            PrecargaJugadores();
+            PrecargaSelecciones();
+            PrecargaPartidosFaseDeGrupos();
+            PrecargaPeriodista();
+            PrecargaIncidencias();
         }
 
         public void PrecargaPaises()

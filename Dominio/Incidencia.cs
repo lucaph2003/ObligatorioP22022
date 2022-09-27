@@ -17,6 +17,9 @@ namespace Dominio
             this.jugador = pJugador;
         }
 
-
+        public override string ToString()
+        {
+            return $"Incidencia: {incidencia}" + $"Minuto: {minuto}" + $"Nombre: {jugador.nombreCompleto}";
+        }
     }
 }

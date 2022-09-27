@@ -12,8 +12,10 @@ namespace Dominio
         public Seleccion seleccion2 { get; set; }
         public DateTime fechaHora { get; set; }
         public bool esFinalizada { get; set; }
+        public string resultado { get;  set; }
+        
 
-        public List<Incidencia> Incidencias { get; set; };
+        public List<Incidencia> Incidencias { get; set; }
 
         public static int contador = 0;
         #endregion
@@ -26,6 +28,7 @@ namespace Dominio
             this.fechaHora = pFechaHora;
             this.esFinalizada = false;
             this.id = contador++;
+            this.resultado = "Pendiente";
         }
 
         public void ValidarSelecciones()
@@ -49,6 +52,30 @@ namespace Dominio
         public void AgregarIncidencia(Incidencia incidencia)
         {
             Incidencias.Add(incidencia);
+        }
+
+        public int CantidadIncidencia()
+        {
+            int cant = 0;
+            for(int i = 0; i< Incidencias.Count; i++)
+            {
+                cant++;
+            }
+            return cant;
+        }
+        public string verIncidencias()
+        {
+            string incidencias = "";
+            foreach(Incidencia i in Incidencias)
+            {
+                incidencias += i.ToString() +  " \n";
+            }
+            return incidencias;
+        }
+
+        public override string ToString()
+        {
+            return $"Fecha: {this.fechaHora}" + "\n" + $"{this.seleccion1}" + "VS" + $"{this.seleccion2}";
         }
         #endregion
     }

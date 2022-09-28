@@ -19,7 +19,7 @@ namespace Dominio
 
         public override string ToString()
         {
-            return $"Incidencia: {incidencia}" + $"Minuto: {minuto}" + $"Nombre: {jugador.nombreCompleto}";
+            return $"Incidencia: {incidencia}" + "\n" + $"Minuto: {minuto}" + "\n" + $"Nombre: {jugador.nombreCompleto}";
         }
     }
 }

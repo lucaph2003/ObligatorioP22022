@@ -263,7 +263,34 @@ namespace Dominio
 
         public void PrecargaIncidencias()
         {
-            AgregarIncidencia(GetPartido(1),new Incidencia("Gol",  82,  GetJugador(7)));
+            AgregarIncidencia(GetPartido(1), new Incidencia("Gol", 30, GetJugador(23)));
+            AgregarIncidencia(GetPartido(1), new Incidencia("Gol", 60, GetJugador(24)));
+            AgregarIncidencia(GetPartido(1), new Incidencia("Amarilla", 82, GetJugador(9)));
+            AgregarIncidencia(GetPartido(2), new Incidencia("Gol", 83, GetJugador(756)));
+            AgregarIncidencia(GetPartido(2), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(2), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(3), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(3), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(7), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(7), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(7), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(9), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(9), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(12), new Incidencia("Gol", 89, GetJugador(650)));
+            AgregarIncidencia(GetPartido(12), new Incidencia("Gol", 89, GetJugador(650)));
         }
 
         public void PrecargaPartidosFaseEliminatoria()

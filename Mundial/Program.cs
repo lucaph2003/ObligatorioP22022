@@ -103,7 +103,6 @@ namespace Mundial
             }
             
         }
-
         public static void MostrarPeriodistas(Sistema sistema)
         {
             List<Periodista> periodistas = sistema.ObtenerPeriodistas();
@@ -117,7 +116,6 @@ namespace Mundial
             Console.ReadLine();
             Console.WriteLine("---------------------------------");
         }
-
         public static void CambiarMontoCategoria(Sistema sistema)
         {
             try
@@ -135,7 +133,6 @@ namespace Mundial
             Console.ReadLine();
             Console.WriteLine("---------------------------------");
         }
-
         public static void ListarPartidosJugador(Sistema sistema)
         {
             Console.WriteLine("Ingrese el id del jugador");
@@ -151,7 +148,6 @@ namespace Mundial
             Console.WriteLine("---------------------------------");
 
         }
-
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {
             List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresExpulsados());

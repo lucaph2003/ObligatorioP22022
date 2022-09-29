@@ -10,6 +10,7 @@ namespace Mundial
         {
             Sistema sistema = Sistema.ObtenerInstancia;
             int op;
+            Console.Clear();
             do
             {
                 Console.WriteLine("Bienvenidos al Mundial Qatar2022! ! !");
@@ -29,6 +30,8 @@ namespace Mundial
                 Console.WriteLine("###Seccion Selecciones###");
                 Console.WriteLine("7-Mostrar partido con mas goles, Busqueda por seleccion");
                 Console.WriteLine("0-Salir");
+                Console.WriteLine("");
+                Console.WriteLine("Ingrese una opcion: ");
                 op = int.Parse(Console.ReadLine());
                 switch (op)
                 {
@@ -87,11 +90,12 @@ namespace Mundial
                     Console.WriteLine("Contrasenias diferentes");
                 }
 
+                Console.WriteLine("");
                 Console.WriteLine("Presiona enter para continuar...");
                 Console.ReadLine();
                 Console.WriteLine("---------------------------------");
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
+                Console.WriteLine("");
                 Console.WriteLine(e.Message);
                 Console.WriteLine("Presiona enter para continuar...");
                 Console.ReadLine();
@@ -108,6 +112,7 @@ namespace Mundial
                 Console.WriteLine(p.ToString());
                 Console.WriteLine("---------------------------------");
             }
+            Console.WriteLine("");
             Console.WriteLine("Presiona enter para continuar...");
             Console.ReadLine();
             Console.WriteLine("---------------------------------");
@@ -125,7 +130,10 @@ namespace Mundial
             {
                 Console.WriteLine(e.Message);
             }
-            
+            Console.WriteLine("");
+            Console.WriteLine("Presiona enter para continuar...");
+            Console.ReadLine();
+            Console.WriteLine("---------------------------------");
         }
 
         public static void ListarPartidosJugador(Sistema sistema)
@@ -137,9 +145,13 @@ namespace Mundial
             {
                 Console.WriteLine(p.ToString());
             }
+            Console.WriteLine("");
+            Console.WriteLine("Presiona enter para continuar...");
             Console.ReadLine();
+            Console.WriteLine("---------------------------------");
 
         }
+
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {
             List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresExpulsados());
@@ -147,6 +159,10 @@ namespace Mundial
             {
                 Console.WriteLine(j.ToString());
             }
+            Console.WriteLine("");
+            Console.WriteLine("Presiona enter para continuar...");
+            Console.ReadLine();
+            Console.WriteLine("---------------------------------");
         }
         public static void ListarJugadoresGol(Sistema sistema)
         {
@@ -155,6 +171,10 @@ namespace Mundial
             {
                 Console.WriteLine(j.ToString());
             }
+            Console.WriteLine("");
+            Console.WriteLine("Presiona enter para continuar...");
+            Console.ReadLine();
+            Console.WriteLine("---------------------------------");
         }
         public static void SeleccionPartidoMasGoles(Sistema sistema)
         {
@@ -162,6 +182,11 @@ namespace Mundial
             string nombreSeleccion = Console.ReadLine();
             Console.WriteLine(sistema.ObtenerPartidoConMasGoles(nombreSeleccion));
             Console.ReadLine();
+
+            Console.WriteLine("");
+            Console.WriteLine("Presiona enter para continuar...");
+            Console.ReadLine();
+            Console.WriteLine("---------------------------------");
         }
 
 

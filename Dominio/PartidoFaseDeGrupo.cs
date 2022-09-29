@@ -11,7 +11,6 @@ namespace Dominio
         
         #endregion
 
-
         #region Metodos PartidoFaseDeGrupo
         public PartidoFaseDeGrupo(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora,char pGrupo) : base(pSeleccion1, pSeleccion2, pFechaHora)
         {

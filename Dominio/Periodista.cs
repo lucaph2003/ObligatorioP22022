@@ -10,12 +10,19 @@ namespace Dominio
         public string email { get; set; }
         public string password { get; set; }
         #endregion
+
         #region Metodos Periodista
+
+        #region Constructores
         public Periodista(string pNombreCompleto,string pEmail,string pPassword) :base(pNombreCompleto)
         {
             this.email =pEmail;
             this.password = pPassword;
         }
+
+        #endregion
+
+        #region Validaciones
         public override void Validar()
         {
             if (this.nombreCompleto.Length > 1  && this.email.Length > 1 && this.password.Length > 1)
@@ -45,11 +52,14 @@ namespace Dominio
                 throw new Exception("La contrasenia debe ser mayor a 8 caracteres");
             }
         }
+        #endregion
 
+        #region Override y Compare
         public override string ToString()
         {
             return $"Nombre: {this.nombreCompleto}" + "\n" + $"Correo Electronico: {this.email}";
         }
+        #endregion
         #endregion
     }
 }

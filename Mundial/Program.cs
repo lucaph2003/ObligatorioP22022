@@ -28,7 +28,6 @@ namespace Mundial
                 Console.WriteLine("");
                 Console.WriteLine("###Seccion Selecciones###");
                 Console.WriteLine("7-Mostrar partido con mas goles, Busqueda por seleccion");
-                Console.WriteLine("8-VerIncidencias");
                 Console.WriteLine("0-Salir");
                 op = int.Parse(Console.ReadLine());
                 switch (op)
@@ -53,9 +52,6 @@ namespace Mundial
                         break;
                     case 7:
                         SeleccionPartidoMasGoles(sistema);
-                        break;
-                    case 8:
-                        VerIncidencias(sistema);
                         break;
                     case 0:
                         break;
@@ -141,7 +137,11 @@ namespace Mundial
         }
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {
-
+            List<Jugador> jugadores = sistema.OrdenarPorValorYNombre(sistema.ObtenerJugadoresExpulsados());
+            foreach (Jugador j in jugadores)
+            {
+                Console.WriteLine(j.ToString());
+            }
         }
         public static void ListarJugadoresGol(Sistema sistema)
         {
@@ -152,10 +152,6 @@ namespace Mundial
 
         }
 
-        public static void VerIncidencias(Sistema sistema)
-        {
-            Console.WriteLine(sistema.VerIncidencia());
-        }
 
     }
 }

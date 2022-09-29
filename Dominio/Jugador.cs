@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Jugador : Persona 
+    public class Jugador : Persona , IComparable
     {
         #region Atributos Jugador
         public int id { get; set; }
@@ -64,6 +64,18 @@ namespace Dominio
         public static void CambiarMonto(int pNuevoMonto)
         {
             montoCategoria = pNuevoMonto;
+        }
+
+
+        public override string ToString()
+        {
+            return "Nombre: "+this.nombreCompleto+"\n Valor Mercado: "+this.valorMercado;
+        }
+
+        public int CompareTo(Object obj)
+        {
+            Jugador aComparar = (Jugador)obj;
+            return this.valorMercado.CompareTo(aComparar.valorMercado);
         }
         #endregion
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public abstract class Persona : IValidable
+    public abstract class Persona : IValidable 
     {
         #region Atributos Persona
         

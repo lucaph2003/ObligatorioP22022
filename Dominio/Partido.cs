@@ -83,7 +83,7 @@ namespace Dominio
 
         public override string ToString()
         {
-            return $"Fecha: {this.fechaHora}" + "\n" + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}";
+            return $"Fecha: {this.fechaHora}" + "\n" + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}"+"\nCantidad Incidencias: " + $"{this.Incidencias.Count}";
         }
         #endregion
     }

@@ -132,7 +132,12 @@ namespace Mundial
         {
             Console.WriteLine("Ingrese el id del jugador");
             int idJugador = int.Parse(Console.ReadLine());
-            
+            List<Partido> partidosParticipados = sistema.ObtenerPartidosJugadorPorId(idJugador);
+            foreach(Partido p in partidosParticipados)
+            {
+                Console.WriteLine(p.ToString());
+            }
+            Console.ReadLine();
 
         }
         public static void ListarJugadoresExpulsados(Sistema sistema)

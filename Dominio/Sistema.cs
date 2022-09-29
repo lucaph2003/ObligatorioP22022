@@ -111,9 +111,16 @@ namespace Dominio
                 throw e;
             }
         }
+
+        public void AltaIncidencia(Partido partido, Incidencia incidencia)
+        {
+            partido.AgregarIncidencia(incidencia);
+
+        }
         #endregion
 
         #region Metodos de retorno
+
         // Retorna el País a partir del nombre.
         private Pais GetPais(string nombre)
         {
@@ -169,7 +176,6 @@ namespace Dominio
             return null;
         }
 
-
         // Retorna todos los jugadores de una selección, a partir del país del jugador.
         private List<Jugador> JugadoresDe(Pais p)
         {
@@ -196,12 +202,29 @@ namespace Dominio
             return periodistas;
         }
 
-        //public List<Partidos> verPartidosJugador(int idJugador)
-        //{
-        //    Jugador jugador = GetJugador(idJugador);
+        public List<Partido> ObtenerPartidosJugadorPorId(int idJugador)
+        {
+            Jugador j = GetJugador(idJugador);
+            List<Partido> partidos = new List<Partido>();
+            Seleccion seleccion = GetSeleccion(j.pais.nombre);
 
-        //}
+            foreach(PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            {
+                if (p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
+                {
+                    partidos.Add(p);
+                }
+            }
+            foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
+            {
+                if (p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
+                {
+                    partidos.Add(p);
+                }
+            }
 
+            return partidos;
+        }
         public void CambiarMontoJugador(int monto)
         {
             if (monto > 0)
@@ -210,11 +233,6 @@ namespace Dominio
             }
         }
 
-        public void AgregarIncidencia(Partido partido,Incidencia incidencia)
-        {
-            partido.AgregarIncidencia(incidencia);
-
-        }
         public List<Jugador> ObtenerJugadoresExpulsados()
         {
             List<Jugador> jugadoresExpulsados = new List<Jugador>();
@@ -301,7 +319,7 @@ namespace Dominio
                     }
                 }
             }
-            return partido.ToString() + "\n CANTIDAD DE GOLES: " + cantidadMaxima.ToString();
+            return partido.ToString() + "\nCantidad de goles: " + cantidadMaxima.ToString();
         }
 
         #endregion
@@ -309,7 +327,6 @@ namespace Dominio
         #region Precarga de Datos
         public void PrecargaSelecciones()
         {
-
             //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
             foreach (Pais p in Paises)
             {
@@ -346,34 +363,34 @@ namespace Dominio
 
         public void PrecargaIncidencias()
         {
-            AgregarIncidencia(GetPartido(1), new Incidencia("Gol", 30, GetJugador(23)));
-            AgregarIncidencia(GetPartido(1), new Incidencia("Gol", 60, GetJugador(24)));
-            AgregarIncidencia(GetPartido(1), new Incidencia("Amarilla", 82, GetJugador(9)));
-            AgregarIncidencia(GetPartido(2), new Incidencia("Gol", 83, GetJugador(756)));
-            AgregarIncidencia(GetPartido(2), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(2), new Incidencia("Roja", 89, GetJugador(402)));
-            AgregarIncidencia(GetPartido(3), new Incidencia("Roja", 89, GetJugador(169)));
-            AgregarIncidencia(GetPartido(3), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(400)));
-            AgregarIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(7), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(7), new Incidencia("Roja", 89, GetJugador(401)));
-            AgregarIncidencia(GetPartido(7), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(9), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(9), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(11), new Incidencia("Roja", 89, GetJugador(650)));
-            AgregarIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(1), new Incidencia("Gol", 30, GetJugador(23)));
+            AltaIncidencia(GetPartido(1), new Incidencia("Gol", 60, GetJugador(24)));
+            AltaIncidencia(GetPartido(1), new Incidencia("Amarilla", 82, GetJugador(9)));
+            AltaIncidencia(GetPartido(2), new Incidencia("Gol", 83, GetJugador(756)));
+            AltaIncidencia(GetPartido(2), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(2), new Incidencia("Roja", 89, GetJugador(402)));
+            AltaIncidencia(GetPartido(3), new Incidencia("Roja", 89, GetJugador(169)));
+            AltaIncidencia(GetPartido(3), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(5), new Incidencia("Gol", 89, GetJugador(400)));
+            AltaIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(6), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(7), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(7), new Incidencia("Roja", 89, GetJugador(401)));
+            AltaIncidencia(GetPartido(7), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(8), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(9), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(9), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(11), new Incidencia("Roja", 89, GetJugador(650)));
+            AltaIncidencia(GetPartido(11), new Incidencia("Gol", 89, GetJugador(650)));
         }
 
         public void PrecargaPartidosFaseEliminatoria()

@@ -13,13 +13,13 @@ namespace Dominio
         public DateTime fechaHora { get; set; }
         public bool esFinalizada { get; set; }
         public string resultado { get;  set; }
-        
-
         public List<Incidencia> Incidencias { get; set; }
-
         public static int contador = 1;
+
         #endregion
         #region Metodos Partido
+
+        #region Constructores
         public Partido(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora)
         {
             Incidencias = new List<Incidencia>();
@@ -39,6 +39,35 @@ namespace Dominio
             this.resultado = "Pendiente";
         }
 
+        #endregion
+
+        #region Metodos
+        public void AgregarIncidencia(Incidencia incidencia)
+        {
+            Incidencias.Add(incidencia);
+        }
+
+        public int CantidadIncidencia()
+        {
+            int cant = 0;
+            for (int i = 0; i < Incidencias.Count; i++)
+            {
+                cant++;
+            }
+            return cant;
+        }
+        public string verIncidencias()
+        {
+            string incidencias = "";
+            foreach (Incidencia i in Incidencias)
+            {
+                incidencias += i.ToString() + " \n";
+            }
+            return incidencias;
+        }
+        #endregion
+
+        #region Validaciones
         public void ValidarSelecciones()
         {
             if(seleccion1 == null || seleccion2 == null || seleccion1.Equals(seleccion2))
@@ -57,34 +86,16 @@ namespace Dominio
             }
         }
 
-        public void AgregarIncidencia(Incidencia incidencia)
-        {
-            Incidencias.Add(incidencia);
-        }
+        #endregion
 
-        public int CantidadIncidencia()
-        {
-            int cant = 0;
-            for(int i = 0; i< Incidencias.Count; i++)
-            {
-                cant++;
-            }
-            return cant;
-        }
-        public string verIncidencias()
-        {
-            string incidencias = "";
-            foreach(Incidencia i in Incidencias)
-            {
-                incidencias += i.ToString() +  " \n";
-            }
-            return incidencias;
-        }
+        #region Override y Compare
 
         public override string ToString()
         {
-            return $"Fecha: {this.fechaHora}" + "\n" + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}"+"\nCantidad Incidencias: " + $"{this.Incidencias.Count}";
+            return $"Fecha: {this.fechaHora}" + "\n" + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}" + "\nCantidad Incidencias: " + $"{this.Incidencias.Count}";
         }
+        #endregion
+
         #endregion
     }
 }

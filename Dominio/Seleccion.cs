@@ -28,8 +28,7 @@ namespace Dominio
 
         public void ValidarJugadores()
         {
-            int cantidadJugadores = Jugadores.Count;
-            if(cantidadJugadores < 11 )
+            if(Jugadores.Count < 11 )
             {
                 throw new Exception("Debe ingresar al menos 11 jugadores");
             }
@@ -44,6 +43,7 @@ namespace Dominio
         {
             return pais.nombre;
         }
+
         #endregion
     }
 }

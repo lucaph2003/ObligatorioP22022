@@ -6,6 +6,6 @@ namespace Dominio
 {
     interface IValidable
     {
-        public void Validar();
+        void Validar();
     }
 }

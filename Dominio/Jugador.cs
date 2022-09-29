@@ -80,7 +80,7 @@ namespace Dominio
         public int CompareTo(Object obj)
         {
             Jugador aComparar = (Jugador)obj;
-            return this.valorMercado.CompareTo(aComparar.valorMercado);
+            return aComparar.valorMercado.CompareTo(this.valorMercado);
         }
         #endregion
     }

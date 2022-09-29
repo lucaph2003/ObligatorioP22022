@@ -120,6 +120,7 @@ namespace Dominio
         #endregion
 
         #region Metodos de retorno
+                /*GET*/
 
         // Retorna el País a partir del nombre.
         private Pais GetPais(string nombre)
@@ -176,6 +177,8 @@ namespace Dominio
             return null;
         }
 
+                /*LISTAS*/
+
         // Retorna todos los jugadores de una selección, a partir del país del jugador.
         private List<Jugador> JugadoresDe(Pais p)
         {
@@ -191,6 +194,7 @@ namespace Dominio
             return _misJugadores;
         }
 
+        //Obtiene todos los periodistas del sistema
         public List<Periodista> ObtenerPeriodistas()
         {
             List<Periodista> periodistas = new List<Periodista>();
@@ -202,6 +206,7 @@ namespace Dominio
             return periodistas;
         }
 
+        //Obtiene los partidos que jugo segun el id del jugador
         public List<Partido> ObtenerPartidosJugadorPorId(int idJugador)
         {
             Jugador j = GetJugador(idJugador);
@@ -225,14 +230,8 @@ namespace Dominio
 
             return partidos;
         }
-        public void CambiarMontoJugador(int monto)
-        {
-            if (monto > 0)
-            {
-                Jugador.CambiarMonto(monto);
-            }
-        }
 
+        //Obtiene todos los jugadores expulsados
         public List<Jugador> ObtenerJugadoresExpulsados()
         {
             List<Jugador> jugadoresExpulsados = new List<Jugador>();
@@ -240,7 +239,7 @@ namespace Dominio
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
-                    if(i.incidencia == "Roja")
+                    if(i.incidencia.Equals("Roja"))
                     {
                         jugadoresExpulsados.Add(i.jugador);
                     }
@@ -251,7 +250,7 @@ namespace Dominio
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
-                    if (i.incidencia == "Roja")
+                    if (i.incidencia.Equals("Roja"))
                     {
                         jugadoresExpulsados.Add(i.jugador);
                     }
@@ -261,12 +260,14 @@ namespace Dominio
             return jugadoresExpulsados;
         }
 
+        //Ordena una lista de jugadores segun su valor
         public List<Jugador> OrdenarPorValor(List<Jugador> jugadores)
         {
             jugadores.Sort();
             return jugadores;
         }
 
+        //Obtiene los jugadores que han marcado al menos un gol
         public List<Jugador> ObtenerJugadoresConGol()
         {
             List<Jugador> jugadoresGoleadores = new List<Jugador>();
@@ -274,7 +275,7 @@ namespace Dominio
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
-                    if (i.incidencia == "Gol")
+                    if (i.incidencia.Equals("Gol"))
                     {
                         jugadoresGoleadores.Add(i.jugador);
                     }
@@ -285,7 +286,7 @@ namespace Dominio
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
-                    if (i.incidencia == "Gol")
+                    if (i.incidencia.Equals("Gol"))
                     {
                         jugadoresGoleadores.Add(i.jugador);
                     }
@@ -295,6 +296,9 @@ namespace Dominio
             return jugadoresGoleadores;
         }
 
+                /*STRING*/
+
+        //Obtiene el partido con mas goles segun la seleccion ignorando cual de los dos equipos fue
         public string ObtenerPartidoConMasGoles(string nombreSeleccion)
         {
             Seleccion seleccion = GetSeleccion(nombreSeleccion);
@@ -322,9 +326,29 @@ namespace Dominio
             return partido.ToString() + "\nCantidad de goles: " + cantidadMaxima.ToString();
         }
 
+                /*VOID*/
+        //Cambia el monto de referencia para definir la categoria de los jugadores
+        public void CambiarMontoJugador(int monto)
+        {
+            if (monto > 0)
+            {
+                Jugador.CambiarMonto(monto);
+            }
+        }
+
         #endregion
 
         #region Precarga de Datos
+
+        public void RealizarPrecargaDatos()
+        {
+            PrecargaPaises();
+            PrecargaJugadores();
+            PrecargaSelecciones();
+            PrecargaPartidosFaseDeGrupos();
+            PrecargaPeriodista();
+            PrecargaIncidencias();
+        }
         public void PrecargaSelecciones()
         {
             //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
@@ -396,16 +420,6 @@ namespace Dominio
         public void PrecargaPartidosFaseEliminatoria()
         {
 
-        }
-
-        public void RealizarPrecargaDatos()
-        {
-            PrecargaPaises();
-            PrecargaJugadores();
-            PrecargaSelecciones();
-            PrecargaPartidosFaseDeGrupos();
-            PrecargaPeriodista();
-            PrecargaIncidencias();
         }
 
         public void PrecargaPaises()

@@ -137,7 +137,7 @@ namespace Mundial
         }
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {
-            List<Jugador> jugadores = sistema.OrdenarPorValorYNombre(sistema.ObtenerJugadoresExpulsados());
+            List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresExpulsados());
             foreach (Jugador j in jugadores)
             {
                 Console.WriteLine(j.ToString());
@@ -145,11 +145,18 @@ namespace Mundial
         }
         public static void ListarJugadoresGol(Sistema sistema)
         {
-
+            List<Jugador> jugadores = sistema.ObtenerJugadoresConGol();
+            foreach (Jugador j in jugadores)
+            {
+                Console.WriteLine(j.ToString());
+            }
         }
         public static void SeleccionPartidoMasGoles(Sistema sistema)
         {
-
+            Console.WriteLine("Ingresa el nombre de la seleccion para buscar: ");
+            string nombreSeleccion = Console.ReadLine();
+            Console.WriteLine(sistema.ObtenerPartidoConMasGoles(nombreSeleccion));
+            Console.ReadLine();
         }
 
 

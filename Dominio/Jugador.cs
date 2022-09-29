@@ -66,6 +66,11 @@ namespace Dominio
             montoCategoria = pNuevoMonto;
         }
 
+        public string VerJugadorValorCategoria()
+        {
+            return this.nombreCompleto + "-" + this.valorMercado + "-" + this.categoria;
+        }
+
 
         public override string ToString()
         {

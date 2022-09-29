@@ -39,6 +39,11 @@ namespace Dominio
         {
             Jugadores.Add(pJugador);
         }
+
+        public string verNombre()
+        {
+            return pais.nombre;
+        }
         #endregion
     }
 }

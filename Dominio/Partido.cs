@@ -17,7 +17,7 @@ namespace Dominio
 
         public List<Incidencia> Incidencias { get; set; }
 
-        public static int contador = 0;
+        public static int contador = 1;
         #endregion
         #region Metodos Partido
         public Partido(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora)
@@ -26,6 +26,14 @@ namespace Dominio
             this.seleccion1 = pSeleccion1;
             this.seleccion2 = pSeleccion2;
             this.fechaHora = pFechaHora;
+            this.esFinalizada = false;
+            this.id = contador++;
+            this.resultado = "Pendiente";
+        }
+
+        public Partido()
+        {
+            Incidencias = new List<Incidencia>();
             this.esFinalizada = false;
             this.id = contador++;
             this.resultado = "Pendiente";
@@ -75,7 +83,7 @@ namespace Dominio
 
         public override string ToString()
         {
-            return $"Fecha: {this.fechaHora}" + "\n" + $"{this.seleccion1}" + "VS" + $"{this.seleccion2}";
+            return $"Fecha: {this.fechaHora}" + "\n" + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}";
         }
         #endregion
     }

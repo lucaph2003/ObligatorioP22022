@@ -249,6 +249,61 @@ namespace Dominio
             return jugadores;
         }
 
+        public List<Jugador> ObtenerJugadoresConGol()
+        {
+            List<Jugador> jugadoresGoleadores = new List<Jugador>();
+            foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            {
+                foreach (Incidencia i in p.Incidencias)
+                {
+                    if (i.incidencia == "Gol")
+                    {
+                        jugadoresGoleadores.Add(i.jugador);
+                    }
+                }
+            }
+
+            foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
+            {
+                foreach (Incidencia i in p.Incidencias)
+                {
+                    if (i.incidencia == "Gol")
+                    {
+                        jugadoresGoleadores.Add(i.jugador);
+                    }
+                }
+            }
+
+            return jugadoresGoleadores;
+        }
+
+        public string ObtenerPartidoConMasGoles(string nombreSeleccion)
+        {
+            Seleccion seleccion = GetSeleccion(nombreSeleccion);
+            Partido partido = new Partido();
+            int cantidadMaxima = 0;
+            foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            {
+                if(p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
+                {
+                    int contadorGol = 0;
+                    foreach(Incidencia i in p.Incidencias)
+                    {
+                        if (i.incidencia.Equals("Gol"))
+                        {
+                            contadorGol++;
+                        }
+                    }
+                    if (contadorGol > cantidadMaxima)
+                    {
+                        cantidadMaxima = contadorGol;
+                        partido = p;
+                    }
+                }
+            }
+            return partido.ToString() + "\n CANTIDAD DE GOLES: " + cantidadMaxima.ToString();
+        }
+
         #endregion
 
         #region Precarga de Datos
@@ -276,11 +331,11 @@ namespace Dominio
         public void PrecargaPartidosFaseDeGrupos()
         {
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("Arabia Saudita"), DateTime.Parse("2022-11-22 10:00:00"), 'C'));
-            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Mexico"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-22 13:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("México"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-22 13:00:00"), 'C'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Arabia Saudita"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-26 10:00:00"), 'C'));
-            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("Mexico"), DateTime.Parse("2022-11-26 16:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("México"), DateTime.Parse("2022-11-26 16:00:00"), 'C'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-30 16:00:00"), 'C'));
-            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Arabia Saudita"), GetSeleccion("Mexico"), DateTime.Parse("2022-11-30 16:00:00"), 'C'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Arabia Saudita"), GetSeleccion("México"), DateTime.Parse("2022-11-30 16:00:00"), 'C'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-11-24 10:00:00"), 'H'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Ghana"), DateTime.Parse("2022-11-24 13:00:00"), 'H'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-11-28 10:00:00"), 'H'));

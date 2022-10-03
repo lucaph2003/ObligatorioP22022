@@ -433,6 +433,11 @@ namespace Dominio
 
         public void PrecargaPartidosFaseEliminatoria()
         {
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), 8, false, false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), 8, false, false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-03 16:00:00"), 4, false, false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Corea del Sur"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), 3, false, false));
+           
 
         }
 

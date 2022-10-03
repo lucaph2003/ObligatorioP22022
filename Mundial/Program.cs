@@ -193,19 +193,28 @@ namespace Mundial
         }
         public static void SeleccionPartidoMasGoles(Sistema sistema)
         {
-            Console.Clear();
-            Console.WriteLine("###Partido con mas Goles");
-            Console.WriteLine("");
-            Console.WriteLine("Ingresa el nombre de la seleccion para buscar: ");
-            Console.WriteLine("");
-            string nombreSeleccion = Console.ReadLine();
-            Console.WriteLine(sistema.ObtenerPartidoConMasGoles(nombreSeleccion));
-            Console.ReadLine();
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("###Partido con mas Goles");
+                Console.WriteLine("");
+                Console.WriteLine("Ingresa el nombre de la seleccion para buscar: ");
+                Console.WriteLine("");
+                string nombreSeleccion = Console.ReadLine();
+                Console.WriteLine("");
+                Console.WriteLine(sistema.ObtenerPartidoConMasGoles(nombreSeleccion));
+                Console.ReadLine();
 
-            Console.WriteLine("");
-            Console.WriteLine("Presiona enter para continuar...");
-            Console.ReadLine();
-            Console.WriteLine("---------------------------------");
+                Console.WriteLine("");
+                Console.WriteLine("Presiona enter para continuar...");
+                Console.ReadLine();
+                Console.WriteLine("---------------------------------");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
 
 

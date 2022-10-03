@@ -351,6 +351,7 @@ namespace Dominio
             PrecargaJugadores();
             PrecargaSelecciones();
             PrecargaPartidosFaseDeGrupos();
+            PrecargaPartidosFaseEliminatoria();
             PrecargaPeriodista();
             PrecargaIncidencias();
         }

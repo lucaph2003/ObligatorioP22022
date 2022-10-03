@@ -123,10 +123,12 @@ namespace Mundial
                 Console.WriteLine("Ingresa el nuevo monto: ");
                 int monto = int.Parse(Console.ReadLine());
                 sistema.CambiarMontoJugador(monto);
+                Console.WriteLine("El monto de categoria se actualizo correctamente");
+                Console.WriteLine($"El monto de categoria es: {monto}");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("El monto debe ser un valor numerico");
             }
             Console.WriteLine("");
             Console.WriteLine("Presiona enter para continuar...");
@@ -135,18 +137,20 @@ namespace Mundial
         }
         public static void ListarPartidosJugador(Sistema sistema)
         {
-            Console.WriteLine("Ingrese el id del jugador");
-            int idJugador = int.Parse(Console.ReadLine());
-            List<Partido> partidosParticipados = sistema.ObtenerPartidosJugadorPorId(idJugador);
-            foreach(Partido p in partidosParticipados)
-            {
-                Console.WriteLine(p.ToString());
-            }
-            Console.WriteLine("");
-            Console.WriteLine("Presiona enter para continuar...");
-            Console.ReadLine();
-            Console.WriteLine("---------------------------------");
-
+            
+                Console.WriteLine("Ingrese el id del jugador");
+                int idJugador = int.Parse(Console.ReadLine());
+                List<Partido> partidosParticipados = sistema.ObtenerPartidosJugadorPorId(idJugador);
+                foreach (Partido p in partidosParticipados)
+                {
+                    Console.WriteLine(p.ToString());
+                }
+                Console.WriteLine("");
+                Console.WriteLine("Presiona enter para continuar...");
+                Console.ReadLine();
+                Console.WriteLine("---------------------------------");
+           
+            
         }
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {

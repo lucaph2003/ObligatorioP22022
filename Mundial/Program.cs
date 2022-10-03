@@ -9,10 +9,10 @@ namespace Mundial
         static void Main(string[] args)
         {
             Sistema sistema = Sistema.ObtenerInstancia;
-            int op;
-            Console.Clear();
+            int op;           
             do
             {
+                Console.Clear();
                 Console.WriteLine("Bienvenidos al Mundial Qatar2022! ! !");
                 Console.WriteLine("");
                 Console.WriteLine("Porfavor ingrese una opcion para continuar...");
@@ -69,9 +69,11 @@ namespace Mundial
 
         public static void CrearPeriodista(Sistema sistema)
         {
+            Console.Clear();
             try
             {
-                Console.WriteLine("Registro de periodista");
+                Console.WriteLine("###Registro de periodista###");
+                Console.WriteLine("");
                 Console.WriteLine("Ingrese nombre completo: ");
                 string nombreCompleto = Console.ReadLine();
                 Console.WriteLine("Ingrese email: ");
@@ -105,6 +107,9 @@ namespace Mundial
         }
         public static void MostrarPeriodistas(Sistema sistema)
         {
+            Console.Clear();
+            Console.WriteLine("###Lista de Periodistas###");
+            Console.WriteLine("");
             List<Periodista> periodistas = sistema.ObtenerPeriodistas();
             foreach(Periodista p in periodistas)
             {
@@ -118,8 +123,11 @@ namespace Mundial
         }
         public static void CambiarMontoCategoria(Sistema sistema)
         {
+            Console.Clear();
             try
             {
+                Console.WriteLine("###Cambio de categoria financiera###");
+                Console.WriteLine("");
                 Console.WriteLine("Ingresa el nuevo monto: ");
                 int monto = int.Parse(Console.ReadLine());
                 sistema.CambiarMontoJugador(monto);
@@ -137,10 +145,13 @@ namespace Mundial
         }
         public static void ListarPartidosJugador(Sistema sistema)
         {
-            
+                Console.Clear();
+                Console.WriteLine("###Busqueda de Partidos por Id Jugador###");
+                Console.WriteLine("");
                 Console.WriteLine("Ingrese el id del jugador");
+                Console.WriteLine("");
                 int idJugador = int.Parse(Console.ReadLine());
-                List<Partido> partidosParticipados = sistema.ObtenerPartidosJugadorPorId(idJugador);
+                List<Partido> partidosParticipados = sistema.ObtenerPartidosJugadorPorId(idJugador);                         
                 foreach (Partido p in partidosParticipados)
                 {
                     Console.WriteLine(p.ToString());
@@ -148,12 +159,13 @@ namespace Mundial
                 Console.WriteLine("");
                 Console.WriteLine("Presiona enter para continuar...");
                 Console.ReadLine();
-                Console.WriteLine("---------------------------------");
-           
-            
+                Console.WriteLine("---------------------------------");           
         }
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {
+            Console.Clear();
+            Console.WriteLine("###Jugadores Expulsados###");
+            Console.WriteLine("");
             List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresExpulsados());
             foreach (Jugador j in jugadores)
             {
@@ -166,7 +178,10 @@ namespace Mundial
         }
         public static void ListarJugadoresGol(Sistema sistema)
         {
-            List<Jugador> jugadores = sistema.ObtenerJugadoresConGol();
+            Console.Clear();
+            Console.WriteLine("###Jugadores que convirtieron gol###");
+            Console.WriteLine("");
+            List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresConGol());
             foreach (Jugador j in jugadores)
             {
                 Console.WriteLine(j.ToString());
@@ -178,7 +193,11 @@ namespace Mundial
         }
         public static void SeleccionPartidoMasGoles(Sistema sistema)
         {
+            Console.Clear();
+            Console.WriteLine("###Partido con mas Goles");
+            Console.WriteLine("");
             Console.WriteLine("Ingresa el nombre de la seleccion para buscar: ");
+            Console.WriteLine("");
             string nombreSeleccion = Console.ReadLine();
             Console.WriteLine(sistema.ObtenerPartidoConMasGoles(nombreSeleccion));
             Console.ReadLine();

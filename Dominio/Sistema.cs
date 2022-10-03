@@ -209,10 +209,11 @@ namespace Dominio
         //Obtiene los partidos que jugo segun el id del jugador
         public List<Partido> ObtenerPartidosJugadorPorId(int idJugador)
         {
-                Jugador j = GetJugador(idJugador);
-                List<Partido> partidos = new List<Partido>();
+                 Jugador j = GetJugador(idJugador);
+             List<Partido> partidos = new List<Partido>();
+             if (j != null) 
+             {         
                 Seleccion seleccion = GetSeleccion(j.pais.nombre);
-
                 foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
                 {
                     if (p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
@@ -227,9 +228,12 @@ namespace Dominio
                         partidos.Add(p);
                     }
                 }
-
-                return partidos;
-              
+              }
+              else
+              {
+               Console.WriteLine($"No existe ese jugador");
+              }
+              return partidos; 
         }
 
         //Obtiene todos los jugadores expulsados
@@ -323,7 +327,7 @@ namespace Dominio
                         partido = p;
                     }
                 }
-            }
+            }          
             return partido.ToString() + "\nCantidad de goles: " + cantidadMaxima.ToString();
         }
 

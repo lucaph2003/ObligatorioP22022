@@ -91,7 +91,12 @@ namespace Dominio
         public int CompareTo(Object obj)
         {
             Jugador aComparar = (Jugador)obj;
-            return aComparar.valorMercado.CompareTo(this.valorMercado);
+            int ordenado = aComparar.valorMercado.CompareTo(this.valorMercado);
+            if(ordenado == 0)
+            {
+                ordenado = aComparar.nombreCompleto.CompareTo(this.nombreCompleto);
+            }
+            return ordenado;
         }
         #endregion
         #endregion

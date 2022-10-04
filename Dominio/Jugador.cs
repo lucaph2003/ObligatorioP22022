@@ -20,6 +20,7 @@ namespace Dominio
         public static int montoCategoria { get; set; }
 
         #endregion
+
         #region Metodos Jugador
 
         #region Constructores

@@ -396,6 +396,16 @@ namespace Dominio
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Uruguay"), DateTime.Parse("2022-11-28 16:00:00"), 'H'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Uruguay"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
+            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Uruguay"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
+        }
+        public void PrecargaPartidosFaseEliminatoria()
+        {
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), 8, false, false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), 8, false, false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00"), 4, true, false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Corea del Sur"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-09 16:00:00"), 3, false, false));
+
+
         }
 
         public void PrecargaIncidencias()
@@ -437,17 +447,28 @@ namespace Dominio
             AltaIncidencia(GetPartido(12), new Incidencia("Gol", 55, GetJugador(494)));
             AltaIncidencia(GetPartido(12), new Incidencia("Gol", 88, GetJugador(506)));
             AltaIncidencia(GetPartido(12), new Incidencia("Amarilla", 89, GetJugador(536)));
+            AltaIncidencia(GetPartido(13), new Incidencia("Gol", 23, GetJugador(23)));
+            //AltaIncidencia(GetPartido(13), new Incidencia("Gol", 46, GetJugador(396)));
+            //AltaIncidencia(GetPartido(13), new Incidencia("Gol", 78, GetJugador(23)));
+            //AltaIncidencia(GetPartido(14), new Incidencia("Amarilla", 4, GetJugador(490)));
+            //AltaIncidencia(GetPartido(14), new Incidencia("Gol", 15, GetJugador(490)));
+            //AltaIncidencia(GetPartido(14), new Incidencia("Gol", 78, GetJugador(650)));
+            //AltaIncidencia(GetPartido(14), new Incidencia("Gol", 89, GetJugador(494)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 17, GetJugador(23)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 39, GetJugador(24)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 44, GetJugador(493)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Amarilla", 56, GetJugador(10)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 57, GetJugador(490)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Roja", 105, GetJugador(9)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 110, GetJugador(486)));
+            //AltaIncidencia(GetPartido(15), new Incidencia("Roja", 118, GetJugador(485)));
+            //AltaIncidencia(GetPartido(16), new Incidencia("Gol", 65, GetJugador(650)));
+            //AltaIncidencia(GetPartido(16), new Incidencia("Gol", 78, GetJugador(650)));
+
+
         }
 
-        public void PrecargaPartidosFaseEliminatoria()
-        {
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), 8, false, false));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), 8, false, false));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-03 16:00:00"), 4, false, false));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Corea del Sur"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), 3, false, false));
-           
-
-        }
+        
 
         public void PrecargaPaises()
         {

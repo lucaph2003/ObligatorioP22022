@@ -41,7 +41,7 @@ namespace Dominio
         #endregion
 
         #region Metodos
-        public void CalcularCategoria()
+        public string CalcularCategoria()
         {
             if (this.valorMercado < montoCategoria)
             {
@@ -51,6 +51,7 @@ namespace Dominio
             {
                 this.categoria = "VIP";
             }
+            return categoria;
         }
 
         public static void CambiarMonto(int pNuevoMonto)
@@ -85,13 +86,18 @@ namespace Dominio
         #region Override y Compare
         public override string ToString()
         {
-            return "Nombre: "+this.nombreCompleto+"\n Valor Mercado: "+this.valorMercado;
+            return "Nombre: " + this.nombreCompleto + "\n Valor Mercado: EUR " + this.valorMercado + "\n Categoria Financiera: " + CalcularCategoria().ToString();
         }
 
         public int CompareTo(Object obj)
         {
             Jugador aComparar = (Jugador)obj;
-            return aComparar.valorMercado.CompareTo(this.valorMercado);
+            int ordenado = aComparar.valorMercado.CompareTo(this.valorMercado);
+            if(ordenado == 0)
+            {
+                ordenado = aComparar.nombreCompleto.CompareTo(this.nombreCompleto);
+            }
+            return ordenado;
         }
         #endregion
         #endregion

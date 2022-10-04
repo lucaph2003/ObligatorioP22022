@@ -169,7 +169,7 @@ namespace Dominio
 
             foreach (Seleccion s in Selecciones)
             {
-                if (s.pais.nombre.Equals(nombre))
+                if (s.pais.nombre.ToLower().Equals(nombre.ToLower()))
                 {
                     return s;
                 }
@@ -309,26 +309,33 @@ namespace Dominio
             Seleccion seleccion = GetSeleccion(nombreSeleccion);
             Partido partido = new Partido();
             int cantidadMaxima = 0;
-            foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            if (seleccion == null) 
             {
-                if(p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
+                return "La seleccion no existe! ! !";
+            }
+            else {
+                foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
                 {
-                    int contadorGol = 0;
-                    foreach(Incidencia i in p.Incidencias)
+                    if (p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
                     {
-                        if (i.incidencia.Equals("Gol"))
+                        int contadorGol = 0;
+                        foreach (Incidencia i in p.Incidencias)
                         {
-                            contadorGol++;
+                            if (i.incidencia.Equals("Gol"))
+                            {
+                                contadorGol++;
+                            }
+                        }
+                        if (contadorGol > cantidadMaxima)
+                        {
+                            cantidadMaxima = contadorGol;
+                            partido = p;
                         }
                     }
-                    if (contadorGol > cantidadMaxima)
-                    {
-                        cantidadMaxima = contadorGol;
-                        partido = p;
-                    }
                 }
-            }          
-            return partido.ToString() + "\nCantidad de goles: " + cantidadMaxima.ToString();
+                return partido.ToString() + "\nCantidad de goles: " + cantidadMaxima.ToString();
+            }
+            
         }
 
                 /*VOID*/

@@ -160,6 +160,13 @@ namespace Dominio
                     return p;
                 }
             }
+            foreach (Partido p in PartidosFaseEliminatoria)
+            {
+                if (p.id.Equals(idPartido))
+                {
+                    return p;
+                }
+            }
             return null;
         }
 
@@ -448,22 +455,22 @@ namespace Dominio
             AltaIncidencia(GetPartido(12), new Incidencia("Gol", 88, GetJugador(506)));
             AltaIncidencia(GetPartido(12), new Incidencia("Amarilla", 89, GetJugador(536)));
             AltaIncidencia(GetPartido(13), new Incidencia("Gol", 23, GetJugador(23)));
-            //AltaIncidencia(GetPartido(13), new Incidencia("Gol", 46, GetJugador(396)));
-            //AltaIncidencia(GetPartido(13), new Incidencia("Gol", 78, GetJugador(23)));
-            //AltaIncidencia(GetPartido(14), new Incidencia("Amarilla", 4, GetJugador(490)));
-            //AltaIncidencia(GetPartido(14), new Incidencia("Gol", 15, GetJugador(490)));
-            //AltaIncidencia(GetPartido(14), new Incidencia("Gol", 78, GetJugador(650)));
-            //AltaIncidencia(GetPartido(14), new Incidencia("Gol", 89, GetJugador(494)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 17, GetJugador(23)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 39, GetJugador(24)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 44, GetJugador(493)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Amarilla", 56, GetJugador(10)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 57, GetJugador(490)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Roja", 105, GetJugador(9)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Gol", 110, GetJugador(486)));
-            //AltaIncidencia(GetPartido(15), new Incidencia("Roja", 118, GetJugador(485)));
-            //AltaIncidencia(GetPartido(16), new Incidencia("Gol", 65, GetJugador(650)));
-            //AltaIncidencia(GetPartido(16), new Incidencia("Gol", 78, GetJugador(650)));
+            AltaIncidencia(GetPartido(13), new Incidencia("Gol", 46, GetJugador(396)));
+            AltaIncidencia(GetPartido(13), new Incidencia("Gol", 78, GetJugador(23)));
+            AltaIncidencia(GetPartido(14), new Incidencia("Amarilla", 4, GetJugador(490)));
+            AltaIncidencia(GetPartido(14), new Incidencia("Gol", 15, GetJugador(490)));
+            AltaIncidencia(GetPartido(14), new Incidencia("Gol", 78, GetJugador(650)));
+            AltaIncidencia(GetPartido(14), new Incidencia("Gol", 89, GetJugador(494)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 17, GetJugador(23)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 39, GetJugador(24)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 44, GetJugador(493)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Amarilla", 56, GetJugador(10)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 57, GetJugador(490)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Roja", 105, GetJugador(9)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 110, GetJugador(486)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Roja", 118, GetJugador(485)));
+            AltaIncidencia(GetPartido(16), new Incidencia("Gol", 65, GetJugador(650)));
+            AltaIncidencia(GetPartido(16), new Incidencia("Gol", 78, GetJugador(650)));
 
 
         }

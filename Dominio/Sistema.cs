@@ -54,13 +54,18 @@ namespace Dominio
             try
             {
                 pPeriodista.Validar();
+                pPeriodista.ExisteId(Periodistas);
+                pPeriodista.ExisteEmail(Periodistas);
                 Periodistas.Add(pPeriodista);
+
             }
             catch (Exception e)
             {
                 throw e;
             }
         }
+
+
 
         public void AltaSeleccion(Seleccion pSeleccion)
         {
@@ -238,7 +243,7 @@ namespace Dominio
               }
               else
               {
-               Console.WriteLine($"No existe ese jugador");
+               Console.WriteLine("No existe ese jugador");
               }
               return partidos; 
         }
@@ -246,6 +251,7 @@ namespace Dominio
         //Obtiene todos los jugadores expulsados
         public List<Jugador> ObtenerJugadoresExpulsados()
         {
+
             List<Jugador> jugadoresExpulsados = new List<Jugador>();
             foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
             {
@@ -268,6 +274,10 @@ namespace Dominio
                     }
                 }
             }
+            if(jugadoresExpulsados.Count == 0)
+            {
+                throw new Exception("No se encuentran registros");
+            }
 
             return jugadoresExpulsados;
         }
@@ -279,32 +289,47 @@ namespace Dominio
             return jugadores;
         }
 
-        //Obtiene los jugadores que han marcado al menos un gol
-        public List<Jugador> ObtenerJugadoresConGol()
+        //Obtiene los jugadores que han marcado al menos un gol busqueda por id de partido
+        public List<Jugador> ObtenerJugadoresConGolPorIdPartido(int idPartido)
         {
+            bool existePartido = false;
+            Partido partido = GetPartido(idPartido);
             List<Jugador> jugadoresGoleadores = new List<Jugador>();
             foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
             {
-                foreach (Incidencia i in p.Incidencias)
+                if(p.Equals(partido))
                 {
-                    if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
+                    existePartido = true;
+                    foreach (Incidencia i in p.Incidencias)
                     {
-                        jugadoresGoleadores.Add(i.jugador);
+                        if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
+                        {
+                            jugadoresGoleadores.Add(i.jugador);
+                        }
                     }
                 }
+                
             }
 
             foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
             {
-                foreach (Incidencia i in p.Incidencias)
+                if (p.Equals(partido))
                 {
-                    if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
+                    existePartido = true;
+                    foreach (Incidencia i in p.Incidencias)
                     {
-                        jugadoresGoleadores.Add(i.jugador);
+                        if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
+                        {
+                            jugadoresGoleadores.Add(i.jugador);
+                        }
                     }
                 }
-            }
 
+            }
+            if (!existePartido)
+            {
+                throw new Exception("El partido no existe");
+            }
             return jugadoresGoleadores;
         }
 
@@ -340,10 +365,30 @@ namespace Dominio
                         }
                     }
                 }
+                foreach(PartidoFaseEliminatoria pE in PartidosFaseEliminatoria)
+                {
+                    if(pE.seleccion1.Equals(seleccion) || pE.seleccion2.Equals(seleccion))
+                    {
+                        int contadorGol = 0;
+                        foreach(Incidencia i in pE.Incidencias)
+                        {
+                            if (i.incidencia.Equals("Gol"))
+                            {
+                                contadorGol++;
+                            }
+                        }
+                        if(contadorGol > cantidadMaxima)
+                        {
+                            cantidadMaxima = contadorGol;
+                            partido = pE;
+                        }
+                    }
+                }
                 return partido.ToString() + "\nCantidad de goles: " + cantidadMaxima.ToString();
             }
             
         }
+
 
                 /*VOID*/
         //Cambia el monto de referencia para definir la categoria de los jugadores
@@ -353,7 +398,12 @@ namespace Dominio
             {
                 Jugador.CambiarMonto(monto);
             }
+            else
+            {
+                throw new Exception("El monto debe ser mayor a 0");
+            }
         }
+        
 
         #endregion
 

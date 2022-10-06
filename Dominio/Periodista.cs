@@ -9,6 +9,10 @@ namespace Dominio
         #region Atributos Periodista
         public string email { get; set; }
         public string password { get; set; }
+
+        public static int contador = 1;
+
+        public int id { get; set; }
         #endregion
 
         #region Metodos Periodista
@@ -18,6 +22,7 @@ namespace Dominio
         {
             this.email =pEmail;
             this.password = pPassword;
+            this.id = contador++;
         }
 
         #endregion
@@ -35,6 +40,28 @@ namespace Dominio
                 throw new Exception("Todos los campos deben estar llenos");
             }
             
+        }
+        public void ExisteEmail(List<Periodista> periodistas)
+        {
+            foreach(Periodista p in periodistas)
+            {
+                if (p.email.Equals(this.email))
+                {
+                    throw new Exception("El mail ya existe");
+                }
+            }
+    
+        }
+        public void ExisteId(List<Periodista> periodistas)
+        {
+            foreach (Periodista p in periodistas)
+            {
+                if (p.id.Equals(this.id))
+                {
+                    throw new Exception("El Id ya existe");
+                }
+            }
+
         }
 
         public void ValidarEmail()

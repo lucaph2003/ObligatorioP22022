@@ -37,7 +37,10 @@ namespace Dominio
             this.puesto = pPuesto;
             CalcularCategoria();
         }
+        public Jugador()
+        {
 
+        }
         #endregion
 
         #region Metodos
@@ -73,10 +76,9 @@ namespace Dominio
                 throw new Exception("Los datos deben estar completos");
             }
         }
-
         public void ValidarValorMercado()
         {
-            if (valorMercado < 0)
+            if (this.valorMercado < 0)
             {
                 throw new Exception("El valor de mercado debe ser mayor a 0");
             }

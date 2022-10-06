@@ -8,11 +8,12 @@ namespace Mundial
     {
         static void Main(string[] args)
         {
+            bool salir = false;
             Sistema sistema = Sistema.ObtenerInstancia;
-            int op;           
-            do
+            Console.Clear();
+            while(!salir)
             {
-                Console.Clear();
+                
                 Console.WriteLine("Bienvenidos al Mundial Qatar2022! ! !");
                 Console.WriteLine("");
                 Console.WriteLine("Porfavor ingrese una opcion para continuar...");
@@ -32,38 +33,49 @@ namespace Mundial
                 Console.WriteLine("0-Salir");
                 Console.WriteLine("");
                 Console.WriteLine("Ingrese una opcion: ");
-                op = int.Parse(Console.ReadLine());
-                switch (op)
+                bool correcto = int.TryParse(Console.ReadLine(), out int opcion);
+                if (!correcto)
                 {
-                    case 1:
-                        CrearPeriodista(sistema);
-                        break;
-                    case 2:
-                        MostrarPeriodistas(sistema);
-                        break;
-                    case 3:
-                        ListarPartidosJugador(sistema);
-                        break;
-                    case 4:
-                        CambiarMontoCategoria(sistema);
-                        break;
-                    case 5:
-                        ListarJugadoresExpulsados(sistema);
-                        break;
-                    case 6:
-                        ListarJugadoresGol(sistema);
-                        break;
-                    case 7:
-                        SeleccionPartidoMasGoles(sistema);
-                        break;
-                    case 0:
-                        break;
-                    default:
-                        Console.WriteLine("Ingresa una de las opciones validas! ! !");
-                        Console.WriteLine("-----------------------------------------");
-                        break;
+                    Console.WriteLine("Opcion invalida. Debe ingresar un valor numerico");
                 }
-            } while (op != 0);
+                else
+                {
+                    switch (opcion)
+                    {
+                        case 1:
+                            CrearPeriodista(sistema);
+                            break;
+                        case 2:
+                            MostrarPeriodistas(sistema);
+                            break;
+                        case 3:
+                            ListarPartidosJugador(sistema);
+                            break;
+                        case 4:
+                            CambiarMontoCategoria(sistema);
+                            break;
+                        case 5:
+                            ListarJugadoresExpulsados(sistema);
+                            break;
+                        case 6:
+                            ListarJugadoresGol(sistema);
+                            break;
+                        case 7:
+                            SeleccionPartidoMasGoles(sistema);
+                            break;
+                        case 0:
+                            Console.WriteLine("Saliendo del sistema...");
+                            salir = true;
+                            break;
+                        default:
+                            Console.WriteLine("Ingresa una de las opciones validas! ! !");
+                            Console.WriteLine("-----------------------------------------");
+                            break;
+                    }
+
+                }
+                
+            } 
             
         }
 
@@ -93,16 +105,14 @@ namespace Mundial
                 }
 
                 Console.WriteLine("");
-                Console.WriteLine("Presiona enter para continuar...");
-                Console.ReadLine();
-                Console.WriteLine("---------------------------------");
             } catch (Exception e) {
                 Console.WriteLine("");
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Presiona enter para continuar...");
-                Console.ReadLine();
-                Console.WriteLine("---------------------------------");
             }
+            Console.WriteLine("Presiona enter para continuar...");
+            Console.ReadLine();
+            Console.WriteLine("---------------------------------");
+            Console.Clear();
             
         }
         public static void MostrarPeriodistas(Sistema sistema)
@@ -129,14 +139,14 @@ namespace Mundial
                 Console.WriteLine("###Cambio de categoria financiera###");
                 Console.WriteLine("");
                 Console.WriteLine("Ingresa el nuevo monto: ");
-                int monto = int.Parse(Console.ReadLine());
+                int monto = int.Parse(Console.ReadLine());           
                 sistema.CambiarMontoJugador(monto);
                 Console.WriteLine("El monto de categoria se actualizo correctamente");
                 Console.WriteLine($"El monto de categoria es: {monto}");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("El monto debe ser un valor numerico");
+                Console.WriteLine(e.Message);
             }
             Console.WriteLine("");
             Console.WriteLine("Presiona enter para continuar...");
@@ -145,13 +155,15 @@ namespace Mundial
         }
         public static void ListarPartidosJugador(Sistema sistema)
         {
+            try
+            {
                 Console.Clear();
                 Console.WriteLine("###Busqueda de Partidos por Id Jugador###");
                 Console.WriteLine("");
                 Console.WriteLine("Ingrese el id del jugador");
                 Console.WriteLine("");
                 int idJugador = int.Parse(Console.ReadLine());
-                List<Partido> partidosParticipados = sistema.ObtenerPartidosJugadorPorId(idJugador);                         
+                List<Partido> partidosParticipados = sistema.ObtenerPartidosJugadorPorId(idJugador);
                 foreach (Partido p in partidosParticipados)
                 {
                     Console.WriteLine(p.ToString());
@@ -159,17 +171,29 @@ namespace Mundial
                 Console.WriteLine("");
                 Console.WriteLine("Presiona enter para continuar...");
                 Console.ReadLine();
-                Console.WriteLine("---------------------------------");           
+                Console.WriteLine("---------------------------------");
+            }       
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {
             Console.Clear();
-            Console.WriteLine("###Jugadores Expulsados###");
-            Console.WriteLine("");
-            List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresExpulsados());
-            foreach (Jugador j in jugadores)
+            try
             {
-                Console.WriteLine(j.ToString());
+                Console.WriteLine("###Jugadores Expulsados###");
+                Console.WriteLine("");
+                List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresExpulsados());
+                foreach (Jugador j in jugadores)
+                {
+                    Console.WriteLine(j.ToString());
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
             Console.WriteLine("");
             Console.WriteLine("Presiona enter para continuar...");
@@ -178,13 +202,23 @@ namespace Mundial
         }
         public static void ListarJugadoresGol(Sistema sistema)
         {
-            Console.Clear();
-            Console.WriteLine("###Jugadores que convirtieron gol###");
-            Console.WriteLine("");
-            List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresConGol());
-            foreach (Jugador j in jugadores)
+
+            try
             {
-                Console.WriteLine(j.ToString());
+                Console.Clear();
+                Console.WriteLine("###Jugadores que convirtieron gol###");
+                Console.WriteLine("");
+                Console.WriteLine("Ingrese Id del partido");
+                int idPartido = int.Parse(Console.ReadLine());
+                List<Jugador> jugadores = sistema.OrdenarPorValor(sistema.ObtenerJugadoresConGolPorIdPartido(idPartido));
+                foreach (Jugador j in jugadores)
+                {
+                    Console.WriteLine(j.ToString());
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
             Console.WriteLine("");
             Console.WriteLine("Presiona enter para continuar...");
@@ -193,11 +227,12 @@ namespace Mundial
         }
         public static void SeleccionPartidoMasGoles(Sistema sistema)
         {
-            try
-            {
+            
                 Console.Clear();
                 Console.WriteLine("###Partido con mas Goles");
                 Console.WriteLine("");
+            try
+            {
                 Console.WriteLine("Ingresa el nombre de la seleccion para buscar: ");
                 Console.WriteLine("");
                 string nombreSeleccion = Console.ReadLine();
@@ -209,14 +244,11 @@ namespace Mundial
                 Console.WriteLine("Presiona enter para continuar...");
                 Console.ReadLine();
                 Console.WriteLine("---------------------------------");
-            }
+            }          
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-            }
-            
+            }           
         }
-
-
     }
 }

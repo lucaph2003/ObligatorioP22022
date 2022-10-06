@@ -86,7 +86,7 @@ namespace Dominio
         #region Override y Compare
         public override string ToString()
         {
-            return "Nombre: " + this.nombreCompleto + "\n Valor Mercado: EUR " + this.valorMercado + "\n Categoria Financiera: " + CalcularCategoria().ToString();
+            return "Nombre: " + this.nombreCompleto + " " + "Valor Mercado: EUR " + this.valorMercado + " " + "Categoria Financiera: " + CalcularCategoria().ToString();
         }
 
         public int CompareTo(Object obj)

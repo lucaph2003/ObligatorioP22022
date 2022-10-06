@@ -287,7 +287,7 @@ namespace Dominio
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
-                    if (i.incidencia.Equals("Gol"))
+                    if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
                     {
                         jugadoresGoleadores.Add(i.jugador);
                     }
@@ -298,7 +298,7 @@ namespace Dominio
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
-                    if (i.incidencia.Equals("Gol"))
+                    if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
                     {
                         jugadoresGoleadores.Add(i.jugador);
                     }

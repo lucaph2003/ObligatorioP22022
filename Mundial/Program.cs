@@ -130,6 +130,7 @@ namespace Mundial
             Console.WriteLine("Presiona enter para continuar...");
             Console.ReadLine();
             Console.WriteLine("---------------------------------");
+            Console.Clear();
         }
         public static void CambiarMontoCategoria(Sistema sistema)
         {
@@ -152,6 +153,7 @@ namespace Mundial
             Console.WriteLine("Presiona enter para continuar...");
             Console.ReadLine();
             Console.WriteLine("---------------------------------");
+            Console.Clear();
         }
         public static void ListarPartidosJugador(Sistema sistema)
         {
@@ -177,6 +179,7 @@ namespace Mundial
             {
                 Console.WriteLine(e.Message);
             }
+            Console.Clear();
         }
         public static void ListarJugadoresExpulsados(Sistema sistema)
         {
@@ -199,6 +202,7 @@ namespace Mundial
             Console.WriteLine("Presiona enter para continuar...");
             Console.ReadLine();
             Console.WriteLine("---------------------------------");
+            Console.Clear();
         }
         public static void ListarJugadoresGol(Sistema sistema)
         {
@@ -224,6 +228,7 @@ namespace Mundial
             Console.WriteLine("Presiona enter para continuar...");
             Console.ReadLine();
             Console.WriteLine("---------------------------------");
+            Console.Clear();
         }
         public static void SeleccionPartidoMasGoles(Sistema sistema)
         {
@@ -248,7 +253,8 @@ namespace Mundial
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-            }           
+            }
+            Console.Clear();
         }
     }
 }

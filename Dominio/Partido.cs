@@ -68,6 +68,7 @@ namespace Dominio
         #endregion
 
         #region Validaciones
+        //Valida que las selecciones no sean vacias, ni que una seleccion se enfrente asi misma
         public void ValidarSelecciones()
         {
             if(seleccion1 == null || seleccion2 == null || seleccion1.Equals(seleccion2))
@@ -75,7 +76,7 @@ namespace Dominio
                 throw new Exception("Debe cargar correctamente las dos selecciones! ! !");
             }
         }
-
+        //Valida que las fechas esten comprendidas en el tiempo estipulado 
         public void ValidarFecha()
         {
             DateTime fechaInicio = new DateTime(2022, 11, 20);

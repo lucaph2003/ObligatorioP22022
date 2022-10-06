@@ -37,10 +37,7 @@ namespace Dominio
             this.puesto = pPuesto;
             CalcularCategoria();
         }
-        public Jugador()
-        {
-
-        }
+       
         #endregion
 
         #region Metodos

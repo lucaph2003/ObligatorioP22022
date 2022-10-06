@@ -408,7 +408,7 @@ namespace Dominio
         #endregion
 
         #region Precarga de Datos
-
+        
         public void RealizarPrecargaDatos()
         {
             PrecargaPaises();
@@ -460,7 +460,7 @@ namespace Dominio
             AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), 8, false, false));
             AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), 8, false, false));
             AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00"), 4, true, false));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Corea del Sur"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-09 16:00:00"), 3, false, false));
+           
 
 
         }
@@ -519,8 +519,7 @@ namespace Dominio
             AltaIncidencia(GetPartido(15), new Incidencia("Roja", 105, GetJugador(9)));
             AltaIncidencia(GetPartido(15), new Incidencia("Gol", 110, GetJugador(486)));
             AltaIncidencia(GetPartido(15), new Incidencia("Roja", 118, GetJugador(485)));
-            AltaIncidencia(GetPartido(16), new Incidencia("Gol", 65, GetJugador(650)));
-            AltaIncidencia(GetPartido(16), new Incidencia("Gol", 78, GetJugador(650)));
+            
 
 
         }

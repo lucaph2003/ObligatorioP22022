@@ -4,9 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    /// <summary>
-    /// hola
-    /// </summary>
+    
     public class Periodista : Persona
     {
         #region Atributos Periodista

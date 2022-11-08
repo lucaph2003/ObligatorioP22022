@@ -34,6 +34,7 @@ namespace Dominio
         public List<Pais> Paises { get; } = new List<Pais>();
         public List<PartidoFaseDeGrupo> PartidosFaseDeGrupos { get; } = new List<PartidoFaseDeGrupo>();
         public List<PartidoFaseEliminatoria> PartidosFaseEliminatoria { get; } = new List<PartidoFaseEliminatoria>();
+        public List<Operador> Operadores { get; } = new List<Operador>();
         #endregion
 
         #region Metodos de Alta
@@ -63,6 +64,12 @@ namespace Dominio
             {
                 throw e;
             }
+        }
+        public void AltaOperador(Operador pOperador)
+        {
+            pOperador.Validar();
+            pOperador.ExisteEmail(Operadores);
+            Operadores.Add(pOperador);
         }
 
 
@@ -216,6 +223,11 @@ namespace Dominio
 
             }
             return periodistas;
+        }
+        public List<Seleccion> ObtenerListaSeleccion()
+        {
+            Selecciones.Sort();
+            return Selecciones;
         }
 
         //Obtiene los partidos que jugo segun el id del jugador
@@ -418,6 +430,7 @@ namespace Dominio
             PrecargaPartidosFaseEliminatoria();
             PrecargaPeriodista();
             PrecargaIncidencias();
+            PrecargaOperador();
         }
         public void PrecargaSelecciones()
         {
@@ -438,6 +451,11 @@ namespace Dominio
         {
             AltaPeriodista(new Periodista("Alberto Kesman", "KesmanAlberto@gmail.com", "Kesman123"));
             AltaPeriodista(new Periodista("Jorge Da Silveira", "DaSilveira@gmail.com", "toto1234"));
+        }
+        public void PrecargaOperador()
+        {
+            AltaOperador(new Operador("Agustin Padia", "Fliapadia@hotmail.com", "Agus1234", DateTime.Parse("2022-11-07 17:20:00")));
+            AltaOperador(new Operador("Luca Podesta", "lucapodesta03@gmail.com", "Luca1234", DateTime.Parse("2022-11-07 17:30:00")));
         }
         public void PrecargaPartidosFaseDeGrupos()
         {

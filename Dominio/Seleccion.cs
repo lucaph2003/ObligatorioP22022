@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Seleccion
+    public class Seleccion :IComparable
     {
         #region Atributos Seleccion
         public Pais pais { get; set; }
@@ -48,6 +48,13 @@ namespace Dominio
             {
                 throw new Exception("Debe ingresar al menos 11 jugadores");
             }
+        }
+        
+        public int CompareTo(Object obj)
+        {
+            Seleccion seleccion = (Seleccion)obj;
+            return this.pais.nombre.CompareTo(seleccion.pais.nombre);
+
         }
         #endregion
 

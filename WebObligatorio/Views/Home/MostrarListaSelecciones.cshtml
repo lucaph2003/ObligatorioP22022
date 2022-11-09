@@ -14,22 +14,30 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Jugadores</th>
         </tr>
     </thead>
 
     @{
         foreach (Seleccion s in Model)
         {
+            foreach (Jugador j in s.Jugadores)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">i</th>
+                        <td>@s.pais.nombre</td>
+                        <td>@j.nombreCompleto</td>
 
-            <tbody>
-                <tr>
-                    <th scope="row">i</th>
-                    <td>@s.pais.nombre</td>
-                    <td></td>
-                   
-                </tr>
-            </tbody>
+                    </tr>
+                </tbody>
+            }
+
         }
+
+
+
+    }
     }
 
 </table>

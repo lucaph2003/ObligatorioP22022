@@ -294,6 +294,20 @@ namespace Dominio
             return jugadoresExpulsados;
         }
 
+        //Obtener Jugadores por seleccion
+        public List<Jugador> ObtenerJugadoresSPais(Pais pais)
+        {
+            List<Jugador> jugadores = new List<Jugador>();
+            foreach (Jugador j in Jugadores)
+            {
+                if(j.pais.Equals(pais))
+                {
+                    jugadores.Add(j);
+                }
+            }
+            return jugadores;
+        }
+
         //Ordena una lista de jugadores segun su valor
         public List<Jugador> OrdenarPorValor(List<Jugador> jugadores)
         {

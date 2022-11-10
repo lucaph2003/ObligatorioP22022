@@ -66,7 +66,7 @@ namespace Dominio
 
         public override bool Equals(object obj)
         {
-            Pais pais = (Pais) obj;
+            Pais pais = (Pais)obj;
             return this.id == pais.id;
         }
         #endregion

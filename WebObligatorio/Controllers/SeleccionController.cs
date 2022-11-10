@@ -16,9 +16,9 @@ namespace WebObligatorio.Controllers
             return View(selecciones);
         }
 
-        public IActionResult Jugadores(Pais pais)
+        public IActionResult Jugadores(int idPais)
         {
-            List<Jugador> jugadores = sistema.ObtenerJugadoresSeleccion(pais);
+            List<Jugador> jugadores = sistema.ObtenerJugadoresPais(idPais);
             return View(jugadores);
         }
     }

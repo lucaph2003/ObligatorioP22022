@@ -137,10 +137,22 @@ namespace Dominio
         // Retorna el País a partir del nombre.
         private Pais GetPais(string nombre)
         {
-
             foreach (Pais p in Paises)
             {
                 if (p.nombre.Equals(nombre))
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
+        // Retorna el País a partir del id.
+        private Pais GetPaisId(int idPais)
+        {
+            foreach (Pais p in Paises)
+            {
+                if (p.id.Equals(idPais))
                 {
                     return p;
                 }
@@ -295,9 +307,10 @@ namespace Dominio
         }
 
         //Obtener Jugadores por seleccion
-        public List<Jugador> ObtenerJugadoresSPais(Pais pais)
+        public List<Jugador> ObtenerJugadoresPais(int idPais)
         {
             List<Jugador> jugadores = new List<Jugador>();
+            Pais pais = GetPaisId(idPais);
             foreach (Jugador j in Jugadores)
             {
                 if(j.pais.Equals(pais))

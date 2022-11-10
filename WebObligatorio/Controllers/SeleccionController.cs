@@ -18,6 +18,7 @@ namespace WebObligatorio.Controllers
 
         public IActionResult Jugadores(int idPais)
         {
+            ViewBag.Pais = sistema.GetPaisId(idPais);
             List<Jugador> jugadores = sistema.ObtenerJugadoresPais(idPais);
             return View(jugadores);
         }

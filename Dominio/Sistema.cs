@@ -148,7 +148,7 @@ namespace Dominio
         }
 
         // Retorna el País a partir del id.
-        private Pais GetPaisId(int idPais)
+        public Pais GetPaisId(int idPais)
         {
             foreach (Pais p in Paises)
             {
@@ -207,6 +207,7 @@ namespace Dominio
             }
             return null;
         }
+
 
                 /*LISTAS*/
 

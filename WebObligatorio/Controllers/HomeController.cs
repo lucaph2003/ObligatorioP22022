@@ -12,7 +12,6 @@ namespace WebObligatorio.Controllers
 {
     public class HomeController : Controller
     {
-        public Sistema sistema = Sistema.ObtenerInstancia;
 
         private readonly ILogger<HomeController> _logger;
 
@@ -26,15 +25,6 @@ namespace WebObligatorio.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult MostrarListaSelecciones()
-        {
-            List<Seleccion> selecciones = sistema.ObtenerListaSeleccion();
-            return View(selecciones);
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -7,21 +7,19 @@ namespace Dominio
     public class Periodista : Usuario
     {
         #region Atributos Periodista
-        public string email { get; set; }
-        public string password { get; set; }
 
         public static int contador = 1;
 
         public int id { get; set; }
+
+        public const string Rol = "Periodista";
         #endregion
 
         #region Metodos Periodista
 
         #region Constructores
-        public Periodista(string pNombreCompleto,string pContrasena,string pEmail,string pPassword) :base(pNombreCompleto,pContrasena)
+        public Periodista(string pNombreCompleto,string pContrasena,string pEmail) :base(pNombreCompleto,pContrasena,pEmail)
         {
-            this.email =pEmail;
-            this.password = pPassword;
             this.id = contador++;
         }
 
@@ -30,7 +28,7 @@ namespace Dominio
         #region Validaciones
         public override void Validar()
         {
-            if (this.nombreCompleto.Length > 1  && this.email.Length > 1 && this.password.Length > 1 && this.contrasena.Length > 1)
+            if (this.nombreCompleto.Length > 1  && this.email.Length > 1 && this.contrasena.Length > 1)
             {
                 ValidarEmail();
                 ValidarPassword();
@@ -41,9 +39,9 @@ namespace Dominio
             }
             
         }
-        public void ExisteEmail(List<Periodista> periodistas)
+        public void ExisteEmail(List<Usuario> usuarios)
         {
-            foreach(Periodista p in periodistas)
+            foreach(Periodista p in usuarios)
             {
                 if (p.email.Equals(this.email))
                 {
@@ -74,11 +72,17 @@ namespace Dominio
 
         public void ValidarPassword()
         {
-            if (this.password.Length < 7)
+            if (this.contrasena.Length < 7)
             {
                 throw new Exception("La contrasenia debe ser mayor a 8 caracteres");
             }
         }
+
+        public override string ObtenerRol()
+        {
+            return Rol;
+        }
+
         #endregion
 
         #region Override y Compare

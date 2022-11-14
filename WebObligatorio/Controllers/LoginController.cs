@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dominio;
+using Microsoft.AspNetCore.Http;
 
 namespace WebObligatorio.Controllers
 {
@@ -12,7 +13,8 @@ namespace WebObligatorio.Controllers
         Sistema sistema = Sistema.ObtenerInstancia;
         public IActionResult Index()
         {
-            HttpContext.Session.Remove("UsuarioLogueado");
+            HttpContext.Session.Remove("UsuarioLogueadoEmail");
+            HttpContext.Session.Remove("UsuarioLogueadoNombre");
             HttpContext.Session.Remove("UsuarioRol");
             return View();
         }
@@ -30,9 +32,10 @@ namespace WebObligatorio.Controllers
                 return View();
             }
 
-            Usuario usuarioDeSistema = sistema.ObtenerUsuarioPorNombreUsuario(usuario.nombreCompleto);
+            Usuario usuarioDeSistema = sistema.ObtenerUsuarioPorEmail(usuario.email);
 
-            HttpContext.Session.SetString("UsuarioLogueado", usuarioDeSistema.nombreCompleto);
+            HttpContext.Session.SetString("UsuarioLogueadoEmail", usuarioDeSistema.email);
+            HttpContext.Session.SetString("UsuarioLogueadoNombre", usuarioDeSistema.nombreCompleto);
             HttpContext.Session.SetString("UsuarioRol", usuarioDeSistema.ObtenerRol());
 
             return RedirectToAction("Index", "Home");

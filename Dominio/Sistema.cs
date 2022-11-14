@@ -54,7 +54,7 @@ namespace Dominio
             try
             {
                 pPeriodista.Validar();
-                pPeriodista.ExisteId(l);
+                pPeriodista.ExisteId(Usuarios);
                 pPeriodista.ExisteEmail(Usuarios);
                 Usuarios.Add(pPeriodista);
 
@@ -214,6 +214,17 @@ namespace Dominio
             return null;
         }
 
+        public Usuario ObtenerUsuarioPorEmail(string email)
+        {
+            foreach (Usuario unUsuario in Usuarios)
+            {
+                if (unUsuario.email == email)
+                {
+                    return unUsuario;
+                }
+            }
+            return null;
+        }
 
                 /*LISTAS*/
 
@@ -439,9 +450,9 @@ namespace Dominio
         {
             foreach (Usuario u in Usuarios)
             {
-                if (u.nombreCompleto == usuario.nombreCompleto)
+                if (u.email == usuario.email)
                 {
-                    if (u.Contrasena == usuario.Contrasena)
+                    if (u.contrasena == usuario.contrasena)
                     {
                         return;
                     }
@@ -497,13 +508,13 @@ namespace Dominio
         }
         public void PrecargaPeriodista()
         {
-            AltaPeriodista(new Periodista("Alberto Kesman", "KesmanAlberto@gmail.com", "Kesman123"));
-            AltaPeriodista(new Periodista("Jorge Da Silveira", "DaSilveira@gmail.com", "toto1234"));
+            AltaPeriodista(new Periodista("Alberto Kesman", "Kesman123", "KesmanAlberto@gmail.com"));
+            AltaPeriodista(new Periodista("Jorge Da Silveira", "toto1234", "DaSilveira@gmail.com"));
         }
         public void PrecargaOperador()
         {
-            AltaOperador(new Operador("Agustin Padia", "Fliapadia@hotmail.com", "Agus1234", DateTime.Parse("2022-11-07 17:20:00")));
-            AltaOperador(new Operador("Luca Podesta", "lucapodesta03@gmail.com", "Luca1234", DateTime.Parse("2022-11-07 17:30:00")));
+            AltaOperador(new Operador("Agustin Padia", "Agus1234", "Fliapadia@hotmail.com",  DateTime.Parse("2022-11-07 17:20:00")));
+            AltaOperador(new Operador("Luca Podesta", "Luca1234", "lucapodesta03@gmail.com", DateTime.Parse("2022-11-07 17:30:00")));
         }
         public void PrecargaPartidosFaseDeGrupos()
         {

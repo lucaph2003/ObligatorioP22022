@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public abstract class Usuario : IValidable 
+    public class Usuario : IValidable 
     {
         #region Atributos Usuario
 
@@ -18,7 +18,7 @@ namespace Dominio
 
         #region Metodos Usuario
         #region Constructores
-        public Usuario(string pNombreCompleto, string pContrasena,string pEmail)
+        public Usuario(string pNombreCompleto, string pContrasena,string pEmail )
         {
             this.nombreCompleto = pNombreCompleto;
             this.contrasena = pContrasena;
@@ -33,7 +33,14 @@ namespace Dominio
         #endregion
 
         #region Validaciones
-        public abstract void Validar();
+        public virtual void Validar() 
+        {
+
+        }
+        public virtual string ObtenerRol()
+        {
+            return "SIN_ROL";
+        }
         #endregion
 
         #endregion

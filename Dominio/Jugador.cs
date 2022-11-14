@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Jugador : Persona , IComparable
+    public class Jugador : IComparable
     {
         #region Atributos Jugador
         public int id { get; set; }
+
+        public string nombreCompleto { get; set; }
         public string dorsal { get; set; }
         public DateTime fechaNacimiento { get; set; }
         public double altura { get; set; }
@@ -24,9 +26,10 @@ namespace Dominio
         #region Metodos Jugador
 
         #region Constructores
-        public Jugador(int pId, string pDorsal, string pNombreCompleto,DateTime pFechaNacimiento,double pAltura,string pPieHabil,int pValorMercado,string pMoneda,Pais pPais,string pPuesto):base(pNombreCompleto)
+        public Jugador(int pId, string pDorsal, string pNombreCompleto,DateTime pFechaNacimiento,double pAltura,string pPieHabil,int pValorMercado,string pMoneda,Pais pPais,string pPuesto)
         {
             this.id = pId;
+            this.nombreCompleto = pNombreCompleto;
             this.dorsal = pDorsal;
             this.fechaNacimiento = pFechaNacimiento;
             this.altura = pAltura;
@@ -66,7 +69,7 @@ namespace Dominio
         #endregion
 
         #region Validaciones
-        public override void Validar()
+        public void Validar()
         {
             if (this.nombreCompleto == null || this.dorsal == null || this.fechaNacimiento == null || this.altura < 0.0 && this.pieHabil == null || this.valorMercado <= 0 || this.pais == null || this.puesto == null)
             {

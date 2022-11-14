@@ -29,12 +29,11 @@ namespace Dominio
 
         #region declaracion e inicializacion de Listas
         public List<Jugador> Jugadores { get; } = new List<Jugador>();
-        public List<Periodista> Periodistas { get; } = new List<Periodista>();
         public List<Seleccion> Selecciones { get; } = new List<Seleccion>();
         public List<Pais> Paises { get; } = new List<Pais>();
         public List<PartidoFaseDeGrupo> PartidosFaseDeGrupos { get; } = new List<PartidoFaseDeGrupo>();
         public List<PartidoFaseEliminatoria> PartidosFaseEliminatoria { get; } = new List<PartidoFaseEliminatoria>();
-        public List<Operador> Operadores { get; } = new List<Operador>();
+        public List<Usuario> Usuarios { get; } = new List<Usuario>();
         #endregion
 
         #region Metodos de Alta
@@ -55,9 +54,9 @@ namespace Dominio
             try
             {
                 pPeriodista.Validar();
-                pPeriodista.ExisteId(Periodistas);
-                pPeriodista.ExisteEmail(Periodistas);
-                Periodistas.Add(pPeriodista);
+                pPeriodista.ExisteId(l);
+                pPeriodista.ExisteEmail(Usuarios);
+                Usuarios.Add(pPeriodista);
 
             }
             catch (Exception e)
@@ -65,11 +64,18 @@ namespace Dominio
                 throw e;
             }
         }
+
         public void AltaOperador(Operador pOperador)
         {
-            pOperador.Validar();
-            pOperador.ExisteEmail(Operadores);
-            Operadores.Add(pOperador);
+            try
+            {
+                pOperador.Validar();
+                Usuarios.Add(pOperador);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
 
@@ -230,13 +236,13 @@ namespace Dominio
         public List<Periodista> ObtenerPeriodistas()
         {
             List<Periodista> periodistas = new List<Periodista>();
-            foreach (Periodista p in Periodistas)
+            foreach (Periodista p in Usuarios)
             {
                 periodistas.Add(p);
-
             }
             return periodistas;
         }
+
         public List<Seleccion> ObtenerListaSeleccion()
         {
             Selecciones.Sort();
@@ -429,8 +435,22 @@ namespace Dominio
             
         }
 
+        public void Login(Usuario usuario)
+        {
+            foreach (Usuario u in Usuarios)
+            {
+                if (u.nombreCompleto == usuario.nombreCompleto)
+                {
+                    if (u.Contrasena == usuario.Contrasena)
+                    {
+                        return;
+                    }
+                }
+            }
+            throw new Exception("Usuario o contraseña incorrecto.");
+        }
 
-                /*VOID*/
+        /*VOID*/
         //Cambia el monto de referencia para definir la categoria de los jugadores
         public void CambiarMontoJugador(int monto)
         {

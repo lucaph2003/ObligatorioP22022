@@ -4,23 +4,31 @@ using System.Text;
 
 namespace Dominio
 {
-    public abstract class Persona : IValidable 
+    public abstract class Usuario : IValidable 
     {
-        #region Atributos Persona
-        
+        #region Atributos Usuario
+
         public string nombreCompleto { get; set; }
+
+        public string contrasena { get; set; }
+
+        public string email { get; set; }
 
         #endregion
 
-        #region Metodos Persona
+        #region Metodos Usuario
         #region Constructores
-        public Persona(string pNombreCompleto)
+        public Usuario(string pNombreCompleto, string pContrasena,string pEmail)
         {
             this.nombreCompleto = pNombreCompleto;
+            this.contrasena = pContrasena;
+            this.email = pEmail;
         }
-        public Persona()
+        public Usuario()
         {
             this.nombreCompleto = "Sin Definir";
+            this.contrasena = "No Existe";
+            this.email = "000@000";
         }
         #endregion
 

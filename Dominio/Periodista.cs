@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Periodista : Persona
+    public class Periodista : Usuario
     {
         #region Atributos Periodista
         public string email { get; set; }
@@ -18,7 +18,7 @@ namespace Dominio
         #region Metodos Periodista
 
         #region Constructores
-        public Periodista(string pNombreCompleto,string pEmail,string pPassword) :base(pNombreCompleto)
+        public Periodista(string pNombreCompleto,string pContrasena,string pEmail,string pPassword) :base(pNombreCompleto,pContrasena)
         {
             this.email =pEmail;
             this.password = pPassword;
@@ -30,7 +30,7 @@ namespace Dominio
         #region Validaciones
         public override void Validar()
         {
-            if (this.nombreCompleto.Length > 1  && this.email.Length > 1 && this.password.Length > 1)
+            if (this.nombreCompleto.Length > 1  && this.email.Length > 1 && this.password.Length > 1 && this.contrasena.Length > 1)
             {
                 ValidarEmail();
                 ValidarPassword();
@@ -52,9 +52,9 @@ namespace Dominio
             }
     
         }
-        public void ExisteId(List<Periodista> periodistas)
+        public void ExisteId(List<Usuario> usuarios)
         {
-            foreach (Periodista p in periodistas)
+            foreach (Periodista p in usuarios)
             {
                 if (p.id.Equals(this.id))
                 {

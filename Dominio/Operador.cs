@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Operador :Persona
+    public class Operador : Usuario
     {
         //ver si hereda de persona o no
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime FechaContratado { get; set; }
 
-        public Operador(string pNombreCompleto, string pEmail, string pPassword, DateTime pFechaContratado):base(pNombreCompleto)
+        public Operador(string pNombreCompleto,string pContrasena, string pEmail, string pPassword, DateTime pFechaContratado):base(pNombreCompleto,pContrasena)
         {
             this.Email = pEmail;
             this.Password = pPassword;
@@ -20,7 +20,7 @@ namespace Dominio
 
         public override void Validar()
         {
-            if (this.nombreCompleto.Length > 1 && this.Email.Length > 1 && this.Password.Length > 1)
+            if (this.nombreCompleto.Length > 1 && this.Email.Length > 1 && this.Password.Length > 1 && this.contrasena.Length > 1)
             {
                 ValidarEmail();
                 ValidarPassword();

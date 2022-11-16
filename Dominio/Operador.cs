@@ -29,11 +29,11 @@ namespace Dominio
             }
 
         }
-        public void ExisteEmail(List<Operador> operadores)
+        public void ExisteEmail(List<Usuario> usuarios)
         {
-            foreach (Operador o in operadores)
+            foreach (Usuario u in usuarios)
             {
-                if (o.email.Equals(this.email))
+                if (u.email.Equals(this.email))
                 {
                     throw new Exception("El mail ya existe");
                 }

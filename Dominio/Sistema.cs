@@ -54,7 +54,7 @@ namespace Dominio
             try
             {
                 pPeriodista.Validar();
-                pPeriodista.ExisteId(Usuarios);
+                //pPeriodista.ExisteId(Usuarios);
                 pPeriodista.ExisteEmail(Usuarios);
                 Usuarios.Add(pPeriodista);
 
@@ -247,9 +247,12 @@ namespace Dominio
         public List<Periodista> ObtenerPeriodistas()
         {
             List<Periodista> periodistas = new List<Periodista>();
-            foreach (Periodista p in Usuarios)
+            foreach (Usuario p in Usuarios)
             {
-                periodistas.Add(p);
+                if(p is Periodista)
+                {
+                    periodistas.Add(p as Periodista);
+                }
             }
             return periodistas;
         }

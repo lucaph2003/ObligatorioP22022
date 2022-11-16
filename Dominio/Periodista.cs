@@ -22,7 +22,7 @@ namespace Dominio
         {
             this.id = contador++;
         }
-
+        public Periodista() { }
         #endregion
 
         #region Validaciones
@@ -41,26 +41,25 @@ namespace Dominio
         }
         public void ExisteEmail(List<Usuario> usuarios)
         {
-            foreach(Periodista p in usuarios)
-            {
-                if (p.email.Equals(this.email))
+            foreach(Usuario u in usuarios)
+            {                   
+               if (u.email.Equals(this.email))
                 {
-                    throw new Exception("El mail ya existe");
-                }
+                  throw new Exception("El mail ya existe");
+                } 
             }
-    
         }
-        public void ExisteId(List<Usuario> usuarios)
-        {
-            foreach (Periodista p in usuarios)
-            {
-                if (p.id.Equals(this.id))
-                {
-                    throw new Exception("El Id ya existe");
-                }
-            }
+        //public void ExisteId(List<Usuario> usuarios)
+        //{
+        //    foreach (Periodista p in usuarios)
+        //    {
+        //        if (p.id.Equals(this.id))
+        //        {
+        //            throw new Exception("El Id ya existe");
+        //        }
+        //    }
 
-        }
+        //}
 
         public void ValidarEmail()
         {

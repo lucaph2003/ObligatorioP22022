@@ -16,6 +16,38 @@ namespace Dominio
         {
             this.grupo = pGrupo;
         }
+
+        public override void ValidarResultado()
+        {
+            if (this.resultado1 > this.resultado2)
+            {
+                this.resultadoFinal = "Ganador: " + this.seleccion1.pais.nombre;
+            }
+            else if (this.resultado1 < this.resultado2)
+            {
+                this.resultadoFinal = "Ganador: " + this.seleccion2.pais.nombre;
+            }
+            else
+            {
+                this.resultadoFinal = "Empate";
+            }
+        }
+
+        public override void finalizarPartido()
+        {
+            if (!esFinalizada) 
+            {
+                this.resultado1 = obtenerGolesSeleccion(this.seleccion1);
+                this.resultado2 = obtenerGolesSeleccion(this.seleccion2);
+                ValidarResultado();
+                esFinalizada = true;
+            }
+            else
+            {
+                throw new Exception("El partido ya esta finalizado");
+            }
+        }
+
         #endregion
     }
 }

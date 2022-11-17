@@ -49,6 +49,7 @@ namespace Dominio
             Incidencias.Add(incidencia);
         }
 
+        //?
         public int CantidadIncidencia()
         {
             int cant = 0;
@@ -58,6 +59,8 @@ namespace Dominio
             }
             return cant;
         }
+
+        //?
         public string verIncidencias()
         {
             string incidencias = "";
@@ -68,38 +71,40 @@ namespace Dominio
             return incidencias;
         }
 
-        public virtual void finalizarPartido(int pResultado1,int pResultado2)
+        //Obtenemos los goles de la seleccion , en caso de no tener devuelve 0
+        public virtual int obtenerGolesSeleccion(Seleccion seleccion)
         {
-            this.resultado1 = pResultado1;
-            this.resultado2 = pResultado2;
-            if (resultado1 > resultado2)
+            int cantGoles = 0;
+            foreach (Incidencia i in Incidencias)
             {
-                resultadoFinal = "Ganador " + seleccion1.pais.nombre;
-            }else if (resultado1 < resultado2)
-            {
-                resultadoFinal = "Ganador " + seleccion2.pais.nombre;
-            }else
-            {
-                resultadoFinal = "Empate";
+                if (i.seleccion.Equals(seleccion) && i.incidencia == "Gol") cantGoles++;
             }
+            return cantGoles;
         }
+
+        //Metodo para validar el resultado
+        public virtual void ValidarResultado() { }
+
+        //Metodo para finalizar el partido
+        public virtual void finalizarPartido(){}
         #endregion
 
         #region Validaciones
         //Valida que las selecciones no sean vacias, ni que una seleccion se enfrente asi misma
         public void ValidarSelecciones()
         {
-            if(seleccion1 == null || seleccion2 == null || seleccion1.Equals(seleccion2))
+            if(this.seleccion1 == null || this.seleccion2 == null || this.seleccion1.Equals(this.seleccion2))
             {
                 throw new Exception("Debe cargar correctamente las dos selecciones! ! !");
             }
         }
+
         //Valida que las fechas esten comprendidas en el tiempo estipulado 
         public void ValidarFecha()
         {
             DateTime fechaInicio = new DateTime(2022, 11, 20);
             DateTime fechaFinal = new DateTime(2022, 12, 18);
-            if(this.fechaHora <fechaInicio || this.fechaHora > fechaFinal)
+            if(this.fechaHora < fechaInicio || this.fechaHora > fechaFinal)
             {
                 throw new Exception("Debe ingresar fecha entre el 20/11/2022 hasta 18/12/2022");
             }
@@ -107,7 +112,11 @@ namespace Dominio
 
         #endregion
         #region Override y Compare
-
+        public override bool Equals(object obj)
+        {
+            Partido p = (Partido)obj;
+            return this.id == p.id;
+        }
         public override string ToString()
         {
             return $"Fecha: {this.fechaHora}" + " " + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}" + " " + "Cantidad Incidencias: " + $"{this.Incidencias.Count}"; 

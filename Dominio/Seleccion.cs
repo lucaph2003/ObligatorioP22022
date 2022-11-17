@@ -58,6 +58,16 @@ namespace Dominio
         }
         #endregion
 
+        public override bool Equals(object obj)
+        {
+            Seleccion s = (Seleccion)obj;
+            return this.pais.Equals(s.pais);
+        }
+
+        public override string ToString()
+        {
+            return this.pais.nombre;
+        }
         #endregion
     }
 }

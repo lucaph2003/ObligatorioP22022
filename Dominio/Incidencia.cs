@@ -10,6 +10,7 @@ namespace Dominio
         public string incidencia { get; set; }
         public int minuto { get; set; }
         public Jugador jugador { get; set; }
+        public Seleccion seleccion { get; set; }
         #endregion
 
         #region Metodos Incidencia

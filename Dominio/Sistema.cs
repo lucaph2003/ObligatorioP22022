@@ -33,6 +33,7 @@ namespace Dominio
         public List<Pais> Paises { get; } = new List<Pais>();
         public List<PartidoFaseDeGrupo> PartidosFaseDeGrupos { get; } = new List<PartidoFaseDeGrupo>();
         public List<PartidoFaseEliminatoria> PartidosFaseEliminatoria { get; } = new List<PartidoFaseEliminatoria>();
+        public List<Partido> Partidos { get; } = new List<Partido>();
         public List<Usuario> Usuarios { get; } = new List<Usuario>();
         #endregion
 
@@ -180,7 +181,7 @@ namespace Dominio
         }
 
         // Retorna el Partido a partir del id.
-        private Partido GetPartido(int idPartido)
+        public Partido GetPartido(int idPartido)
         {
 
             foreach (Partido p in PartidosFaseDeGrupos)
@@ -261,6 +262,21 @@ namespace Dominio
         {
             Selecciones.Sort();
             return Selecciones;
+        }
+
+        public List<Partido> ObtenerListaPartido()
+        {
+            List<Partido> PartidosJugados = new List<Partido>();
+            foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            {
+                PartidosJugados.Add(p);
+            }
+            foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
+            {
+                PartidosJugados.Add(p);
+            }
+
+            return PartidosJugados;
         }
 
         //Obtiene los partidos que jugo segun el id del jugador
@@ -391,6 +407,22 @@ namespace Dominio
                 throw new Exception("El partido no existe");
             }
             return jugadoresGoleadores;
+        }
+
+        public List<Jugador> ObtenerJugadoresPorIdPartido(int idPartido)
+        {
+            Partido partido = GetPartido(idPartido);
+            List<Jugador> jugadores = new List<Jugador>();
+            foreach (Jugador j in partido.seleccion1.Jugadores)
+            {
+                jugadores.Add(j);
+            }
+            foreach (Jugador j in partido.seleccion2.Jugadores)
+            {
+                jugadores.Add(j);
+            }
+
+            return jugadores;
         }
 
                 /*STRING*/

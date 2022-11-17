@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Dominio;
+@model List<Jugador>
+
+<script>
+    window.addEventListener("load", inicio);
+
+    function inicio() {
+        minutos();
+    }
+
+    function minutos() {
+        for (let i = 0; i <= 90; i++)
+        {
+            document.querySelector("#txtMinutos").innerHTML += '<option name="minuto" value="' + i + '">' + i + '</option>';
+        }
+    }
+</script>
+
+<h1>Agregar Incidencia</h1>
+<form>
+    <div class="form-outline mb-4">
+        <label class="form-label" for="TipoIncidencia">Tipo de Incidencia: </label>
+        <select id="TipoIncidencia" name="incidencia" class="form-control">
+            <option name="incidencia" value="Gol">Gol</option>
+            <option name="incidencia" value="Targeta Amarilla">Targeta Amarilla</option>
+            <option name="incidencia" value="Targeta Roja">Targeta Roja</option>
+        </select>
+    </div>
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="txtMinutos">Minuto: </label>
+        <select id="txtMinutos" name="minutos" class="form-control">
+        </select>
+    </div>
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="txtJugadores">Jugador: </label>
+        <select id="txtJugadores" name="jugador" class="form-control">
+            @foreach (Jugador j in Model)
+            {
+                <option name="jugador" value="@j.id">@j.nombreCompleto</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-outline mb-4">
+        <button type="submit" class="btn btn-primary btn-block mb-4">Agregar Incidencia</button>
+    </div>
+
+        
+</form>

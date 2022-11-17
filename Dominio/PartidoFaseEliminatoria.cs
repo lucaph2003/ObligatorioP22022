@@ -19,10 +19,8 @@ namespace Dominio
             this.penales = pPenales;
         }
 
-        public void ValidarResultado()
-        {
+     
 
-        }
         #endregion
 
     }

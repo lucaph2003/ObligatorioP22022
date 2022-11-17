@@ -7,6 +7,7 @@
 @model List<Partido>
 
 <h1>Listado de partidos</h1>
+ 
 <table class="table">
     <thead>
         <tr>
@@ -19,20 +20,19 @@
         </tr>
     </thead>
     <tbody>
-        @{ 
+        @{
             foreach (Partido partido in Model)
             {
                 if (!partido.esFinalizada)
-                { 
-                <tr>
-                    <th scope="row">i</th>
-                    <td>@partido.fechaHora</td>
-                    <td>@partido.seleccion1.ToString()</td>
-                    <td>@partido.seleccion2.ToString()</td>
-                    <td>@Html.ActionLink("Agregar Incidencia", "Incidencia", "Partido", new { idPartido = partido.id })</td>
-                    <td>@Html.ActionLink("Finalizar", "Finalizar", "Partido", new { idPartido = partido.id })</td>
-
-                </tr>
+                {
+                    <tr>
+                        <th scope="row">i</th>
+                        <td>@partido.fechaHora</td>
+                        <td>@partido.seleccion1.ToString()</td>
+                        <td>@partido.seleccion2.ToString()</td>
+                        <td>@Html.ActionLink("Agregar Incidencia", "Incidencia", "Partido", new { idPartido = partido.id })</td>
+                        <td>@Html.ActionLink("Finalizar", "Finalizar", "Partido", new { idPartido = partido.id })</td>
+                    </tr>
                 }
             }
         }

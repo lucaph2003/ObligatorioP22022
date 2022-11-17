@@ -42,7 +42,14 @@ namespace WebObligatorio.Controllers
 
         public IActionResult Finalizar(int idPartido)
         {
-            sistema.FinalizarPartido(idPartido);
+            try
+            {
+                sistema.FinalizarPartido(idPartido);
+            }
+            catch(Exception e)
+            {
+                ViewBag.ErrorNombre = e.Message ;
+            }
             return RedirectToAction("ListadoPartido", "Partido");
         }
     }

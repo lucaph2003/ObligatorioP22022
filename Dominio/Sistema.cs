@@ -509,6 +509,12 @@ namespace Dominio
                 throw new Exception("El monto debe ser mayor a 0");
             }
         }
+
+        public void FinalizarPartido(int idPartido)
+        {
+            Partido partidoAFinalizar = GetPartido(idPartido);
+            partidoAFinalizar.finalizarPartido();
+        }
         
 
         #endregion

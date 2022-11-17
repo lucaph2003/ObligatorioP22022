@@ -16,7 +16,7 @@ namespace Dominio
         #region Metodos Incidencia
 
         #region Constructores
-        public Incidencia(string pIncidencia,int pMinuto,Jugador pJugador)
+        public Incidencia(string pIncidencia,int pMinuto,Jugador pJugador )
         {
             this.incidencia = pIncidencia;
             this.minuto = pMinuto;

@@ -77,7 +77,7 @@ namespace Dominio
             int cantGoles = 0;
             foreach (Incidencia i in Incidencias)
             {
-                if (i.seleccion.Equals(seleccion) && i.incidencia == "Gol") cantGoles++;
+                if (i.jugador.pais.Equals(seleccion.pais) && i.incidencia == "Gol") { cantGoles++; }
             }
             return cantGoles;
         }

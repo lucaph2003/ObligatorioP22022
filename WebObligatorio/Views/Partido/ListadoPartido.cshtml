@@ -14,6 +14,7 @@
             <th scope="col">Fecha</th>
             <th scope="col">Seleccion 1</th>
             <th scope="col">Seleccion 2</th>
+            <th scope="col">Incidencias</th>
             <th scope="col">Finalizar Partido</th>
         </tr>
     </thead>
@@ -29,7 +30,8 @@
                     <td>@partido.seleccion1.ToString()</td>
                     <td>@partido.seleccion2.ToString()</td>
                     <td>@Html.ActionLink("Agregar Incidencia", "Incidencia", "Partido", new { idPartido = partido.id })</td>
-                    
+                    <td>@Html.ActionLink("Finalizar", "Finalizar", "Partido", new { idPartido = partido.id })</td>
+
                 </tr>
                 }
             }

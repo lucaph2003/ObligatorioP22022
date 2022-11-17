@@ -31,13 +31,18 @@ namespace WebObligatorio.Controllers
         {
             try
             {
-                sistema.AltaIncidencia(sistema.GetPartido(idPartido), incidencia));
-            }
-            catch
+               // sistema.AltaIncidencia(sistema.GetPartido(idPartido), incidencia));
+            }catch
             {
 
             }
 
+            return RedirectToAction("ListadoPartido", "Partido");
+        }
+
+        public IActionResult Finalizar(int idPartido)
+        {
+            sistema.FinalizarPartido(idPartido);
             return RedirectToAction("ListadoPartido", "Partido");
         }
     }

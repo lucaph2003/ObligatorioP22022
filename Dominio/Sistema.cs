@@ -134,7 +134,6 @@ namespace Dominio
         public void AltaIncidencia(Partido partido, Incidencia incidencia)
         {
             partido.AgregarIncidencia(incidencia);
-
         }
         #endregion
 

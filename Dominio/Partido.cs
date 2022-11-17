@@ -12,7 +12,9 @@ namespace Dominio
         public Seleccion seleccion2 { get; set; }
         public DateTime fechaHora { get; set; }
         public bool esFinalizada { get; set; }
-        public string resultado { get;  set; }
+        public int resultado1 { get; set; }
+        public int resultado2 { get; set; }
+        public string resultadoFinal { get;  set; }
         public List<Incidencia> Incidencias { get; set; }
         public static int contador = 1;
 
@@ -28,7 +30,7 @@ namespace Dominio
             this.fechaHora = pFechaHora;
             this.esFinalizada = false;
             this.id = contador++;
-            this.resultado = "Pendiente";
+            this.resultadoFinal = "Pendiente";
         }
 
         public Partido()
@@ -36,7 +38,7 @@ namespace Dominio
             Incidencias = new List<Incidencia>();
             this.esFinalizada = false;
             this.id = contador++;
-            this.resultado = "Pendiente";
+            this.resultadoFinal = "Pendiente";
         }
 
         #endregion
@@ -65,6 +67,22 @@ namespace Dominio
             }
             return incidencias;
         }
+
+        public virtual void finalizarPartido(int pResultado1,int pResultado2)
+        {
+            this.resultado1 = pResultado1;
+            this.resultado2 = pResultado2;
+            if (resultado1 > resultado2)
+            {
+                resultadoFinal = "Ganador " + seleccion1.pais.nombre;
+            }else if (resultado1 < resultado2)
+            {
+                resultadoFinal = "Ganador " + seleccion2.pais.nombre;
+            }else
+            {
+                resultadoFinal = "Empate";
+            }
+        }
         #endregion
 
         #region Validaciones
@@ -88,7 +106,6 @@ namespace Dominio
         }
 
         #endregion
-
         #region Override y Compare
 
         public override string ToString()

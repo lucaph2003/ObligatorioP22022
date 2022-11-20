@@ -59,9 +59,9 @@ namespace WebObligatorio.Controllers
             {
                 sistema.FinalizarPartido(idPartido);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                ViewBag.ErrorNombre = e.Message ;
+                ViewBag.ErrorNombre = e.Message;
                 return View();
             }
             //ARREGLAR
@@ -69,6 +69,7 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
+        [HttpPost]
         public IActionResult FinalizarEliminatoria(int idPartido, bool alargues, bool penales)
         {
             sistema.CambiarEstadoPartido(idPartido, alargues, penales);

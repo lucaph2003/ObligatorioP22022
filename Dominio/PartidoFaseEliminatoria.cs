@@ -9,17 +9,23 @@ namespace Dominio
         #region Atributos PartidoFaseEliminatoria
         public bool alargue { get; set; }
         public bool penales { get; set; }
-        public int etapa { get; set; }
         #endregion
         #region Metodos PartidoFaseEliminatoria
-        public PartidoFaseEliminatoria(Seleccion pSeleccion1,Seleccion pSeleccion2,DateTime pFechaHora, int pEtapa, bool pAlargue, bool pPenales):base(pSeleccion1,pSeleccion2, pFechaHora)
+        public PartidoFaseEliminatoria(Seleccion pSeleccion1, Seleccion pSeleccion2,DateTime pFechaHora):base(pSeleccion1,pSeleccion2,pFechaHora)
         {
-            this.etapa = pEtapa;
-            this.alargue = pAlargue;
-            this.penales = pPenales;
+            this.alargue = false;
+            this.penales = false;
         }
 
-     
+        public void HuboAlargue()
+        {
+            this.alargue = true;
+        }
+
+        public void HuboPenales()
+        {
+            this.penales = true;
+        }
 
         #endregion
 

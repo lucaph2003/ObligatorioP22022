@@ -16,7 +16,8 @@ namespace WebObligatorio.Controllers
         }
         public IActionResult ListadoPartido()
         {
-            List<Partido> partidos = sistema.ObtenerListaPartido();
+            List<Partido> partidos = sistema.ObtenerListaPartidos();
+            ViewBag.Resultado = "";
             return View(partidos);
         }
         public IActionResult Incidencia(int idPartido)
@@ -27,16 +28,17 @@ namespace WebObligatorio.Controllers
         }
 
         [HttpPost]
-        public IActionResult Incidencia(int idPartido,Incidencia incidencia)
+        public IActionResult Incidencia(int idPartido,string incidencia,int minuto,int idJugador)
         {
             try
             {
-               // sistema.AltaIncidencia(sistema.GetPartido(idPartido), incidencia));
-            }catch
-            {
-
+                sistema.RegistrarIncidencia(idPartido,incidencia,minuto,idJugador);
             }
-
+            catch (Exception e)
+            {
+                ViewBag.ErrorNombre = e.Message;
+                return View();
+            }
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
@@ -49,7 +51,10 @@ namespace WebObligatorio.Controllers
             catch(Exception e)
             {
                 ViewBag.ErrorNombre = e.Message ;
+                return View();
             }
+            //ARREGLAR
+            ViewBag.Resultado = sistema.VerResultadoPartido(idPartido);
             return RedirectToAction("ListadoPartido", "Partido");
         }
     }

@@ -22,7 +22,10 @@
 </script>
 
 <h1>Agregar Incidencia</h1>
-<form>
+<form action="/Partido/Incidencia" method="post">
+
+    <input type="hidden" value=@ViewBag.idPartido name="idPartido"/>
+
     <div class="form-outline mb-4">
         <label class="form-label" for="TipoIncidencia">Tipo de Incidencia: </label>
         <select id="TipoIncidencia" name="incidencia" class="form-control">
@@ -34,16 +37,16 @@
 
     <div class="form-outline mb-4">
         <label class="form-label" for="txtMinutos">Minuto: </label>
-        <select id="txtMinutos" name="minutos" class="form-control">
+        <select id="txtMinutos" name="minuto" class="form-control">
         </select>
     </div>
 
     <div class="form-outline mb-4">
         <label class="form-label" for="txtJugadores">Jugador: </label>
-        <select id="txtJugadores" name="jugador" class="form-control">
+        <select id="txtJugadores" name="idJugador" class="form-control">
             @foreach (Jugador j in Model)
             {
-                <option name="jugador" value="@j.id">@j.nombreCompleto</option>
+                <option value="@j.id" name="idJugador">@j.nombreCompleto</option>
             }
         </select>
     </div>

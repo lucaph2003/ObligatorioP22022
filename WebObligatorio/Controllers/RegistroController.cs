@@ -20,16 +20,20 @@ namespace WebObligatorio.Controllers
             List<Periodista> periodistas = sistema.ObtenerPeriodistas();
             return View(periodistas);
         }
-        public IActionResult AltaPeriodista()
-        {
-            return View();
-        }
 
 
         [HttpPost]
-        public IActionResult AltaPeriodista(Periodista periodista)
+        public IActionResult Index(Periodista usuario)
         {
-            sistema.AltaPeriodista(periodista);
+            try
+            {
+                sistema.AltaPeriodista(usuario);
+            }catch(Exception e)
+            {
+                ViewBag.NombreError = e.Message;
+                return View();
+            }
+            
             return RedirectToAction("ListarPeriodistas", "Registro");
         }
 

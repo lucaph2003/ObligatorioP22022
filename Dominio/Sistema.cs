@@ -31,14 +31,12 @@ namespace Dominio
         public List<Jugador> Jugadores { get; } = new List<Jugador>();
         public List<Seleccion> Selecciones { get; } = new List<Seleccion>();
         public List<Pais> Paises { get; } = new List<Pais>();
-        public List<PartidoFaseDeGrupo> PartidosFaseDeGrupos { get; } = new List<PartidoFaseDeGrupo>();
-        public List<PartidoFaseEliminatoria> PartidosFaseEliminatoria { get; } = new List<PartidoFaseEliminatoria>();
         public List<Partido> Partidos { get; } = new List<Partido>();
         public List<Usuario> Usuarios { get; } = new List<Usuario>();
         #endregion
 
         #region Metodos de Alta
-        public void AltaJugador(Jugador pJugador)
+        private void AltaJugador(Jugador pJugador)
         {
             try
             {
@@ -50,23 +48,33 @@ namespace Dominio
                 Console.WriteLine(e.Message);
             }
         }
-        public void AltaPeriodista(Periodista pPeriodista)
-        {
-            try
-            {
-                pPeriodista.Validar();
-                //pPeriodista.ExisteId(Usuarios);
-                pPeriodista.ExisteEmail(Usuarios);
-                Usuarios.Add(pPeriodista);
 
-            }
-            catch (Exception e)
+        public void ExisteEmail(Usuario usuario)
+        {
+            foreach (Usuario u in Usuarios)
             {
-                throw e;
+                if (u.email.Equals(usuario.email))
+                {
+                    throw new Exception("El mail ya existe");
+                }
             }
         }
 
-        public void AltaOperador(Operador pOperador)
+        public void AltaPeriodista(Periodista pUsuario)
+        {
+            try
+            {
+                pUsuario.Validar();
+                ExisteEmail(pUsuario);
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            Usuarios.Add(pUsuario);
+        }
+
+
+        private void AltaOperador(Operador pOperador)
         {
             try
             {
@@ -80,39 +88,31 @@ namespace Dominio
         }
 
 
-
-        public void AltaSeleccion(Seleccion pSeleccion)
+        private void AltaSeleccion(Seleccion pSeleccion)
         {
-            try
-            {
-                Selecciones.Add(pSeleccion);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            Selecciones.Add(pSeleccion);
         }
 
-        public void AltaPais(Pais pPais)
+        private void AltaPais(Pais pPais)
         {
             try
             {
                 pPais.Validar();
-                Paises.Add(pPais);
             }
             catch (Exception e)
             {
-                throw e;
+                throw new Exception(e.Message);
             }
+            Paises.Add(pPais);
         }
 
-        public void AltaPartidoFaseDeGrupos(PartidoFaseDeGrupo pPartido)
+        private void AltaPartidoFaseDeGrupos(PartidoFaseDeGrupo pPartido)
         {
             try
             {
-
-                PartidosFaseDeGrupos.Add(pPartido);
-            } catch (Exception e)
+                Partidos.Add(pPartido);
+            } 
+            catch (Exception e)
             {
                 throw e;
             }
@@ -122,8 +122,7 @@ namespace Dominio
         {
             try
             {
-
-                PartidosFaseEliminatoria.Add(pPartido);
+                Partidos.Add(pPartido);
             }
             catch (Exception e)
             {
@@ -134,6 +133,14 @@ namespace Dominio
         public void AltaIncidencia(Partido partido, Incidencia incidencia)
         {
             partido.AgregarIncidencia(incidencia);
+        }
+
+        public void RegistrarIncidencia(int pIdPartido,string pIncidencia,int pMinuto,int pIdJugador)
+        {
+            Partido partido = GetPartido(pIdPartido);
+            Jugador jugador = GetJugador(pIdJugador);
+            Incidencia incidencia = new Incidencia(pIncidencia, pMinuto, jugador);
+            AltaIncidencia(partido, incidencia);
         }
         #endregion
 
@@ -182,15 +189,7 @@ namespace Dominio
         // Retorna el Partido a partir del id.
         public Partido GetPartido(int idPartido)
         {
-
-            foreach (Partido p in PartidosFaseDeGrupos)
-            {
-                if (p.id.Equals(idPartido))
-                {
-                    return p;
-                }
-            }
-            foreach (Partido p in PartidosFaseEliminatoria)
+            foreach (Partido p in Partidos)
             {
                 if (p.id.Equals(idPartido))
                 {
@@ -263,37 +262,25 @@ namespace Dominio
             return Selecciones;
         }
 
-        public List<Partido> ObtenerListaPartido()
+        public List<Partido> ObtenerListaPartidos()
         {
             List<Partido> PartidosJugados = new List<Partido>();
-            foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            foreach (Partido p in Partidos)
             {
                 PartidosJugados.Add(p);
             }
-            foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
-            {
-                PartidosJugados.Add(p);
-            }
-
             return PartidosJugados;
         }
 
         //Obtiene los partidos que jugo segun el id del jugador
         public List<Partido> ObtenerPartidosJugadorPorId(int idJugador)
         {
-                 Jugador j = GetJugador(idJugador);
+             Jugador j = GetJugador(idJugador);
              List<Partido> partidos = new List<Partido>();
              if (j != null) 
              {         
                 Seleccion seleccion = GetSeleccion(j.pais.nombre);
-                foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
-                {
-                    if (p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
-                    {
-                        partidos.Add(p);
-                    }
-                }
-                foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
+                foreach (Partido p in Partidos)
                 {
                     if (p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
                     {
@@ -311,9 +298,8 @@ namespace Dominio
         //Obtiene todos los jugadores expulsados
         public List<Jugador> ObtenerJugadoresExpulsados()
         {
-
             List<Jugador> jugadoresExpulsados = new List<Jugador>();
-            foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            foreach (Partido p in Partidos)
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
@@ -323,22 +309,6 @@ namespace Dominio
                     }
                 }
             }
-
-            foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
-            {
-                foreach (Incidencia i in p.Incidencias)
-                {
-                    if (i.incidencia.Equals("Roja"))
-                    {
-                        jugadoresExpulsados.Add(i.jugador);
-                    }
-                }
-            }
-            if(jugadoresExpulsados.Count == 0)
-            {
-                throw new Exception("No se encuentran registros");
-            }
-
             return jugadoresExpulsados;
         }
 
@@ -367,14 +337,12 @@ namespace Dominio
         //Obtiene los jugadores que han marcado al menos un gol busqueda por id de partido
         public List<Jugador> ObtenerJugadoresConGolPorIdPartido(int idPartido)
         {
-            bool existePartido = false;
             Partido partido = GetPartido(idPartido);
             List<Jugador> jugadoresGoleadores = new List<Jugador>();
-            foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            foreach (Partido p in Partidos)
             {
                 if(p.Equals(partido))
                 {
-                    existePartido = true;
                     foreach (Incidencia i in p.Incidencias)
                     {
                         if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
@@ -384,26 +352,6 @@ namespace Dominio
                     }
                 }
                 
-            }
-
-            foreach (PartidoFaseEliminatoria p in PartidosFaseEliminatoria)
-            {
-                if (p.Equals(partido))
-                {
-                    existePartido = true;
-                    foreach (Incidencia i in p.Incidencias)
-                    {
-                        if (i.incidencia.Equals("Gol") && !jugadoresGoleadores.Contains(i.jugador))
-                        {
-                            jugadoresGoleadores.Add(i.jugador);
-                        }
-                    }
-                }
-
-            }
-            if (!existePartido)
-            {
-                throw new Exception("El partido no existe");
             }
             return jugadoresGoleadores;
         }
@@ -436,8 +384,9 @@ namespace Dominio
             {
                 return "La seleccion no existe! ! !";
             }
-            else {
-                foreach (PartidoFaseDeGrupo p in PartidosFaseDeGrupos)
+            else 
+            {
+                foreach (Partido p in Partidos)
                 {
                     if (p.seleccion1.Equals(seleccion) || p.seleccion2.Equals(seleccion))
                     {
@@ -453,25 +402,6 @@ namespace Dominio
                         {
                             cantidadMaxima = contadorGol;
                             partido = p;
-                        }
-                    }
-                }
-                foreach(PartidoFaseEliminatoria pE in PartidosFaseEliminatoria)
-                {
-                    if(pE.seleccion1.Equals(seleccion) || pE.seleccion2.Equals(seleccion))
-                    {
-                        int contadorGol = 0;
-                        foreach(Incidencia i in pE.Incidencias)
-                        {
-                            if (i.incidencia.Equals("Gol"))
-                            {
-                                contadorGol++;
-                            }
-                        }
-                        if(contadorGol > cantidadMaxima)
-                        {
-                            cantidadMaxima = contadorGol;
-                            partido = pE;
                         }
                     }
                 }
@@ -493,6 +423,12 @@ namespace Dominio
                 }
             }
             throw new Exception("Usuario o contraseña incorrecto.");
+        }
+
+        public string VerResultadoPartido(int idPartido)
+        {
+            Partido partido = GetPartido(idPartido);
+            return partido.resultadoFinal;
         }
 
         /*VOID*/
@@ -520,7 +456,7 @@ namespace Dominio
 
         #region Precarga de Datos
         
-        public void RealizarPrecargaDatos()
+        private void RealizarPrecargaDatos()
         {
             PrecargaPaises();
             PrecargaJugadores();
@@ -531,7 +467,7 @@ namespace Dominio
             PrecargaIncidencias();
             PrecargaOperador();
         }
-        public void PrecargaSelecciones()
+        private void PrecargaSelecciones()
         {
             //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
             foreach (Pais p in Paises)
@@ -546,18 +482,18 @@ namespace Dominio
                 AltaSeleccion(selNueva);
             }
         }
-        public void PrecargaPeriodista()
+        private void PrecargaPeriodista()
         {
             AltaPeriodista(new Periodista("Alberto Kesman", "Kesman123", "KesmanAlberto@gmail.com"));
             AltaPeriodista(new Periodista("Jorge Da Silveira", "toto1234", "DaSilveira@gmail.com"));
             AltaPeriodista(new Periodista("Luca Podesta", "Luca1234", "lucapodesta47@gmail.com"));
         }
-        public void PrecargaOperador()
+        private void PrecargaOperador()
         {
             AltaOperador(new Operador("Agustin Padia", "Agus1234", "Fliapadia@hotmail.com",  DateTime.Parse("2022-11-07 17:20:00")));
             AltaOperador(new Operador("Luca Podesta", "Luca1234", "lucapodesta03@gmail.com", DateTime.Parse("2022-11-07 17:30:00")));
         }
-        public void PrecargaPartidosFaseDeGrupos()
+        private void PrecargaPartidosFaseDeGrupos()
         {
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Argentina"), GetSeleccion("Arabia Saudita"), DateTime.Parse("2022-11-22 10:00:00"), 'C'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("México"), GetSeleccion("Polonia"), DateTime.Parse("2022-11-22 13:00:00"), 'C'));
@@ -573,14 +509,14 @@ namespace Dominio
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Uruguay"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Uruguay"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
         }
-        public void PrecargaPartidosFaseEliminatoria()
+        private void PrecargaPartidosFaseEliminatoria()
         {
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), 8, false, false));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), 8, false, false));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00"), 4, true, false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00")));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00")));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00")));
         }
 
-        public void PrecargaIncidencias()
+        private void PrecargaIncidencias()
         {
             AltaIncidencia(GetPartido(1), new Incidencia("Gol", 15, GetJugador(23)));
             AltaIncidencia(GetPartido(1), new Incidencia("Gol", 43, GetJugador(24)));
@@ -636,9 +572,7 @@ namespace Dominio
             AltaIncidencia(GetPartido(15), new Incidencia("Roja", 118, GetJugador(485)));
         }
 
-        
-
-        public void PrecargaPaises()
+        private void PrecargaPaises()
         {
             AltaPais(new Pais("Catar", "QAT"));
             AltaPais(new Pais("Dinamarca", "DNK"));
@@ -674,7 +608,7 @@ namespace Dominio
             AltaPais(new Pais("Costa Rica", "CRI"));
         }
        
-        public void PrecargaJugadores()
+        private void PrecargaJugadores()
         {
             AltaJugador(new Jugador(1, "23", "Emiliano Martínez", DateTime.Parse("1992-09-02"), 1.95, "derecho", 28000000, "EUR", GetPais("Argentina"), "Portero"));
             AltaJugador(new Jugador(2, "12", "Gerónimo Rulli", DateTime.Parse("1992-05-20"), 1.89, "derecho", 6000000, "EUR", GetPais("Argentina"), "Portero"));

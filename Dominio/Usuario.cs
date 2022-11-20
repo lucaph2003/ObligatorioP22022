@@ -35,7 +35,30 @@ namespace Dominio
         #region Validaciones
         public virtual void Validar() 
         {
+            try
+            {
+                ValidarEmail();
+                ValidarPassword();
+            }catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
+        public virtual void ValidarEmail()
+        {
+            if (!this.email.Contains("@") || this.email.StartsWith("@") || this.email.EndsWith("@"))
+            {
+                throw new Exception("El email debe contener @ y no puede estar en el principio ni final");
+            }
+        }
+
+        public virtual void ValidarPassword()
+        {
+            if (this.contrasena.Length < 7)
+            {
+                throw new Exception("La contrasenia debe ser mayor a 8 caracteres");
+            }
         }
         public virtual string ObtenerRol()
         {

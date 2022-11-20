@@ -7,7 +7,7 @@
 
 <h3>Registro de Usuario</h3>
 
-<form action="/Registro/AltaPeriodista" method="post">
+<form action="/Registro/Index" method="post">
 
     <div class="form-outline mb-4">
         <label class="form-label" for="nombre">Nombre Completo</label>
@@ -23,12 +23,19 @@
 
     <div class="form-outline mb-4">
         <label class="form-label" for="password">Contraseña</label>
-        <input type="password" class="form-control" id="password" name="password" required />
+        <input type="password" class="form-control" id="password" name="contrasena" required />
     </div>
 
     <div class="form-outline mb-4">
         <button type="submit" class="btn btn-primary btn-block mb-4">Registrarse</button>
     </div>
+
+    @if (ViewBag.NombreError != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.NombreError
+        </div>
+    }
 
 </form>
 

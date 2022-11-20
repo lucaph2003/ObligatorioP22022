@@ -35,7 +35,7 @@
                     {
                         <td>@Html.ActionLink("Finalizar", "Finalizar", "Partido", new { idPartido = partido.id })</td>
                     }
-                    else if (partido.ObtenerTipo() == "FaseEliminatoria")
+                    else
                     {
                         <td>@Html.ActionLink("Finalizar Eliminatoria", "FinalizarEliminatoria", "Partido", new { idPartido = partido.id })</td>
                     }

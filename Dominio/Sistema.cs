@@ -475,6 +475,7 @@ namespace Dominio
 
             if (pPenales)
             {
+                p.HuboAlargue();
                 p.HuboPenales();
             }
         }

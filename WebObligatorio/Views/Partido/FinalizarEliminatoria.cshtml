@@ -4,18 +4,27 @@
 @{
 }
 @using Dominio;
-@model Partido;
 
 <h1>Agregar Incidencia</h1>
 <form action="/Partido/FinalizarEliminatoria" method="post">
 
-    <input type="hidden" name="idPartido" value="Model.id" />
+    <input type="hidden" name="idPartido" value="@ViewBag.idPartido" />
 
-    <input type="checkbox" id="alargue" name="alargue" />
-    <label for="alargue"> Alargue </label>
+    <div class="form-outline mb-4">
+        <label class="form-label" for="alargues">Alargue: </label>
+        <select id="alargues" name="alargues" class="form-control">
+            <option name="alargues" value="true">Si</option>
+            <option name="alargues" value="false">No</option>
+        </select>
+    </div>
 
-    <input type="checkbox" id="penales" name="penales" />
-    <label for="penales"> Penales </label>
+    <div class="form-outline mb-4">
+        <label class="form-label" for="penales">Penales: </label>
+        <select id="penales" name="penales" class="form-control">
+            <option name="penales" value="true">Si</option>
+            <option name="penales" value="false">No</option>
+        </select>
+    </div>
 
     <div class="form-outline mb-4">
         <button type="submit" class="btn btn-primary btn-block mb-4">Actualizar</button>

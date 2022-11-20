@@ -33,9 +33,8 @@ namespace WebObligatorio.Controllers
 
         public IActionResult FinalizarEliminatoria(int idPartido)
         {
-            Partido partido = sistema.GetPartido(idPartido);
             ViewBag.idPartido = idPartido;
-            return View(partido);
+            return View();
         }
 
         [HttpPost]
@@ -53,6 +52,7 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
+        [HttpPost]
         public IActionResult Finalizar(int idPartido)
         {
             try
@@ -73,6 +73,7 @@ namespace WebObligatorio.Controllers
         public IActionResult FinalizarEliminatoria(int idPartido, bool alargues, bool penales)
         {
             sistema.CambiarEstadoPartido(idPartido, alargues, penales);
+            sistema.FinalizarPartido(idPartido);
             return RedirectToAction("ListadoPartido", "Partido");
         }
 

@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Dominio;
+@model List<Resenia>
+<h1>Mis Reseñas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Contenido</th>
+            <th scope="col">Seleccion 1</th>
+            <th scope="col">Seleccion 2</th>
+        </tr>
+    </thead>
+
+    @{
+        foreach (Resenia resenia in Model)
+        {
+        <tr>
+            <th scope="row">i</th>
+            <td>@resenia.titulo</td>
+            <td>@resenia.contenido</td>
+            <td>@resenia.partido.seleccion1.pais.nombre</td>
+            <td>@resenia.partido.seleccion2.pais.nombre</td>
+
+        </tr>
+        }
+
+
+    }
+</table>

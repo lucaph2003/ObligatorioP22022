@@ -28,7 +28,7 @@
                         @if (Context.Session.GetString("UsuarioLogueadoEmail") != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="index">Partidos Jugados</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="ListadosPartidosFinalizados">Partidos Jugados</a>
                             </li>
                             @if (Context.Session.GetString("UsuarioRol") == "Periodista")
                             {

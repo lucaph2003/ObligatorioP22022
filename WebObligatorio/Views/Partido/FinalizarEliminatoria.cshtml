@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Dominio;
+@model Partido;
+
+<h1>Agregar Incidencia</h1>
+<form action="/Partido/FinalizarEliminatoria" method="post">
+
+    <input type="hidden" name="idPartido" value="Model.id" />
+
+    <input type="checkbox" id="alargue" name="alargue" />
+    <label for="alargue"> Alargue </label>
+
+    <input type="checkbox" id="penales" name="penales" />
+    <label for="penales"> Penales </label>
+
+    <div class="form-outline mb-4">
+        <button type="submit" class="btn btn-primary btn-block mb-4">Actualizar</button>
+    </div>
+
+
+</form>

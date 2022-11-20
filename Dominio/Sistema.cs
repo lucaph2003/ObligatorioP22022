@@ -463,12 +463,27 @@ namespace Dominio
             Partido partidoAFinalizar = GetPartido(idPartido);
             partidoAFinalizar.finalizarPartido();
         }
-        
+
+        public void CambiarEstadoPartido(int idPartido,bool pAlargues,bool pPenales)
+        {
+            Partido partido = GetPartido(idPartido);
+            PartidoFaseEliminatoria p = (PartidoFaseEliminatoria)partido;
+            if (pAlargues)
+            {
+                p.HuboAlargue();
+            }
+
+            if (pPenales)
+            {
+                p.HuboPenales();
+            }
+        }
+
 
         #endregion
 
         #region Precarga de Datos
-        
+
         private void RealizarPrecargaDatos()
         {
             PrecargaPaises();

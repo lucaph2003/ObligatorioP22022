@@ -8,6 +8,8 @@ namespace Dominio
     {
         #region Atributos PartidoFaseDeGrupo
         public char grupo { get; set; }
+
+        public const string tipo = "FaseGrupo";
         
         #endregion
 
@@ -46,6 +48,11 @@ namespace Dominio
             {
                 throw new Exception("El partido ya esta finalizado");
             }
+        }
+
+        public override string ObtenerTipo()
+        {
+            return tipo;
         }
 
         #endregion

@@ -25,14 +25,22 @@
             {
                 if (!partido.esFinalizada)
                 {
-                    <tr>
-                        <th scope="row">i</th>
-                        <td>@partido.fechaHora</td>
-                        <td>@partido.seleccion1.ToString()</td>
-                        <td>@partido.seleccion2.ToString()</td>
-                        <td>@Html.ActionLink("Agregar Incidencia", "Incidencia", "Partido", new { idPartido = partido.id })</td>
+                <tr>
+                    <th scope="row">i</th>
+                    <td>@partido.fechaHora</td>
+                    <td>@partido.seleccion1.ToString()</td>
+                    <td>@partido.seleccion2.ToString()</td>
+                    <td>@Html.ActionLink("Agregar Incidencia", "Incidencia", "Partido", new { idPartido = partido.id })</td>
+                    @if (partido.ObtenerTipo() == "FaseGrupo")
+                    {
                         <td>@Html.ActionLink("Finalizar", "Finalizar", "Partido", new { idPartido = partido.id })</td>
-                    </tr>
+                    }
+                    else if (partido.ObtenerTipo() == "FaseEliminatoria")
+                    {
+                        <td>@Html.ActionLink("Finalizar Eliminatoria", "FinalizarEliminatoria", "Partido", new { idPartido = partido.id })</td>
+                    }
+
+                </tr>
                 }
             }
         }

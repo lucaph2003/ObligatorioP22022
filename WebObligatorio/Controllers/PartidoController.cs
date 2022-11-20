@@ -10,10 +10,7 @@ namespace WebObligatorio.Controllers
     public class PartidoController : Controller
     {
         Sistema sistema = Sistema.ObtenerInstancia;
-        public IActionResult Index()
-        {
-            return View();
-        }
+
         public IActionResult ListadoPartido()
         {
             List<Partido> partidos = sistema.ObtenerListaPartidos();
@@ -32,6 +29,13 @@ namespace WebObligatorio.Controllers
             List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
             ViewBag.Resultado = "";
             return View(partidos);
+        }
+
+        public IActionResult FinalizarEliminatoria(int idPartido)
+        {
+            Partido partido = sistema.GetPartido(idPartido);
+            ViewBag.idPartido = idPartido;
+            return View(partido);
         }
 
         [HttpPost]
@@ -64,5 +68,13 @@ namespace WebObligatorio.Controllers
             ViewBag.Resultado = sistema.VerResultadoPartido(idPartido);
             return RedirectToAction("ListadoPartido", "Partido");
         }
+
+        public IActionResult FinalizarEliminatoria(int idPartido, bool alargues, bool penales)
+        {
+            sistema.CambiarEstadoPartido(idPartido, alargues, penales);
+            return RedirectToAction("ListadoPartido", "Partido");
+        }
+
+
     }
 }

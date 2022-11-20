@@ -27,10 +27,7 @@ namespace Dominio
 
         #region Validaciones
 
-        public override string ObtenerRol()
-        {
-            return Rol;
-        }
+       
 
         #endregion
 
@@ -39,6 +36,11 @@ namespace Dominio
         {
             return $"Nombre: {this.nombreCompleto}" + "\n" + $"Correo Electronico: {this.email}";
         }
+        public override string ObtenerRol()
+        {
+            return Rol;
+        }
+
         #endregion
         #endregion
     }

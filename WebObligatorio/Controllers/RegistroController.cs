@@ -34,7 +34,7 @@ namespace WebObligatorio.Controllers
                 return View();
             }
             
-            return RedirectToAction("ListarPeriodistas", "Registro");
+            return RedirectToAction("Index", "Login");
         }
 
     }

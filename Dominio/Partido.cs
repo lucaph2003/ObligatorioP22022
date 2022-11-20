@@ -121,6 +121,11 @@ namespace Dominio
         {
             return $"Fecha: {this.fechaHora}" + " " + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}" + " " + "Cantidad Incidencias: " + $"{this.Incidencias.Count}"; 
         }
+
+        public virtual string ObtenerTipo()
+        {
+            return "SIN_TIPO";
+        }
         #endregion
 
         #endregion

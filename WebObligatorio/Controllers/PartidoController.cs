@@ -27,6 +27,13 @@ namespace WebObligatorio.Controllers
             return View(jugadores);
         }
 
+        public IActionResult ListadosPartidosFinalizados()
+        {
+            List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
+            ViewBag.Resultado = "";
+            return View(partidos);
+        }
+
         [HttpPost]
         public IActionResult Incidencia(int idPartido,string incidencia,int minuto,int idJugador)
         {

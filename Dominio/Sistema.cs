@@ -264,12 +264,25 @@ namespace Dominio
 
         public List<Partido> ObtenerListaPartidos()
         {
-            List<Partido> PartidosJugados = new List<Partido>();
+            List<Partido> partidos = new List<Partido>();
             foreach (Partido p in Partidos)
             {
-                PartidosJugados.Add(p);
+                partidos.Add(p);
             }
-            return PartidosJugados;
+            return partidos;
+        }
+
+        public List<Partido> ObtenerListaPartidosFinalizados()
+        {
+            List<Partido> partidosFinalizados = new List<Partido>();
+            foreach (Partido p in Partidos)
+            {
+                if (p.esFinalizada)
+                {
+                    partidosFinalizados.Add(p);
+                }
+            }
+            return partidosFinalizados;
         }
 
         //Obtiene los partidos que jugo segun el id del jugador

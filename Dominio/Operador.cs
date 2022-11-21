@@ -11,14 +11,14 @@ namespace Dominio
 
         public const string Rol = "Operador";
 
-        public Operador(string pNombreCompleto,string pContrasena, string pEmail , DateTime pFechaContratado):base(pNombreCompleto,pContrasena,pEmail)
+        public Operador(string pNombre, string pApellido, string pContrasena, string pEmail , DateTime pFechaContratado):base(pNombre, pApellido, pContrasena,pEmail)
         {
             this.FechaContratado = pFechaContratado;
         }
 
         public override void Validar()
         {
-            if (this.nombreCompleto.Length > 1 && this.email.Length > 1 && this.contrasena.Length > 1)
+            if (this.nombre.Length > 1 && this.apellido.Length > 1 && this.email.Length > 1 && this.contrasena.Length > 1)
             {
                 ValidarEmail();
                 ValidarPassword();

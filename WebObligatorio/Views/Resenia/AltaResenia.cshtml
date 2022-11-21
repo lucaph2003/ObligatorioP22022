@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Dominio;
+@model List<Partido>
+<h3>Alta de Resenia</h3>
+
+<form action="/Resenia/AltaResenia" method="post">
+
+    <input type="hidden" value=@ViewBag.Periodista name="periodista" />
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="fecha">Ingrese Fecha</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" required />
+    </div>
+
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="txtPartidos">Seleccione Partido: </label>
+        <select id="txtPartidos" name="partido" class="form-control">
+            @foreach (Partido p in Model)
+            {
+                <option value="@p" name="partido">@p.seleccion1 vs @p.seleccion2</option>
+            }
+        </select>
+    </div>
+
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="titulo">Titulo de la Reseña</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" required />
+    </div>
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="contenido">Escriba su reseña</label>
+        <textarea class="form-control" id="contenido" name="contenido" required></textarea>
+    </div>
+
+    <div class="form-outline mb-4">
+        <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar Reseña</button>
+    </div>
+
+    @if (ViewBag.NombreError != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.NombreError
+        </div>
+    }
+
+</form>

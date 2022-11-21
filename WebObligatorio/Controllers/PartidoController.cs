@@ -30,7 +30,7 @@ namespace WebObligatorio.Controllers
             ViewBag.Resultado = "";
             return View(partidos);
         }
-
+        
         public IActionResult FinalizarEliminatoria(int idPartido)
         {
             ViewBag.idPartido = idPartido;
@@ -52,7 +52,7 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
-        [HttpPost]
+        
         public IActionResult Finalizar(int idPartido)
         {
             try

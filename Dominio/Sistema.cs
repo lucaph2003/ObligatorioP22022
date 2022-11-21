@@ -33,6 +33,7 @@ namespace Dominio
         public List<Pais> Paises { get; } = new List<Pais>();
         public List<Partido> Partidos { get; } = new List<Partido>();
         public List<Usuario> Usuarios { get; } = new List<Usuario>();
+        public List<Resenia> Resenias { get; } = new List<Resenia>();
         #endregion
 
         #region Metodos de Alta
@@ -92,6 +93,10 @@ namespace Dominio
         {
             Selecciones.Add(pSeleccion);
         }
+        public void AltaResenia(Resenia pResenia)
+        {
+            Resenias.Add(pResenia);
+        }
 
         private void AltaPais(Pais pPais)
         {
@@ -142,6 +147,7 @@ namespace Dominio
             Incidencia incidencia = new Incidencia(pIncidencia, pMinuto, jugador);
             AltaIncidencia(partido, incidencia);
         }
+
         #endregion
 
         #region Metodos de retorno
@@ -155,6 +161,24 @@ namespace Dominio
                 if (p.nombre.Equals(nombre))
                 {
                     return p;
+                }
+            }
+            return null;
+        }
+
+        public Periodista GetPeriodista(string email)
+        {
+            foreach(Usuario u in Usuarios)
+            {
+                if(u is Periodista)
+                {
+                    foreach(Periodista p in Usuarios)
+                    {
+                        if(p.email == email)
+                        {
+                            return p;
+                        }
+                    }
                 }
             }
             return null;
@@ -224,6 +248,7 @@ namespace Dominio
             }
             return null;
         }
+        
 
                 /*LISTAS*/
 
@@ -253,6 +278,7 @@ namespace Dominio
                     periodistas.Add(p as Periodista);
                 }
             }
+            periodistas.Sort();
             return periodistas;
         }
 
@@ -422,6 +448,19 @@ namespace Dominio
             }
             
         }
+       
+        public List<Resenia> ObtenerReseniasPorPeriodista(string email)
+        {
+            List<Resenia> aux = new List<Resenia>();
+            foreach(Resenia r in Resenias)
+            {
+                if (r.periodista.email.Equals(email))
+                {
+                    aux.Add(r);
+                }
+            }
+            return aux;
+        }
 
         public void Login(Usuario usuario)
         {
@@ -487,14 +526,16 @@ namespace Dominio
 
         private void RealizarPrecargaDatos()
         {
+            PrecargaPeriodista();
             PrecargaPaises();
             PrecargaJugadores();
             PrecargaSelecciones();
             PrecargaPartidosFaseDeGrupos();
             PrecargaPartidosFaseEliminatoria();
-            PrecargaPeriodista();
+
             PrecargaIncidencias();
             PrecargaOperador();
+            PrecargaResenia();  
         }
         private void PrecargaSelecciones()
         {
@@ -511,16 +552,26 @@ namespace Dominio
                 AltaSeleccion(selNueva);
             }
         }
+
+        private void PrecargaResenia()
+        {
+            AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"), GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
+            AltaResenia(new Resenia(GetPeriodista("lucapodesta47@gmail.com"), DateTime.Parse("2022-11-22 13:00:00"), GetPartido(2), "Titulo Prueba 2", "Contenido de prueba 3"));
+        }
         private void PrecargaPeriodista()
         {
-            AltaPeriodista(new Periodista("Alberto Kesman", "Kesman123", "KesmanAlberto@gmail.com"));
-            AltaPeriodista(new Periodista("Jorge Da Silveira", "toto1234", "DaSilveira@gmail.com"));
-            AltaPeriodista(new Periodista("Luca Podesta", "Luca1234", "lucapodesta47@gmail.com"));
+            
+            AltaPeriodista(new Periodista("Alberto ", "Kesman", "Kesman123", "KesmanAlberto@gmail.com"));
+            AltaPeriodista(new Periodista("Andres ", "Da Silveira", "Toto1234", "DaSilveira@outlook.com"));
+            AltaPeriodista(new Periodista("Jorge ", "Da Silveira", "Toto1234", "DaSilveira@gmail.com"));
+            AltaPeriodista(new Periodista("Matias ", "Da Silveira", "Toto1234", "DaSilveira@hotmail.com"));
+            AltaPeriodista(new Periodista("Luca", "Podesta", "Luca1234", "lucapodesta47@gmail.com"));
+            AltaPeriodista(new Periodista("julian", "Podesta", "Luca1234", "lucapodesta47@hotmail.com"));
         }
         private void PrecargaOperador()
         {
-            AltaOperador(new Operador("Agustin Padia", "Agus1234", "Fliapadia@hotmail.com",  DateTime.Parse("2022-11-07 17:20:00")));
-            AltaOperador(new Operador("Luca Podesta", "Luca1234", "lucapodesta03@gmail.com", DateTime.Parse("2022-11-07 17:30:00")));
+            AltaOperador(new Operador("Agustin", "Padia", "Agus1234", "Fliapadia@hotmail.com",  DateTime.Parse("2022-11-07 17:20:00")));
+            AltaOperador(new Operador("Luca", " Podesta", "Luca1234", "lucapodesta03@gmail.com", DateTime.Parse("2022-11-07 17:30:00")));
         }
         private void PrecargaPartidosFaseDeGrupos()
         {

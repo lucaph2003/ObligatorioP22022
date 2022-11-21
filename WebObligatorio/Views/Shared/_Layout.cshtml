@@ -33,7 +33,7 @@
                             @if (Context.Session.GetString("UsuarioRol") == "Periodista")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="index">Ver Reseñas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Resenia" asp-action="ListarResenias">Ver Reseñas</a>
                                 </li>
                             }
                             @if (Context.Session.GetString("UsuarioRol") == "Operador")

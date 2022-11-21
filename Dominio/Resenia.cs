@@ -23,6 +23,7 @@ namespace Dominio
             this.titulo = pTitulo;
             this.contenido = pContenido;
         }
+        public Resenia() { }
         #endregion
 
     }

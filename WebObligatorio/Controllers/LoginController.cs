@@ -35,8 +35,10 @@ namespace WebObligatorio.Controllers
             Usuario usuarioDeSistema = sistema.ObtenerUsuarioPorEmail(usuario.email);
 
             HttpContext.Session.SetString("UsuarioLogueadoEmail", usuarioDeSistema.email);
-            HttpContext.Session.SetString("UsuarioLogueadoNombre", usuarioDeSistema.nombreCompleto);
+            HttpContext.Session.SetString("UsuarioLogueadoNombre", usuarioDeSistema.nombre);
             HttpContext.Session.SetString("UsuarioRol", usuarioDeSistema.ObtenerRol());
+            
+
 
             return RedirectToAction("Index", "Home");
         }

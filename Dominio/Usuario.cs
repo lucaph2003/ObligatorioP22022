@@ -8,7 +8,8 @@ namespace Dominio
     {
         #region Atributos Usuario
 
-        public string nombreCompleto { get; set; }
+        public string nombre { get; set; }
+        public string apellido { get; set; }
 
         public string contrasena { get; set; }
 
@@ -18,15 +19,17 @@ namespace Dominio
 
         #region Metodos Usuario
         #region Constructores
-        public Usuario(string pNombreCompleto, string pContrasena,string pEmail )
+        public Usuario(string pNombre, string pApellido, string pContrasena,string pEmail )
         {
-            this.nombreCompleto = pNombreCompleto;
+            this.nombre = pNombre;
+            this.apellido = pApellido;
             this.contrasena = pContrasena;
             this.email = pEmail;
         }
         public Usuario()
         {
-            this.nombreCompleto = "Sin Definir";
+            this.nombre = "Sin Definir";
+            this.apellido = "Unkown";
             this.contrasena = "No Existe";
             this.email = "000@000";
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Periodista : Usuario
+    public class Periodista : Usuario, IComparable
     {
         #region Atributos Periodista
 
@@ -18,7 +18,7 @@ namespace Dominio
         #region Metodos Periodista
 
         #region Constructores
-        public Periodista(string pNombreCompleto,string pContrasena,string pEmail) :base(pNombreCompleto,pContrasena,pEmail)
+        public Periodista(string pNombre, string pApellido, string pContrasena,string pEmail) :base(pNombre, pApellido, pContrasena,pEmail)
         {
             this.id = contador++;
         }
@@ -34,11 +34,21 @@ namespace Dominio
         #region Override y Compare
         public override string ToString()
         {
-            return $"Nombre: {this.nombreCompleto}" + "\n" + $"Correo Electronico: {this.email}";
+            return $"Nombre: {this.nombre}" + "\n" + $"Correo Electronico: {this.email}";
         }
         public override string ObtenerRol()
         {
             return Rol;
+        }
+        public int CompareTo(Object obj)
+        {
+            Periodista periodista = (Periodista)obj;
+            int ordenado = this.apellido.CompareTo(periodista.apellido);
+            if(ordenado == 0)
+            {
+                ordenado = this.nombre.CompareTo(periodista.nombre);
+            }
+            return ordenado;
         }
 
         #endregion

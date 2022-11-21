@@ -18,18 +18,16 @@ namespace WebObligatorio.Controllers
             List<Resenia> resenias = sistema.ObtenerReseniasPorPeriodista(email);
             return View(resenias);
         }
-        public IActionResult AltaResenia()
+        public IActionResult AltaResenia(int idPartido)
         {
-            string email = HttpContext.Session.GetString("UsuarioLogueadoEmail");
-            ViewBag.Periodista = sistema.GetPeriodista(email);
-            List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
-            return View(partidos);
+            ViewBag.idPartido = idPartido;
+            return View();
         }
 
         [HttpPost]
-        public IActionResult AltaResenia(Resenia resenia)
+        public IActionResult AltaResenia(DateTime fecha,int idPartido, string titulo, string contenido)
         {
-            
+            Resenia resenia = sistema.RegistrarResenia(HttpContext.Session.GetString("UsuarioLogueadoEmail"), fecha, idPartido, titulo, contenido);
             sistema.AltaResenia(resenia);
             return RedirectToAction("ListarResenias", "Resenia");
         }

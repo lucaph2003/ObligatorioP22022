@@ -9,24 +9,12 @@
 
 <form action="/Resenia/AltaResenia" method="post">
 
-    <input type="hidden" value=@ViewBag.Periodista name="periodista" />
+    <input type="hidden" name="idPartido" value="@ViewBag.idPartido" />
 
     <div class="form-outline mb-4">
         <label class="form-label" for="fecha">Ingrese Fecha</label>
         <input type="date" class="form-control" id="fecha" name="fecha" required />
     </div>
-
-
-    <div class="form-outline mb-4">
-        <label class="form-label" for="txtPartidos">Seleccione Partido: </label>
-        <select id="txtPartidos" name="partido" class="form-control">
-            @foreach (Partido p in Model)
-            {
-                <option value="@p" name="partido">@p.seleccion1 vs @p.seleccion2</option>
-            }
-        </select>
-    </div>
-
 
     <div class="form-outline mb-4">
         <label class="form-label" for="titulo">Titulo de la Reseña</label>

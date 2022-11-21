@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Dominio
 {
@@ -148,10 +147,18 @@ namespace Dominio
             AltaIncidencia(partido, incidencia);
         }
 
+        public Resenia RegistrarResenia(string pEmailPeriodista,DateTime pFecha, int pIdPartido, string pTitulo,string pContenido)
+        {
+            Periodista periodista = GetPeriodista(pEmailPeriodista);
+            Partido partido = GetPartido(pIdPartido);
+            Resenia resenia = new Resenia(periodista, pFecha,partido,pTitulo,pContenido);
+            return resenia;
+        }
+
         #endregion
 
         #region Metodos de retorno
-                /*GET*/
+        /*GET*/
 
         // Retorna el País a partir del nombre.
         private Pais GetPais(string nombre)

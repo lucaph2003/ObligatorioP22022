@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System.Threading.Tasks;
 using Dominio;
@@ -27,7 +28,7 @@ namespace WebObligatorio.Controllers
         public IActionResult ListadosPartidosFinalizados()
         {
             List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
-            ViewBag.Resultado = "";
+            ViewBag.rol = HttpContext.Session.GetString("UsuarioRol");
             return View(partidos);
         }
         

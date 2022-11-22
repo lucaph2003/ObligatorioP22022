@@ -14,9 +14,23 @@ namespace WebObligatorio.Controllers
         
         public IActionResult ListarResenias(string email)
         {
-            //string email = HttpContext.Session.GetString("UsuarioLogueadoEmail");
-            List<Resenia> resenias = sistema.ObtenerReseniasPorPeriodista(email);
-            return View(resenias);
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            string pEmail = HttpContext.Session.GetString("UsuarioLogueadoEmail");
+            if(rol != null && rol == "Operador")
+            {
+                List<Resenia> resenias = sistema.ObtenerReseniasPorPeriodista(email);
+                return View(resenias);
+            }
+            else if(rol != null && rol == "Periodista")
+            {
+                List<Resenia> resenias = sistema.ObtenerReseniasPorPeriodista(pEmail);
+                return View(resenias);
+            }
+            TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+            return RedirectToAction("MostrarError", "Error");
+            
+                
+
         }
         
         public IActionResult AltaResenia(int idPartido)

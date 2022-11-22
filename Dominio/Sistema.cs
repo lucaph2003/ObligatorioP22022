@@ -469,33 +469,36 @@ namespace Dominio
             aux.Sort();
             return aux;
         }
-        //VER SI ES NECESARIO
-        //public bool ExisteResenia(Partido partido)
-        //{
-        //    bool existe = false;
-        //    foreach(Partido p in Partidos)
-        //    {
-        //        foreach(Resenia r in Resenias)
-        //        {
-        //            if (p.id.Equals(r.partido.id))
-        //            {
-        //                existe = true;
-        //            }
-        //        }
-        //    }
-        //    return existe;
-        //}
+       //VER SI ES NECESARIO
+        public bool ExisteResenia(Partido partido)
+        {
+            bool existe = false;
+            foreach (Partido p in Partidos)
+            {
+                foreach (Resenia r in Resenias)
+                {
+                    if (p.id.Equals(r.partido.id))
+                    {
+                        existe = true;
+                    }
+                }
+            }
+            return existe;
+        }
 
         public List<Partido> ObtenerPartidoRojaReseniaEmailPeriodista(string email)
         {
             List<Partido> partidoConRoja = new List<Partido>();
             foreach(Resenia r in Resenias)
             {
-                foreach(Partido p in Partidos)
+                foreach (Partido p in Partidos)
                 {
-                    if (r.periodista.email.Equals(email) && r.partido.ObtenerExpulsionesSeleccion(p.seleccion1) >= 1 && r.partido.ObtenerExpulsionesSeleccion(p.seleccion2) >= 1)
+                    if (ExisteResenia(p) && r.periodista.email.Equals(email))
                     {
-                        partidoConRoja.Add(p);
+                        if(r.partido.ObtenerExpulsionesSeleccion(p.seleccion1) >= 1 || r.partido.ObtenerExpulsionesSeleccion(p.seleccion2) >= 1)
+                        {
+                            partidoConRoja.Add(p);
+                        }
                     }
                 }
             }

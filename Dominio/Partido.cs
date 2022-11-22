@@ -81,6 +81,26 @@ namespace Dominio
             }
             return cantGoles;
         }
+        public int ObtenerAmonestacionesSeleccion(Seleccion seleccion)
+        {
+            int cantAmarillas = 0;
+            foreach(Incidencia i in Incidencias)
+            {
+                if(i.jugador.pais.Equals(seleccion.pais) && i.incidencia == "Amarilla") { cantAmarillas++; }
+            }
+            return cantAmarillas;
+        }
+        public int ObtenerExpulsionesSeleccion(Seleccion seleccion)
+        {
+            int cantRojas = 0;
+            foreach (Incidencia i in Incidencias)
+            {
+                if (i.jugador.pais.Equals(seleccion.pais) && i.incidencia == "Roja") { cantRojas++; }
+            }
+            return cantRojas;
+        }
+
+        
 
         //Metodo para validar el resultado
         public virtual void ValidarResultado() { }

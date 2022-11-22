@@ -12,12 +12,13 @@ namespace WebObligatorio.Controllers
     {
         Sistema sistema = Sistema.ObtenerInstancia;
         
-        public IActionResult ListarResenias()
+        public IActionResult ListarResenias(string email)
         {
-            string email = HttpContext.Session.GetString("UsuarioLogueadoEmail");
+            //string email = HttpContext.Session.GetString("UsuarioLogueadoEmail");
             List<Resenia> resenias = sistema.ObtenerReseniasPorPeriodista(email);
             return View(resenias);
         }
+        
         public IActionResult AltaResenia(int idPartido)
         {
             ViewBag.idPartido = idPartido;

@@ -32,9 +32,20 @@ namespace WebObligatorio.Controllers
             return View(partidos);
         }
         
+       
+        
+        
         public IActionResult FinalizarEliminatoria(int idPartido)
         {
             ViewBag.idPartido = idPartido;
+            return View();
+        }
+        public IActionResult ObtenerPartido2Fechas()
+        {
+            return View();
+        }
+        public IActionResult BuscarPartidoEmailPeriodista()
+        {
             return View();
         }
 
@@ -77,6 +88,23 @@ namespace WebObligatorio.Controllers
             sistema.FinalizarPartido(idPartido);
             return RedirectToAction("ListadoPartido", "Partido");
         }
+
+        [HttpPost]
+        public IActionResult ListarPartidoFiltrado(DateTime f1, DateTime f2)
+        {
+            List<Partido>partidoFiltrado = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
+            return View(partidoFiltrado);
+        }
+        [HttpPost]
+        public IActionResult ListarBusquedaPorEmail(string email)
+        {
+            List<Partido> partidoRojaPeridista = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
+            return View(partidoRojaPeridista);
+        }
+
+
+
+
 
 
     }

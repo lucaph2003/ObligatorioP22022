@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Resenia
+    public class Resenia:IComparable
     {
         #region Atributos Resenia
         public Periodista periodista { get; set; }
@@ -26,5 +26,11 @@ namespace Dominio
         public Resenia() { }
         #endregion
 
+
+        public int CompareTo(Object obj)
+        {
+            Resenia resenia = (Resenia)obj;
+            return this.fecha.CompareTo(resenia.fecha);
+        }
     }
 }

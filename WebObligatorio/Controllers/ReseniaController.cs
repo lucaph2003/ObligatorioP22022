@@ -28,8 +28,6 @@ namespace WebObligatorio.Controllers
             }
             TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
             return RedirectToAction("MostrarError", "Error");
-            
-                
 
         }
         

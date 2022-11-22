@@ -75,41 +75,51 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <div class="Mynav_navbar">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        @if (Context.Session.GetString("UsuarioLogueadoEmail") != null)
-                        {
-                            @if (Context.Session.GetString("UsuarioRol") == "Periodista")
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            @if (Context.Session.GetString("UsuarioLogueadoEmail") != null)
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Resenia" asp-action="ListarResenias">Ver Reseñas</a>
+                                @if (Context.Session.GetString("UsuarioRol") == "Periodista")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Resenia" asp-action="ListarResenias">Ver Reseñas</a>
+                                    </li>
+
+                                }
+                                @if (Context.Session.GetString("UsuarioRol") == "Operador")
+                                {
+                                    <li class="nav-item">
+                                        <div class="Mynav_dropdown">
+                                            <button class="Mynav_dropbtn">
+                                                Selecciones
+                                            </button>
+                                            <div class="Mynav_dropdown-content">
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="index">Ver Selecciones</a>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="index">Ver Goleadores</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="Mynav_dropdown">
+                                            <button class="Mynav_dropbtn">
+                                                Partidos
+                                            </button>
+                                            <div class="Mynav_dropdown-content">
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="index">Listar Partidos</a>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="index">Listar Finalizados</a>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="index">Buscar Partidos</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
 
                             }
-                            @if (Context.Session.GetString("UsuarioRol") == "Operador")
-                            {
-                                <div class="Mynav_dropdown">
-                                    <button class="Mynav_dropbtn">
-                                        Selecciones
-                                    </button>
-                                    <div class="Mynav_dropdown-content">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="index">Ver Selecciones</a>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="index">Ver Goleadores</a>
-                                    </div>
-                                </div>
-
-                                <div class="Mynav_dropdown">
-                                    <button class="Mynav_dropbtn">
-                                        Partidos
-                                    </button>
-                                    <div class="Mynav_dropdown-content">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="index">Listar Partidos</a>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="index">Listar Finalizados</a>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="index">Buscar Partidos</a>
-                                    </div>
-                                </div>
-                            }
-
-                        }
+                        </ul>
                     </div>
                 </div>
 

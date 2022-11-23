@@ -66,7 +66,8 @@ namespace Dominio
             {
                 pUsuario.Validar();
                 ExisteEmail(pUsuario);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -115,7 +116,7 @@ namespace Dominio
             try
             {
                 Partidos.Add(pPartido);
-            } 
+            }
             catch (Exception e)
             {
                 throw e;
@@ -139,7 +140,7 @@ namespace Dominio
             partido.AgregarIncidencia(incidencia);
         }
 
-        public void RegistrarIncidencia(int pIdPartido,string pIncidencia,int pMinuto,int pIdJugador)
+        public void RegistrarIncidencia(int pIdPartido, string pIncidencia, int pMinuto, int pIdJugador)
         {
             Partido partido = GetPartido(pIdPartido);
             Jugador jugador = GetJugador(pIdJugador);
@@ -147,11 +148,11 @@ namespace Dominio
             AltaIncidencia(partido, incidencia);
         }
 
-        public Resenia RegistrarResenia(string pEmailPeriodista,DateTime pFecha, int pIdPartido, string pTitulo,string pContenido)
+        public Resenia RegistrarResenia(string pEmailPeriodista, DateTime pFecha, int pIdPartido, string pTitulo, string pContenido)
         {
             Periodista periodista = GetPeriodista(pEmailPeriodista);
             Partido partido = GetPartido(pIdPartido);
-            Resenia resenia = new Resenia(periodista, pFecha,partido,pTitulo,pContenido);
+            Resenia resenia = new Resenia(periodista, pFecha, partido, pTitulo, pContenido);
             return resenia;
         }
 
@@ -175,13 +176,13 @@ namespace Dominio
 
         public Periodista GetPeriodista(string email)
         {
-            foreach(Usuario u in Usuarios)
+            foreach (Usuario u in Usuarios)
             {
-                if(u is Periodista)
+                if (u is Periodista)
                 {
-                    foreach(Periodista p in Usuarios)
+                    foreach (Periodista p in Usuarios)
                     {
-                        if(p.email == email)
+                        if (p.email == email)
                         {
                             return p;
                         }
@@ -255,9 +256,9 @@ namespace Dominio
             }
             return null;
         }
-        
 
-                /*LISTAS*/
+
+        /*LISTAS*/
 
         // Retorna todos los jugadores de una selección, a partir del país del jugador.
         private List<Jugador> JugadoresDe(Pais p)
@@ -280,7 +281,7 @@ namespace Dominio
             List<Periodista> periodistas = new List<Periodista>();
             foreach (Usuario p in Usuarios)
             {
-                if(p is Periodista)
+                if (p is Periodista)
                 {
                     periodistas.Add(p as Periodista);
                 }
@@ -321,10 +322,10 @@ namespace Dominio
         //Obtiene los partidos que jugo segun el id del jugador
         public List<Partido> ObtenerPartidosJugadorPorId(int idJugador)
         {
-             Jugador j = GetJugador(idJugador);
-             List<Partido> partidos = new List<Partido>();
-             if (j != null) 
-             {         
+            Jugador j = GetJugador(idJugador);
+            List<Partido> partidos = new List<Partido>();
+            if (j != null)
+            {
                 Seleccion seleccion = GetSeleccion(j.pais.nombre);
                 foreach (Partido p in Partidos)
                 {
@@ -333,12 +334,12 @@ namespace Dominio
                         partidos.Add(p);
                     }
                 }
-              }
-              else
-              {
-               Console.WriteLine("No existe ese jugador");
-              }
-              return partidos; 
+            }
+            else
+            {
+                Console.WriteLine("No existe ese jugador");
+            }
+            return partidos;
         }
 
         //Obtiene todos los jugadores expulsados
@@ -349,7 +350,7 @@ namespace Dominio
             {
                 foreach (Incidencia i in p.Incidencias)
                 {
-                    if(i.incidencia.Equals("Roja"))
+                    if (i.incidencia.Equals("Roja"))
                     {
                         jugadoresExpulsados.Add(i.jugador);
                     }
@@ -365,7 +366,7 @@ namespace Dominio
             Pais pais = GetPaisId(idPais);
             foreach (Jugador j in Jugadores)
             {
-                if(j.pais.Equals(pais))
+                if (j.pais.Equals(pais))
                 {
                     jugadores.Add(j);
                 }
@@ -387,7 +388,7 @@ namespace Dominio
             List<Jugador> jugadoresGoleadores = new List<Jugador>();
             foreach (Partido p in Partidos)
             {
-                if(p.Equals(partido))
+                if (p.Equals(partido))
                 {
                     foreach (Incidencia i in p.Incidencias)
                     {
@@ -397,9 +398,57 @@ namespace Dominio
                         }
                     }
                 }
-                
+
             }
             return jugadoresGoleadores;
+        }
+
+        public int CantidadGoles()
+        {
+            int cantMax = 0;
+            //Este primer bloque encuentra la maxima cantidad de goles que hizo una seleccion
+            foreach (Seleccion s in Selecciones)
+            {
+                int cantGoles = 0;
+                foreach (Partido p in Partidos)
+                {
+                    if (p.seleccion1.Equals(s))
+                    {
+                        cantGoles += p.resultado1;
+                    }
+                    else if (p.seleccion2.Equals(s))
+                    {
+                        cantGoles += p.resultado2;
+                    }
+                }
+                if (cantGoles > cantMax) cantMax = cantGoles;
+            }
+            return cantMax;
+        }
+
+        public List<Seleccion> ObtenerSeleccionGoleadora()
+        {
+            List<Seleccion> selecciones = new List<Seleccion>();
+            int cantMax = CantidadGoles();
+
+            //Este bloque nos dice que la cantidad de goles es igual al maximo lo agrega a la lista
+            foreach (Seleccion s in Selecciones)
+            {
+                int cantGoles = 0;
+                foreach (Partido p in Partidos)
+                {
+                    if (p.seleccion1.Equals(s))
+                    {
+                        cantGoles += p.resultado1;
+                    }
+                    else if (p.seleccion2.Equals(s))
+                    {
+                        cantGoles += p.resultado2;
+                    }
+                }
+                if (cantGoles == cantMax) selecciones.Add(s);
+            }
+            return selecciones;
         }
 
         public List<Jugador> ObtenerJugadoresPorIdPartido(int idPartido)
@@ -418,7 +467,7 @@ namespace Dominio
             return jugadores;
         }
 
-                /*STRING*/
+        /*STRING*/
 
         //Obtiene el partido con mas goles segun la seleccion ignorando cual de los dos equipos fue
         public string ObtenerPartidoConMasGoles(string nombreSeleccion)
@@ -426,11 +475,11 @@ namespace Dominio
             Seleccion seleccion = GetSeleccion(nombreSeleccion);
             Partido partido = new Partido();
             int cantidadMaxima = 0;
-            if (seleccion == null) 
+            if (seleccion == null)
             {
                 return "La seleccion no existe! ! !";
             }
-            else 
+            else
             {
                 foreach (Partido p in Partidos)
                 {
@@ -453,13 +502,13 @@ namespace Dominio
                 }
                 return partido.ToString() + "\nCantidad de goles: " + cantidadMaxima.ToString();
             }
-            
+
         }
-       
+
         public List<Resenia> ObtenerReseniasPorPeriodista(string email)
         {
             List<Resenia> aux = new List<Resenia>();
-            foreach(Resenia r in Resenias)
+            foreach (Resenia r in Resenias)
             {
                 if (r.periodista.email.Equals(email))
                 {
@@ -469,7 +518,7 @@ namespace Dominio
             aux.Sort();
             return aux;
         }
-       //VER SI ES NECESARIO
+        //VER SI ES NECESARIO
         public bool ExisteResenia(Partido partido)
         {
             bool existe = false;
@@ -489,15 +538,15 @@ namespace Dominio
         public List<Partido> ObtenerPartidoRojaReseniaEmailPeriodista(string email)
         {
             List<Partido> partidoConRoja = new List<Partido>();
-            foreach(Resenia r in Resenias)
+            foreach (Resenia r in Resenias)
             {
-                    if (r.periodista.email.Equals(email))
+                if (r.periodista.email.Equals(email))
+                {
+                    if (r.partido.ObtenerExpulsionesSeleccion(r.partido.seleccion1) >= 1 || r.partido.ObtenerExpulsionesSeleccion(r.partido.seleccion2) >= 1)
                     {
-                        if(r.partido.ObtenerExpulsionesSeleccion(r.partido.seleccion1) >= 1 || r.partido.ObtenerExpulsionesSeleccion(r.partido.seleccion2) >= 1)
-                        {
-                            partidoConRoja.Add(r.partido);
-                        }
+                        partidoConRoja.Add(r.partido);
                     }
+                }
             }
             return partidoConRoja;
         }
@@ -505,9 +554,9 @@ namespace Dominio
         public List<Partido> ObtenerPartidosEntre2Fechas(DateTime f1, DateTime f2)
         {
             List<Partido> aux = new List<Partido>();
-            foreach(Partido p in Partidos)
+            foreach (Partido p in Partidos)
             {
-                if(p.fechaHora >= f1 && p.fechaHora <= f2)
+                if (p.fechaHora >= f1 && p.fechaHora <= f2)
                 {
                     aux.Add(p);
                 }
@@ -556,7 +605,7 @@ namespace Dominio
             partidoAFinalizar.finalizarPartido();
         }
 
-        public void CambiarEstadoPartido(int idPartido,bool pAlargues,bool pPenales)
+        public void CambiarEstadoPartido(int idPartido, bool pAlargues, bool pPenales)
         {
             Partido partido = GetPartido(idPartido);
             PartidoFaseEliminatoria p = (PartidoFaseEliminatoria)partido;
@@ -571,7 +620,7 @@ namespace Dominio
                 p.HuboPenales();
             }
         }
-        
+
 
 
         #endregion
@@ -589,7 +638,7 @@ namespace Dominio
 
             PrecargaIncidencias();
             PrecargaOperador();
-            PrecargaResenia();  
+            PrecargaResenia();
         }
         private void PrecargaSelecciones()
         {
@@ -615,7 +664,7 @@ namespace Dominio
         }
         private void PrecargaPeriodista()
         {
-            
+
             AltaPeriodista(new Periodista("Alberto ", "Kesman", "Kesman123", "KesmanAlberto@gmail.com"));
             AltaPeriodista(new Periodista("Andres ", "Da Silveira", "Toto1234", "DaSilveira@outlook.com"));
             AltaPeriodista(new Periodista("Jorge ", "Da Silveira", "Toto1234", "DaSilveira@gmail.com"));
@@ -625,7 +674,7 @@ namespace Dominio
         }
         private void PrecargaOperador()
         {
-            AltaOperador(new Operador("Agustin", "Padia", "Agus1234", "Fliapadia@hotmail.com",  DateTime.Parse("2022-11-07 17:20:00")));
+            AltaOperador(new Operador("Agustin", "Padia", "Agus1234", "Fliapadia@hotmail.com", DateTime.Parse("2022-11-07 17:20:00")));
             AltaOperador(new Operador("Luca", " Podesta", "Luca1234", "lucapodesta03@gmail.com", DateTime.Parse("2022-11-07 17:30:00")));
         }
         private void PrecargaPartidosFaseDeGrupos()
@@ -659,7 +708,7 @@ namespace Dominio
             AltaIncidencia(GetPartido(2), new Incidencia("Gol", 4, GetJugador(650)));
             AltaIncidencia(GetPartido(2), new Incidencia("Gol", 67, GetJugador(650)));
             AltaIncidencia(GetPartido(2), new Incidencia("Roja", 76, GetJugador(741)));
-            AltaIncidencia(GetPartido(3), new Incidencia("Gol",  43, GetJugador(650)));
+            AltaIncidencia(GetPartido(3), new Incidencia("Gol", 43, GetJugador(650)));
             AltaIncidencia(GetPartido(3), new Incidencia("Roja", 65, GetJugador(432)));
             AltaIncidencia(GetPartido(3), new Incidencia("Gol", 67, GetJugador(650)));
             AltaIncidencia(GetPartido(4), new Incidencia("Gol", 23, GetJugador(23)));
@@ -742,7 +791,7 @@ namespace Dominio
             AltaPais(new Pais("Australia", "AUS"));
             AltaPais(new Pais("Costa Rica", "CRI"));
         }
-       
+
         private void PrecargaJugadores()
         {
             AltaJugador(new Jugador(1, "23", "Emiliano Martínez", DateTime.Parse("1992-09-02"), 1.95, "derecho", 28000000, "EUR", GetPais("Argentina"), "Portero"));

@@ -22,5 +22,12 @@ namespace WebObligatorio.Controllers
             List<Jugador> jugadores = sistema.ObtenerJugadoresPais(idPais);
             return View(jugadores);
         }
+
+        public IActionResult Goleadores()
+        {
+            ViewBag.Goles = sistema.CantidadGoles();
+            List<Seleccion> selecciones = sistema.ObtenerSeleccionGoleadora();
+            return View(selecciones);
+        }
     }
 }

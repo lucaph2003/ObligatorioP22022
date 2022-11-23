@@ -81,6 +81,7 @@ namespace Dominio
             }
             return cantGoles;
         }
+
         public int ObtenerAmonestacionesSeleccion(Seleccion seleccion)
         {
             int cantAmarillas = 0;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dominio;
+using Microsoft.AspNetCore.Http;
 
 namespace WebObligatorio.Controllers
 {
@@ -12,9 +13,17 @@ namespace WebObligatorio.Controllers
         Sistema sistema = Sistema.ObtenerInstancia;
         public IActionResult ListarPeriodistas()
         {
-            List<Periodista> periodistas = sistema.ObtenerPeriodistas();
-            return View(periodistas);
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol != null && rol == ("Operador"))
+            {
+                List<Periodista> periodistas = sistema.ObtenerPeriodistas();
+                return View(periodistas);
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }    
         }
-
     }
 }

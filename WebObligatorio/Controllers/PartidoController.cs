@@ -15,54 +15,126 @@ namespace WebObligatorio.Controllers
         //Vista del listado de partidos sin finalizar
         public IActionResult ListadoPartido()
         {
-            List<Partido> partidos = sistema.ObtenerListaPartidos();
-            ViewBag.Resultado = "";
-            return View(partidos);
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if(rol != null && rol == ("Operador"))
+            {
+                List<Partido> partidos = sistema.ObtenerListaPartidos();
+                ViewBag.Resultado = "";
+                return View(partidos);
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
         }
 
         //Vista para agregar incidencia
         public IActionResult Incidencia(int idPartido)
         {
-            List<Jugador> jugadores = sistema.ObtenerJugadoresPorIdPartido(idPartido);
-            ViewBag.idPartido = idPartido;
-            return View(jugadores);
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol != null && rol == ("Operador"))
+            {
+                List<Jugador> jugadores = sistema.ObtenerJugadoresPorIdPartido(idPartido);
+                ViewBag.idPartido = idPartido;
+                return View(jugadores);
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
         }
 
         //Vista de los partidos finalizados
         public IActionResult ListadosPartidosFinalizados()
         {
-            List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
-            ViewBag.rol = HttpContext.Session.GetString("UsuarioRol");
-            return View(partidos);
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if(rol != null)
+            {
+                List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
+                ViewBag.rol = HttpContext.Session.GetString("UsuarioRol");
+                return View(partidos);
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
+            
         }
 
         //Vista de Finalizar la eliminatoria
         public IActionResult FinalizarEliminatoria(int idPartido)
         {
-            ViewBag.idPartido = idPartido;
-            return View();
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if(rol != null && rol == ("Operador"))
+            {
+                ViewBag.idPartido = idPartido;
+                return View();
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
+            
         }
 
         //Vista de Buscar partido por 2 fechas
         public IActionResult BuscarPartidosEntreDosFechas()
         {
-            return View();
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol != null && rol == ("Operador"))
+            {
+                return View();
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
+
         }
 
-        //Vista de Buscar partido por 2 fechas
-        public IActionResult ListadoPartidosEntreDosFechas()
+        //Vista de Listar partido por 2 fechas
+        public IActionResult ListadoPartidosEntreDosFechas(DateTime f1, DateTime f2)
         {
-            return View();
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol != null && rol == ("Operador"))
+            {
+                List<Partido> partidos = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
+                return View(partidos);
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
         }
-
         public IActionResult BuscarPartidoEmailPeriodista()
         {
-            return View();
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol != null && rol == ("Operador"))
+            {
+                return View();
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
         }
-
-        public IActionResult ListadoPartidoEmailPeriodista()
+        public IActionResult ListadoPartidoEmailPeriodista(string email)
         {
-            return View();
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol != null && rol == "Operador")
+            {
+                List<Partido> partidos = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
+                return View(partidos);
+            }
+            TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+            return RedirectToAction("MostrarError", "Error");
         }
 
         [HttpPost]
@@ -103,19 +175,10 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
-        [HttpPost]
-        public IActionResult BuscarPartidosEntreDosFechas(DateTime f1, DateTime f2)
-        {
-            List<Partido> partidos = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
-            return View(partidos);
-        }
+        
+        
 
-        [HttpPost]
-        public IActionResult BuscarPartidoEmailPeriodista(string email)
-        {
-            List<Partido> partidoRojaPeridista = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
-            return View(partidoRojaPeridista);
-        }
+        
 
 
 

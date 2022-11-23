@@ -30,23 +30,21 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("MostrarError", "Error");
         }
 
-        public IActionResult ListarReseniasConRoja(string email)
-        {
-            string rol = HttpContext.Session.GetString("UsuarioRol");
-            string pEmail = HttpContext.Session.GetString("UsuarioLogueadoEmail");
-            if (rol != null && rol == "Operador")
-            {
-                List<Partido> partidos = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
-                return View(partidos);
-            }
-            TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
-            return RedirectToAction("MostrarError", "Error");
-        }
+        
 
         public IActionResult AltaResenia(int idPartido)
         {
-            ViewBag.idPartido = idPartido;
-            return View();
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if(rol != null && rol == "Periodista")
+            {
+                ViewBag.idPartido = idPartido;
+                return View();
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
         }
 
 

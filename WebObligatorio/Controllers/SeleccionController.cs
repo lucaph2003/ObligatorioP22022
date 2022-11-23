@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dominio;
+using Microsoft.AspNetCore.Http;
 
 namespace WebObligatorio.Controllers
 {
@@ -25,9 +26,18 @@ namespace WebObligatorio.Controllers
 
         public IActionResult Goleadores()
         {
-            ViewBag.Goles = sistema.CantidadGoles();
-            List<Seleccion> selecciones = sistema.ObtenerSeleccionGoleadora();
-            return View(selecciones);
+            string rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol != null && rol == ("Operador"))
+            {
+                ViewBag.Goles = sistema.CantidadGoles();
+                List<Seleccion> selecciones = sistema.ObtenerSeleccionGoleadora();
+                return View(selecciones);
+            }
+            else
+            {
+                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
+                return RedirectToAction("MostrarError", "Error");
+            }
         }
     }
 }

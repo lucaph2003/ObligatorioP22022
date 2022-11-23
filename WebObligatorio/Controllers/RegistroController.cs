@@ -15,11 +15,7 @@ namespace WebObligatorio.Controllers
             return View();
         }
 
-        public IActionResult ListarPeriodistas()
-        {
-            List<Periodista> periodistas = sistema.ObtenerPeriodistas();
-            return View(periodistas);
-        }
+       
 
 
         [HttpPost]

@@ -100,9 +100,18 @@
                                         Partidos
                                     </button>
                                     <div class="Mynav_dropdown-content">
-                                        <a asp-area="" asp-controller="Partido" asp-action="index">Listar Partidos</a>
+                                        <a asp-area="" asp-controller="Partido" asp-action="ListadoPartido">Listar Partidos</a>
                                         <a asp-area="" asp-controller="Partido" asp-action="ListadosPartidosFinalizados">Listar Finalizados</a>
-                                        <a asp-area="" asp-controller="Partido" asp-action="ListarPartidoEntreDosFechas">Buscar Partidos</a>
+                                        <a asp-area="" asp-controller="Partido" asp-action="BuscarPartidosEntreDosFechas">Buscar Partidos</a>
+                                    </div>
+                                </div>
+                                <div class="Mynav_dropdown">
+                                    <button class="Mynav_dropbtn">
+                                        Periodistas
+                                    </button>
+                                    <div class="Mynav_dropdown-content">
+                                        <a asp-area="" asp-controller="Periodista" asp-action="ListarPeriodistas">Listar Periodistas</a>
+                                        <a asp-area="" asp-controller="Partido" asp-action="BuscarPartidoEmailPeriodista">Buscar Reseñas</a>
                                     </div>
                                 </div>
                             }

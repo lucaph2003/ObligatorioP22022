@@ -8,7 +8,7 @@
 
 <h1>Obtener Partido Entre 2 Fechas</h1>
 
-<form action="/Partido/ListarPartidoFiltrado" method="post">
+<form action="/Partido/BuscarPartidosEntreDosFechas" method="post">
     <div class="form-outline mb-4">
         <label class="form-label" for="f1">Fecha 1</label>
         <input class="form-control" type="date" id="f1" name="f1" />
@@ -22,4 +22,4 @@
     </div>
 </form>
 
-@Html.Partial("ListadoPartidosEntreDosFechas");
+@Html.Partial("ListadoPartidosEntreDosFechas")

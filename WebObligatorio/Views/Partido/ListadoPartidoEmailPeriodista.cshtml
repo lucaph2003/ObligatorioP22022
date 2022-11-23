@@ -6,8 +6,6 @@
 @using Dominio
 @model List<Partido>
 
-<h2>Resultados de la busqueda</h2>
-
 <table class="table">
     <thead>
         <tr>
@@ -25,27 +23,28 @@
     </thead>
     <tbody>
         @{
-            if (Model != null) {
+            if (Model != null)
+            {
                 foreach (Partido partido in Model)
                 {
                     if (partido.esFinalizada)
                     {
-                    <tr>
-                        <th scope="row">i</th>
-                        <td>@partido.fechaHora</td>
-                        <td>@partido.seleccion1.pais.nombre</td>
-                        <td>@partido.resultado1</td>
-                        <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion1)</td>
-                        <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion1)</td>
-                        <td>@partido.seleccion2.pais.nombre</td>
-                        <td>@partido.resultado2</td>
-                        <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion2)</td>
-                        <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion2)</td>
-                    </tr>
-                        }
-
+                        <tr>
+                            <th scope="row">i</th>
+                            <td>@partido.fechaHora</td>
+                            <td>@partido.seleccion1.pais.nombre</td>
+                            <td>@partido.resultado1</td>
+                            <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion1)</td>
+                            <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion1)</td>
+                            <td>@partido.seleccion2.pais.nombre</td>
+                            <td>@partido.resultado2</td>
+                            <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion2)</td>
+                            <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion2)</td>
+                        </tr>
                     }
+
                 }
             }
+        }
     </tbody>
 </table>

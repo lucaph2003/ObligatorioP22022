@@ -6,7 +6,8 @@
 @using Dominio;
 @model List<Periodista>
 
-<h1>Lista Periodistas //prueba</h1>
+<h1>Lista Periodistas</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -27,7 +28,7 @@
                     <td>@p.nombre</td>
                     <td>@p.apellido</td>
                     <td>@p.email </td>
-                    <td>@Html.ActionLink("Ver Reseñas ", "ListarResenias", "Resenia", new { email = p.email })</td>
+                    <td>@Html.ActionLink("Ver Reseñas", "ListarResenias", "Resenia", new { email = p.email })</td>
                 </tr>
             }
         }

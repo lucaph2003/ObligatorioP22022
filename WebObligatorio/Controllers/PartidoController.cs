@@ -44,12 +44,23 @@ namespace WebObligatorio.Controllers
         }
 
         //Vista de Buscar partido por 2 fechas
-        public IActionResult ListarPartidoEntreDosFechas()
+        public IActionResult BuscarPartidosEntreDosFechas()
+        {
+            return View();
+        }
+
+        //Vista de Buscar partido por 2 fechas
+        public IActionResult ListadoPartidosEntreDosFechas()
         {
             return View();
         }
 
         public IActionResult BuscarPartidoEmailPeriodista()
+        {
+            return View();
+        }
+
+        public IActionResult ListadoPartidoEmailPeriodista()
         {
             return View();
         }
@@ -69,7 +80,7 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
-        [HttpPost]
+        
         public IActionResult Finalizar(int idPartido)
         {
             try
@@ -81,8 +92,6 @@ namespace WebObligatorio.Controllers
                 ViewBag.ErrorNombre = e.Message;
                 return View();
             }
-            //ARREGLAR
-            ViewBag.Resultado = sistema.VerResultadoPartido(idPartido);
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
@@ -95,14 +104,14 @@ namespace WebObligatorio.Controllers
         }
 
         [HttpPost]
-        public IActionResult ListarPartidoEntreDosFechas(DateTime f1, DateTime f2)
+        public IActionResult BuscarPartidosEntreDosFechas(DateTime f1, DateTime f2)
         {
-            List<Partido> partidoFiltrado = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
-            return View(partidoFiltrado);
+            List<Partido> partidos = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
+            return View(partidos);
         }
 
         [HttpPost]
-        public IActionResult ListarBusquedaPorEmail(string email)
+        public IActionResult BuscarPartidoEmailPeriodista(string email)
         {
             List<Partido> partidoRojaPeridista = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
             return View(partidoRojaPeridista);

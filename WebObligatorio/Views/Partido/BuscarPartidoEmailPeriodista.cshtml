@@ -4,12 +4,17 @@
 @{
 }
 
-
-<h1>Buscar Partido Con Roja Por Mail Periodista</h1>
+<h1>Buscar partido con roja por mail periodista</h1>
 
 <form action="/Partido/ListarBusquedaPorEmail" method="post">
-    <label for="email">Ingrese Email Periodista</label>
-    <input type="email" id="email" name="email" />
-    <br />
-    <button type="submit">Buscar</button>
+    <div class="form-outline mb-4">
+        <label class="form-label" for="email">Ingrese Email Periodista: </label>
+        <input type="email" class="form-control" id="email" name="email" />
+    </div>
+
+    <div class="form-outline mb-4">
+        <button type="submit" class="btn btn-primary btn-block mb-4">Buscar</button>
+    </div>
 </form>
+
+@Html.Partial("ListadoPartidoEmailPeriodista")

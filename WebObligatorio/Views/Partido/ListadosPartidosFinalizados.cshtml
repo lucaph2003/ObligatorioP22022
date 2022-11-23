@@ -4,37 +4,26 @@
 *@
 @{
 }
-@using Dominio
+@using Dominio;
 @model List<Partido>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Seleccion 1</th>
-            <th scope="col">Seleccion 2</th>
-            @if (ViewBag.rol == "Periodista")
+@if (ViewBag.error != null)
+{
+<div class="alert alert-warning" role="alert">
+    @ViewBag.error
+</div> }
+            else
             {
-                <th scope="col">Resenia</th>
+                foreach (Partido p in Model)
+                {
+<div class="alert alert-primary" role="alert">
+    <p><strong>Fase:</strong> @p.ObtenerTipo()</p>
+    <p><strong>Fecha:</strong> @p.fechaHora</p>
+    <p><strong>Selección:</strong> @p.seleccion1.pais.nombre | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion1) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion1)</p>
+    <p><strong>Selección:</strong> @p.seleccion2.pais.nombre | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion2) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion2)</p>
+    <p><strong>Resultado del partido:</strong> @p.resultadoFinal</p>
+    @if (ViewBag.Rol == "Periodista")
+    {
+<button type="button" class="btn btn-outline-primary">@Html.ActionLink("Registrar Reseña", "AltaResenia", "Resenia", new { idPartido = p.id })</button>                    }
+</div>}
             }
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (Partido partido in Model)
-            {
-                <tr>
-                    <th scope="row">i</th>
-                    <td>@partido.fechaHora</td>
-                    <td>@partido.seleccion1</td>
-                    <td>@partido.seleccion2</td>
-                    @if (ViewBag.rol == "Periodista")
-                    {
-                        <td>@Html.ActionLink("Agregar Resenia", "AltaResenia", "Resenia", new { idPartido = partido.id })</td>
-                    }
-                </tr>
-            }
-        }
-    </tbody>
-</table>

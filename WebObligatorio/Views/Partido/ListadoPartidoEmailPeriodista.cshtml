@@ -6,45 +6,25 @@
 @using Dominio
 @model List<Partido>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Fecha/Hora</th>
-            <th scope="col">Seleccion 1</th>
-            <th scope="col">Goles </th>
-            <th scope="col">Amarillas </th>
-            <th scope="col">Rojas </th>
-            <th scope="col">Seleccion 2</th>
-            <th scope="col">Goles </th>
-            <th scope="col">Amarillas </th>
-            <th scope="col">Rojas </th>
-        </tr>
-    </thead>
-    <tbody>
+
         @{
             if (Model != null)
             {
-                foreach (Partido partido in Model)
+                foreach (Partido p in Model)
                 {
-                    if (partido.esFinalizada)
+                    if (p.esFinalizada)
                     {
-                        <tr>
-                            <th scope="row">i</th>
-                            <td>@partido.fechaHora</td>
-                            <td>@partido.seleccion1.pais.nombre</td>
-                            <td>@partido.resultado1</td>
-                            <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion1)</td>
-                            <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion1)</td>
-                            <td>@partido.seleccion2.pais.nombre</td>
-                            <td>@partido.resultado2</td>
-                            <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion2)</td>
-                            <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion2)</td>
-                        </tr>
+                <div class="alert alert-primary" role="alert">
+                    <p><strong>Fase:</strong> @p.ObtenerTipo()</p>
+                    <p><strong>Fecha/Hora:</strong> @p.fechaHora</p>
+                    <p><strong>Selección:</strong> @p.seleccion1.pais.nombre | <strong>Goles:</strong> @p.resultado1 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion1) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion1)</p>
+                    <p><strong>Selección:</strong> @p.seleccion2.pais.nombre | <strong>Goles:</strong> @p.resultado2 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion2) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion2)</p>
+                    <p><strong>Resultado del partido:</strong> @p.resultadoFinal</p>
+                    
+                </div>
                     }
 
                 }
             }
         }
-    </tbody>
-</table>
+    

@@ -553,16 +553,17 @@ namespace Dominio
 
         public List<Partido> ObtenerPartidosEntre2Fechas(DateTime f1, DateTime f2)
         {
-            List<Partido> aux = new List<Partido>();
-            foreach (Partido p in Partidos)
-            {
-                if (p.fechaHora >= f1 && p.fechaHora <= f2)
+                List<Partido> aux = new List<Partido>();
+                foreach (Partido p in Partidos)
                 {
-                    aux.Add(p);
+                    if (p.fechaHora >= f1 && p.fechaHora <= f2)
+                    {
+                        p.ValidarFecha();
+                        aux.Add(p);
+                    }
                 }
-            }
-            return aux;
-        }
+                return aux;
+          }
 
         public void Login(Usuario usuario)
         {

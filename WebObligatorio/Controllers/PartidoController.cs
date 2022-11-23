@@ -35,7 +35,7 @@ namespace WebObligatorio.Controllers
             ViewBag.rol = HttpContext.Session.GetString("UsuarioRol");
             return View(partidos);
         }
-        
+
         //Vista de Finalizar la eliminatoria
         public IActionResult FinalizarEliminatoria(int idPartido)
         {
@@ -66,11 +66,11 @@ namespace WebObligatorio.Controllers
         }
 
         [HttpPost]
-        public IActionResult Incidencia(int idPartido,string incidencia,int minuto,int idJugador)
+        public IActionResult Incidencia(int idPartido, string incidencia, int minuto, int idJugador)
         {
             try
             {
-                sistema.RegistrarIncidencia(idPartido,incidencia,minuto,idJugador);
+                sistema.RegistrarIncidencia(idPartido, incidencia, minuto, idJugador);
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
-        
+
         public IActionResult Finalizar(int idPartido)
         {
             try

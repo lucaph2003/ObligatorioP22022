@@ -6,23 +6,7 @@
 @using Dominio
 @model List<Partido>
 
-
-<h1>Obtener Partido Entre 2 Fechas</h1>
-
-<form action="/Partido/ListarPartidoFiltrado" method="post">
-    <div class="form-outline mb-4">
-        <label class="form-label" for="f1">Fecha 1</label>
-        <input class="form-control" type="date" id="f1" name="f1" />
-    </div>
-    <div class="form-outline mb-4">
-        <label class="form-label" for="f2">Fecha 2</label>
-        <input class="form-control" type="date" id="f2" name="f2" />
-    </div>
-    <div class="form-outline mb-4">
-        <button class="btn btn-primary btn-block mb-4" type="submit">Buscar Partidos</button>
-    </div>
-</form>
-
+<h2>Resultados de la busqueda: </h2>
 
 <table class="table">
     <thead>

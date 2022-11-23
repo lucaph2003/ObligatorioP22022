@@ -12,12 +12,15 @@ namespace WebObligatorio.Controllers
     {
         Sistema sistema = Sistema.ObtenerInstancia;
 
+        //Vista del listado de partidos sin finalizar
         public IActionResult ListadoPartido()
         {
             List<Partido> partidos = sistema.ObtenerListaPartidos();
             ViewBag.Resultado = "";
             return View(partidos);
         }
+
+        //Vista para agregar incidencia
         public IActionResult Incidencia(int idPartido)
         {
             List<Jugador> jugadores = sistema.ObtenerJugadoresPorIdPartido(idPartido);
@@ -25,6 +28,7 @@ namespace WebObligatorio.Controllers
             return View(jugadores);
         }
 
+        //Vista de los partidos finalizados
         public IActionResult ListadosPartidosFinalizados()
         {
             List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
@@ -32,18 +36,19 @@ namespace WebObligatorio.Controllers
             return View(partidos);
         }
         
-       
-        
-        
+        //Vista de Finalizar la eliminatoria
         public IActionResult FinalizarEliminatoria(int idPartido)
         {
             ViewBag.idPartido = idPartido;
             return View();
         }
-        public IActionResult ObtenerPartido2Fechas()
+
+        //Vista de Buscar partido por 2 fechas
+        public IActionResult ListarPartidoEntreDosFechas()
         {
             return View();
         }
+
         public IActionResult BuscarPartidoEmailPeriodista()
         {
             return View();
@@ -64,7 +69,7 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
-        
+        [HttpPost]
         public IActionResult Finalizar(int idPartido)
         {
             try
@@ -90,11 +95,12 @@ namespace WebObligatorio.Controllers
         }
 
         [HttpPost]
-        public IActionResult ListarPartidoFiltrado(DateTime f1, DateTime f2)
+        public IActionResult ListarPartidoEntreDosFechas(DateTime f1, DateTime f2)
         {
-            List<Partido>partidoFiltrado = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
+            List<Partido> partidoFiltrado = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
             return View(partidoFiltrado);
         }
+
         [HttpPost]
         public IActionResult ListarBusquedaPorEmail(string email)
         {

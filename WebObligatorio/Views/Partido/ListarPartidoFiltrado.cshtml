@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Dominio;
+@model List<Partido>
+
+<h1>Listado de partidos por fecha</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha/Hora</th>
+            <th scope="col">Seleccion 1</th>
+            <th scope="col">Goles </th>
+            <th scope="col">Amarillas </th>
+            <th scope="col">Rojas </th>
+            <th scope="col">Seleccion 2</th>
+            <th scope="col">Goles </th>
+            <th scope="col">Amarillas </th>
+            <th scope="col">Rojas </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (Partido partido in Model)
+            {
+                if (partido.esFinalizada)
+                {
+                <tr>
+                    <th scope="row">i</th>
+                    <td>@partido.fechaHora</td>
+                    <td>@partido.seleccion1.pais.nombre</td>
+                    <td>@partido.obtenerGolesSeleccion(partido.seleccion1)</td>
+                    <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion1)</td>
+                    <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion1)</td>
+                    <td>@partido.seleccion2.pais.nombre</td>
+                    <td>@partido.obtenerGolesSeleccion(partido.seleccion2)</td>
+                    <td>@partido.ObtenerAmonestacionesSeleccion(partido.seleccion2)</td>
+                    <td>@partido.ObtenerExpulsionesSeleccion(partido.seleccion2)</td>
+                </tr>
+                }
+
+            }
+        }
+    </tbody>
+</table>

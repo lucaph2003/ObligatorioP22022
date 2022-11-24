@@ -14,7 +14,7 @@ namespace WebObligatorio.Controllers
         public IActionResult Incidencias(int idPartido)
         {
             string rol = HttpContext.Session.GetString("UsuarioRol");
-            if (rol != null && rol == ("Operador"))
+            if (rol != null)
             {
                 List<Incidencia> incidencias = sistema.ObtenerListaInciaPorIdPartido(idPartido);
                 return View(incidencias);

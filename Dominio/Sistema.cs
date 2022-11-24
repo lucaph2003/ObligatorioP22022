@@ -490,22 +490,6 @@ namespace Dominio
             aux.Sort();
             return aux;
         }
-        //VER SI ES NECESARIO
-        //public bool ExisteResenia(Partido partido)
-        //{
-        //    bool existe = false;
-        //    foreach (Partido p in Partidos)
-        //    {
-        //        foreach (Resenia r in Resenias)
-        //        {
-        //            if (p.id.Equals(r.partido.id))
-        //            {
-        //                existe = true;
-        //            }
-        //        }
-        //    }
-        //    return existe;
-        //}
 
         public List<Partido> ObtenerPartidoRojaReseniaEmailPeriodista(string email)
         {
@@ -577,22 +561,6 @@ namespace Dominio
         {
             Partido partidoAFinalizar = GetPartido(idPartido);
             partidoAFinalizar.finalizarPartido();
-        }
-
-        public void CambiarEstadoPartido(int idPartido, bool pAlargues, bool pPenales)
-        {
-            Partido partido = GetPartido(idPartido);
-            PartidoFaseEliminatoria p = (PartidoFaseEliminatoria)partido;
-            if (pAlargues)
-            {
-                p.HuboAlargue();
-            }
-
-            if (pPenales)
-            {
-                p.HuboAlargue();
-                p.HuboPenales();
-            }
         }
 
         public void AsociarPeriodistaResenia(string email,Resenia resenia)

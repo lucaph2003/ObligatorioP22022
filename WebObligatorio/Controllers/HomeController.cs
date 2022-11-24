@@ -25,6 +25,13 @@ namespace WebObligatorio.Controllers
             return View();
         }
 
+        public IActionResult Salir()
+        {
+            HttpContext.Session.Remove("UsuarioLogueadoEmail");
+            HttpContext.Session.Remove("UsuarioLogueadoNombre");
+            HttpContext.Session.Remove("UsuarioRol");
+            return RedirectToAction("Index","Home");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

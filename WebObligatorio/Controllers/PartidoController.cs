@@ -29,23 +29,6 @@ namespace WebObligatorio.Controllers
             }
         }
 
-        //Vista para agregar incidencia
-        public IActionResult Incidencia(int idPartido)
-        {
-            string rol = HttpContext.Session.GetString("UsuarioRol");
-            if (rol != null && rol == ("Operador"))
-            {
-                List<Jugador> jugadores = sistema.ObtenerJugadoresPorIdPartido(idPartido);
-                ViewBag.idPartido = idPartido;
-                return View(jugadores);
-            }
-            else
-            {
-                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
-                return RedirectToAction("MostrarError", "Error");
-            }
-        }
-
         //Vista de los partidos finalizados
         public IActionResult ListadosPartidosFinalizados()
         {
@@ -53,8 +36,11 @@ namespace WebObligatorio.Controllers
             string rol = HttpContext.Session.GetString("UsuarioRol");
             if (rol != null)
             {
-                ViewBag.pE = sistema.ObtenerPartidosFE();
-                List<Partido> partidos = sistema.ObtenerPartidosFG();
+                List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
+                if(partidos.Count < 1)
+                {
+                    ViewBag.Error = "No hay partidos finalizados";
+                }
                 return View(partidos);
             }
             else
@@ -129,23 +115,6 @@ namespace WebObligatorio.Controllers
         }
 
 
-
-        [HttpPost]
-        public IActionResult Incidencia(int idPartido, string incidencia, int minuto, int idJugador)
-        {
-            try
-            {
-                sistema.RegistrarIncidencia(idPartido, incidencia, minuto, idJugador);
-            }
-            catch (Exception e)
-            {
-                ViewBag.ErrorNombre = e.Message;
-                return View();
-            }
-            return RedirectToAction("ListadoPartido", "Partido");
-        }
-
-
         public IActionResult Finalizar(int idPartido)
         {
             try
@@ -160,13 +129,6 @@ namespace WebObligatorio.Controllers
             return RedirectToAction("ListadoPartido", "Partido");
         }
 
-        [HttpPost]
-        public IActionResult FinalizarEliminatoria(int idPartido, bool alargues, bool penales)
-        {
-            sistema.CambiarEstadoPartido(idPartido, alargues, penales);
-            sistema.FinalizarPartido(idPartido);
-            return RedirectToAction("ListadoPartido", "Partido");
-        }
 
         
         

@@ -85,6 +85,10 @@ namespace Dominio
             return tipo;
         }
 
+        public override string ObtenerEtapa()
+        {
+            return this.etapa;
+        }
         #endregion
 
     }

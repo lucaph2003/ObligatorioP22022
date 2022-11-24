@@ -11,6 +11,8 @@ namespace WebObligatorio.Controllers
     public class LoginController : Controller
     {
         Sistema sistema = Sistema.ObtenerInstancia;
+
+
         public IActionResult Index()
         {
             HttpContext.Session.Remove("UsuarioLogueadoEmail");

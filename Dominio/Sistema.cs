@@ -69,7 +69,7 @@ namespace Dominio
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw e;
             }
             Usuarios.Add(pUsuario);
         }
@@ -139,15 +139,6 @@ namespace Dominio
         {
             partido.AgregarIncidencia(incidencia);
         }
-
-        public void RegistrarIncidencia(int pIdPartido, string pIncidencia, int pMinuto, int pIdJugador)
-        {
-            Partido partido = GetPartido(pIdPartido);
-            Jugador jugador = GetJugador(pIdJugador);
-            Incidencia incidencia = new Incidencia(pIncidencia, pMinuto, jugador);
-            AltaIncidencia(partido, incidencia);
-        }
-
 
         #endregion
 
@@ -288,56 +279,20 @@ namespace Dominio
 
         public List<Partido> ObtenerListaPartidos()
         {
-            List<Partido> partidos = new List<Partido>();
-            foreach (Partido p in Partidos)
-            {
-                partidos.Add(p);
-            }
-            return partidos;
-        }
-        //VER SI ES NECESARIO
-        //public List<Partido> ObtenerListaPartidosFinalizados()
-        //{
-        //    List<Partido> partidosFinalizados = new List<Partido>();
-        //    foreach (Partido p in Partidos)
-        //    {
-        //        if (p.esFinalizada)
-        //        {
-        //            partidosFinalizados.Add(p);
-        //        }
-        //    }
-        //    return partidosFinalizados;
-        //}
-        public List<Partido> ObtenerPartidosFG()
-        {
-            List<Partido> aux = new List<Partido>();
-            foreach (Partido p in Partidos)
-            {
-                if (p is PartidoFaseDeGrupo)
-                {
-                    if (p.esFinalizada)
-                    {
-                        aux.Add(p as PartidoFaseDeGrupo);
-                    }
-                }
-            }
-            return aux;
+            return Partidos;
         }
 
-        public List<Partido> ObtenerPartidosFE()
+       public List<Partido> ObtenerListaPartidosFinalizados()
         {
-            List<Partido> aux = new List<Partido>();
+            List<Partido> partidosFinalizados = new List<Partido>();
             foreach (Partido p in Partidos)
             {
-                if (p is PartidoFaseEliminatoria)
+                if (p.esFinalizada)
                 {
-                    if (p.esFinalizada)
-                    {
-                        aux.Add(p as PartidoFaseEliminatoria);
-                    }
+                    partidosFinalizados.Add(p);
                 }
             }
-            return aux;
+            return partidosFinalizados;
         }
 
         //Obtiene los partidos que jugo segun el id del jugador
@@ -355,10 +310,6 @@ namespace Dominio
                         partidos.Add(p);
                     }
                 }
-            }
-            else
-            {
-                Console.WriteLine("No existe ese jugador");
             }
             return partidos;
         }
@@ -654,6 +605,12 @@ namespace Dominio
         {
             Partido partido = GetPartido(resenia.idPartido);
             resenia.Partido = partido;
+        }
+
+        public List<Incidencia> ObtenerListaInciaPorIdPartido(int idPartido)
+        {
+            Partido partido = GetPartido(idPartido);
+            return partido.Incidencias;
         }
 
 

@@ -8,8 +8,6 @@ namespace Dominio
     {
         #region Atributos PartidoFaseDeGrupo
         public char grupo { get; set; }
-
-        public const string tipo = "FaseGrupo";
         
         #endregion
 
@@ -52,7 +50,12 @@ namespace Dominio
 
         public override string ObtenerTipo()
         {
-            return tipo;
+            return "FaseGrupo";
+        }
+
+        public override string ObtenerEtapa()
+        {
+            return "SIN_ETAPA";
         }
 
         #endregion

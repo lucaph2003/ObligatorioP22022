@@ -67,6 +67,8 @@ namespace Dominio
         {
             return "SIN_ROL";
         }
+       
+
         #endregion
 
         #endregion

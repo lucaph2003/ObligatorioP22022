@@ -594,10 +594,10 @@ namespace Dominio
             PrecargaSelecciones();
             PrecargaPartidosFaseDeGrupos();
             PrecargaPartidosFaseEliminatoria();
-
             PrecargaIncidencias();
             PrecargaOperador();
             PrecargaResenia();
+            PrecargaPartidoFinalizado();
         }
         private void PrecargaSelecciones()
         {
@@ -615,16 +615,18 @@ namespace Dominio
             }
         }
 
+        private void PrecargaPartidoFinalizado()
+        {
+            FinalizarPartido(1);
+        }
+
         private void PrecargaResenia()
         {
-            AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"),GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
-            AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"), GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
+            AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022-11-22 10:00:00"),GetPartido(1), "Inicio del Mundial", "Partido parejo para el arranque del mundial de la seleccion Argentina, con victoria con goles de los mejores delanteros! ! !"));
         }
         private void PrecargaPeriodista()
         {
-
             AltaPeriodista(new Periodista("Alberto ", "Kesman", "Kesman123", "KesmanAlberto@gmail.com"));
-            AltaPeriodista(new Periodista("Luca", "Podesta", "Luca1234", "lucapodesta47@gmail.com"));
         }
         private void PrecargaOperador()
         {
@@ -659,6 +661,7 @@ namespace Dominio
             AltaIncidencia(GetPartido(1), new Incidencia("Gol", 15, GetJugador(23)));
             AltaIncidencia(GetPartido(1), new Incidencia("Gol", 43, GetJugador(24)));
             AltaIncidencia(GetPartido(1), new Incidencia("Amarilla", 82, GetJugador(9)));
+            AltaIncidencia(GetPartido(1), new Incidencia("Roja", 87, GetJugador(10)));
             AltaIncidencia(GetPartido(2), new Incidencia("Gol", 4, GetJugador(650)));
             AltaIncidencia(GetPartido(2), new Incidencia("Gol", 67, GetJugador(650)));
             AltaIncidencia(GetPartido(2), new Incidencia("Roja", 76, GetJugador(741)));

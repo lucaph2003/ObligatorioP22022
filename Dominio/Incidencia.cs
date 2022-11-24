@@ -8,7 +8,9 @@ namespace Dominio
     {
         #region Atributos
         public string incidencia { get; set; }
-        public int minuto { get; set; }
+
+        //Los goles de penales son representados en el minuto 121
+        public int minuto { get; set; } 
         public Jugador jugador { get; set; }
         public Seleccion seleccion { get; set; }
         #endregion

@@ -15,7 +15,6 @@ namespace Dominio
         public int resultado1 { get; set; }
         public int resultado2 { get; set; }
         public string resultadoFinal { get;  set; }
-        public string etapa { get; set; }
         public List<Incidencia> Incidencias { get; set; }
         public static int contador = 1;
 

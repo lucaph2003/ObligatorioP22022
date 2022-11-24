@@ -651,9 +651,9 @@ namespace Dominio
         }
         private void PrecargaPartidosFaseEliminatoria()
         {
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), "Octavos"));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), "Octavos"));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00"), "Cuartos"));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), "Octavos",true,false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), "Cuartos",false,false));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00"), "Semi-Final",true,true));
         }
 
         private void PrecargaIncidencias()
@@ -698,7 +698,7 @@ namespace Dominio
             AltaIncidencia(GetPartido(12), new Incidencia("Amarilla", 89, GetJugador(536)));
             AltaIncidencia(GetPartido(13), new Incidencia("Gol", 23, GetJugador(23)));
             AltaIncidencia(GetPartido(13), new Incidencia("Gol", 46, GetJugador(396)));
-            AltaIncidencia(GetPartido(13), new Incidencia("Gol", 78, GetJugador(23)));
+            AltaIncidencia(GetPartido(13), new Incidencia("Gol", 101, GetJugador(23)));
             AltaIncidencia(GetPartido(14), new Incidencia("Amarilla", 4, GetJugador(490)));
             AltaIncidencia(GetPartido(14), new Incidencia("Gol", 15, GetJugador(490)));
             AltaIncidencia(GetPartido(14), new Incidencia("Gol", 78, GetJugador(650)));
@@ -709,8 +709,12 @@ namespace Dominio
             AltaIncidencia(GetPartido(15), new Incidencia("Amarilla", 56, GetJugador(10)));
             AltaIncidencia(GetPartido(15), new Incidencia("Gol", 57, GetJugador(490)));
             AltaIncidencia(GetPartido(15), new Incidencia("Roja", 105, GetJugador(9)));
-            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 110, GetJugador(486)));
             AltaIncidencia(GetPartido(15), new Incidencia("Roja", 118, GetJugador(485)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 121, GetJugador(506)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 121, GetJugador(499)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 121, GetJugador(490)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 121, GetJugador(23)));
+            AltaIncidencia(GetPartido(15), new Incidencia("Gol", 121, GetJugador(486)));
         }
 
         private void PrecargaPaises()

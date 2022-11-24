@@ -148,13 +148,6 @@ namespace Dominio
             AltaIncidencia(partido, incidencia);
         }
 
-        public Resenia RegistrarResenia(string pEmailPeriodista, DateTime pFecha, int pIdPartido, string pTitulo, string pContenido)
-        {
-            Periodista periodista = GetPeriodista(pEmailPeriodista);
-            Partido partido = GetPartido(pIdPartido);
-            Resenia resenia = new Resenia(periodista, pFecha, partido, pTitulo, pContenido);
-            return resenia;
-        }
 
         #endregion
 
@@ -510,7 +503,7 @@ namespace Dominio
             List<Resenia> aux = new List<Resenia>();
             foreach (Resenia r in Resenias)
             {
-                if (r.periodista.email.Equals(email))
+                if (r.Periodista.email.Equals(email))
                 {
                     aux.Add(r);
                 }
@@ -519,32 +512,33 @@ namespace Dominio
             return aux;
         }
         //VER SI ES NECESARIO
-        public bool ExisteResenia(Partido partido)
-        {
-            bool existe = false;
-            foreach (Partido p in Partidos)
-            {
-                foreach (Resenia r in Resenias)
-                {
-                    if (p.id.Equals(r.partido.id))
-                    {
-                        existe = true;
-                    }
-                }
-            }
-            return existe;
-        }
+        //public bool ExisteResenia(Partido partido)
+        //{
+        //    bool existe = false;
+        //    foreach (Partido p in Partidos)
+        //    {
+        //        foreach (Resenia r in Resenias)
+        //        {
+        //            if (p.id.Equals(r.partido.id))
+        //            {
+        //                existe = true;
+        //            }
+        //        }
+        //    }
+        //    return existe;
+        //}
 
         public List<Partido> ObtenerPartidoRojaReseniaEmailPeriodista(string email)
         {
             List<Partido> partidoConRoja = new List<Partido>();
+            
             foreach (Resenia r in Resenias)
             {
-                if (r.periodista.email.Equals(email))
+                if (r.Periodista.email.Equals(email))
                 {
-                    if (r.partido.ObtenerExpulsionesSeleccion(r.partido.seleccion1) >= 1 || r.partido.ObtenerExpulsionesSeleccion(r.partido.seleccion2) >= 1)
+                    if (r.Partido.ObtenerExpulsionesSeleccion(r.Partido.seleccion1) >= 1 || r.Partido.ObtenerExpulsionesSeleccion(r.Partido.seleccion2) >= 1)
                     {
-                        partidoConRoja.Add(r.partido);
+                        partidoConRoja.Add(r.Partido);
                     }
                 }
             }
@@ -622,6 +616,17 @@ namespace Dominio
             }
         }
 
+        public void AsociarPeriodistaResenia(string email,Resenia resenia)
+        {
+            Periodista periodista = GetPeriodista(email);
+            resenia.Periodista = periodista;
+        }
+
+        public void AsociarPartidoResenia(Resenia resenia)
+        {
+            Partido partido = GetPartido(resenia.idPartido);
+            resenia.Partido = partido;
+        }
 
 
         #endregion
@@ -659,7 +664,7 @@ namespace Dominio
 
         private void PrecargaResenia()
         {
-            AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"), GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
+            AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"),GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
             AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"), GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
             AltaResenia(new Resenia(GetPeriodista("lucapodesta47@gmail.com"), DateTime.Parse("2022-11-22 13:00:00"), GetPartido(2), "Titulo Prueba 2", "Contenido de prueba 3"));
         }

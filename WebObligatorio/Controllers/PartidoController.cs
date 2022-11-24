@@ -53,7 +53,6 @@ namespace WebObligatorio.Controllers
             if(rol != null)
             {
                 List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
-                ViewBag.rol = HttpContext.Session.GetString("UsuarioRol");
                 return View(partidos);
             }
             else
@@ -82,12 +81,20 @@ namespace WebObligatorio.Controllers
         }
 
         //Vista de Buscar partido por 2 fechas
-        public IActionResult BuscarPartidosEntreDosFechas()
+        public IActionResult BuscarPartidosEntreDosFechas(DateTime f1, DateTime f2)
         {
             string rol = HttpContext.Session.GetString("UsuarioRol");
             if (rol != null && rol == ("Operador"))
             {
-                return View();
+                if(f1 != null && f2 != null)
+                {
+                    List<Partido> partidos = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
+                    return View(partidos);
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
@@ -97,14 +104,20 @@ namespace WebObligatorio.Controllers
 
         }
 
-        //Vista de Listar partido por 2 fechas
-        public IActionResult ListadoPartidosEntreDosFechas(DateTime f1, DateTime f2)
+        public IActionResult BuscarPartidoEmailPeriodista(string email)
         {
             string rol = HttpContext.Session.GetString("UsuarioRol");
             if (rol != null && rol == ("Operador"))
             {
-                List<Partido> partidos = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
-                return View(partidos);
+                if(email != null)
+                {
+                    List<Partido> partidos = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
+                    return View(partidos);
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
@@ -112,30 +125,8 @@ namespace WebObligatorio.Controllers
                 return RedirectToAction("MostrarError", "Error");
             }
         }
-        public IActionResult BuscarPartidoEmailPeriodista()
-        {
-            string rol = HttpContext.Session.GetString("UsuarioRol");
-            if (rol != null && rol == ("Operador"))
-            {
-                return View();
-            }
-            else
-            {
-                TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
-                return RedirectToAction("MostrarError", "Error");
-            }
-        }
-        public IActionResult ListadoPartidoEmailPeriodista(string email)
-        {
-            string rol = HttpContext.Session.GetString("UsuarioRol");
-            if (rol != null && rol == "Operador")
-            {
-                List<Partido> partidos = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
-                return View(partidos);
-            }
-            TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
-            return RedirectToAction("MostrarError", "Error");
-        }
+
+
 
         [HttpPost]
         public IActionResult Incidencia(int idPartido, string incidencia, int minuto, int idJugador)

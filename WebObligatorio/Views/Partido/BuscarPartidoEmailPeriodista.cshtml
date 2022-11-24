@@ -3,10 +3,13 @@
 *@
 @{
 }
+@using Dominio
+@model List<Partido>
+
 
 <h1>Buscar partido con roja por mail periodista</h1>
 
-<form action="/Partido/ListadoPartidoEmailPeriodista" method="post">
+<form action="/Partido/BuscarPartidoEmailPeriodista" method="get">
     <div class="form-outline mb-4">
         <label class="form-label" for="email">Ingrese Email Periodista: </label>
         <input type="email" class="form-control" id="email" name="email" />
@@ -17,4 +20,25 @@
     </div>
 </form>
 
-@Html.Partial("ListadoPartidoEmailPeriodista")
+
+
+@{
+    if (Model != null)
+    {
+        foreach (Partido p in Model)
+        {
+            if (p.esFinalizada)
+            {
+                <div class="alert alert-primary" role="alert">
+                    <p><strong>Fase:</strong> @p.ObtenerTipo()</p>
+                    <p><strong>Fecha/Hora:</strong> @p.fechaHora</p>
+                    <p><strong>Selección:</strong> @p.seleccion1.pais.nombre | <strong>Goles:</strong> @p.resultado1 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion1) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion1)</p>
+                    <p><strong>Selección:</strong> @p.seleccion2.pais.nombre | <strong>Goles:</strong> @p.resultado2 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion2) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion2)</p>
+                    <p><strong>Resultado del partido:</strong> @p.resultadoFinal</p>
+
+                </div>
+            }
+
+        }
+    }
+}

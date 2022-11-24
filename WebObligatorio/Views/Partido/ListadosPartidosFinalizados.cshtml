@@ -22,7 +22,7 @@
     <p><strong>Selección:</strong> @p.seleccion1.pais.nombre | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion1) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion1)</p>
     <p><strong>Selección:</strong> @p.seleccion2.pais.nombre | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion2) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion2)</p>
     <p><strong>Resultado del partido:</strong> @p.resultadoFinal</p>
-    @if (ViewBag.Rol == "Periodista")
+    @if (Context.Session.GetString("UsuarioRol") == "Periodista")
     {
 <button type="button" class="btn btn-outline-primary">@Html.ActionLink("Registrar Reseña", "AltaResenia", "Resenia", new { idPartido = p.id })</button>                    }
 </div>}

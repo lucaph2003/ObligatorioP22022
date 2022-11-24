@@ -8,7 +8,7 @@ namespace Dominio
     {
         #region Atributos Periodista
 
-        public static int contador = 1;
+        public static int Contador = 1;
 
         public int id { get; set; }
 
@@ -20,9 +20,11 @@ namespace Dominio
         #region Constructores
         public Periodista(string pNombre, string pApellido, string pContrasena,string pEmail) :base(pNombre, pApellido, pContrasena,pEmail)
         {
-            this.id = contador++;
+            this.id = Contador++;
         }
-        public Periodista() { }
+        public Periodista() {
+            this.id = Contador++;
+        }
         #endregion
 
         #region Validaciones

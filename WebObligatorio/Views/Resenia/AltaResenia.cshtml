@@ -4,17 +4,17 @@
 @{
 }
 @using Dominio;
-@model List<Partido>
+
 <h3>Alta de Resenia</h3>
 
 <form action="/Resenia/AltaResenia" method="post">
-
-    <input type="hidden" name="idPartido" value="@ViewBag.idPartido" />
 
     <div class="form-outline mb-4">
         <label class="form-label" for="fecha">Ingrese Fecha</label>
         <input type="date" class="form-control" id="fecha" name="fecha" required />
     </div>
+
+    <input type="hidden" name="idPartido" value="@ViewBag.idPartido" />
 
     <div class="form-outline mb-4">
         <label class="form-label" for="titulo">Titulo de la Reseña</label>
@@ -29,6 +29,7 @@
     <div class="form-outline mb-4">
         <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar Reseña</button>
     </div>
+
 
     @if (ViewBag.NombreError != null)
     {

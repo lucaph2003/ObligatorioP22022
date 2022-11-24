@@ -7,9 +7,10 @@ namespace Dominio
     public class Resenia:IComparable
     {
         #region Atributos Resenia
-        public Periodista periodista { get; set; }
+        public Periodista Periodista { get; set; }
         public DateTime fecha { get; set; }
-        public Partido partido { get; set; }
+        public Partido Partido { get; set; }
+        public int idPartido { get; set; }
         public string titulo { get; set; }
         public string contenido { get; set; }
 
@@ -17,9 +18,9 @@ namespace Dominio
         #region Metodos Resenia
         public Resenia(Periodista pPeriodista,DateTime pFecha,Partido pPartido, string pTitulo, string pContenido)
         {
-            this.periodista = pPeriodista;
+            this.Periodista = pPeriodista;
             this.fecha = pFecha;
-            this.partido = pPartido;
+            this.Partido = pPartido;
             this.titulo = pTitulo;
             this.contenido = pContenido;
         }

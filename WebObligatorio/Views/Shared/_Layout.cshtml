@@ -103,7 +103,7 @@
                                     </button>
                                     <div class="Mynav_dropdown-content">
                                         <a asp-area="" asp-controller="Resenia" asp-action="ListarResenias">Listar Reseñas</a>
-                                        <a asp-area="" asp-controller="Partido" asp-action="ListadosPartidosFinalizados">Crear Reseña</a>
+                                        <a asp-area="" asp-controller="Partido" asp-action="ListadosPartidosFinalizados">Crear Reseñas</a>
                                     </div>
                                 </div>
                             }
@@ -115,7 +115,7 @@
                                     </button>
                                     <div class="Mynav_dropdown-content">
                                         <a asp-area="" asp-controller="Seleccion" asp-action="index">Ver Selecciones</a>
-                                        <a asp-area="" asp-controller="Seleccion" asp-action="Goleadores">Ver Goleadores</a>
+                                        
                                     </div>
                                 </div>
                                 <div class="Mynav_dropdown">
@@ -130,11 +130,19 @@
                                 </div>
                                 <div class="Mynav_dropdown">
                                     <button class="Mynav_dropbtn">
+                                        Estadisticas
+                                    </button>
+                                    <div class="Mynav_dropdown-content">
+                                        <a asp-area="" asp-controller="Seleccion" asp-action="Goleadores">Ver Goleadores</a>
+                                        <a asp-area="" asp-controller="Partido" asp-action="BuscarPartidoEmailPeriodista">Buscar Reseñas</a>
+                                    </div>
+                                </div>
+                                <div class="Mynav_dropdown">
+                                    <button class="Mynav_dropbtn">
                                         Periodistas
                                     </button>
                                     <div class="Mynav_dropdown-content">
                                         <a asp-area="" asp-controller="Periodista" asp-action="ListarPeriodistas">Listar Periodistas</a>
-                                        <a asp-area="" asp-controller="Partido" asp-action="BuscarPartidoEmailPeriodista">Buscar Reseñas</a>
                                     </div>
                                 </div>
                             }

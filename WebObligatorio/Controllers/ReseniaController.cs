@@ -49,9 +49,10 @@ namespace WebObligatorio.Controllers
 
 
         [HttpPost]
-        public IActionResult AltaResenia(DateTime fecha,int idPartido, string titulo, string contenido)
+        public IActionResult AltaResenia(Resenia resenia)
         {
-            Resenia resenia = sistema.RegistrarResenia(HttpContext.Session.GetString("UsuarioLogueadoEmail"), fecha, idPartido, titulo, contenido);
+            sistema.AsociarPeriodistaResenia(HttpContext.Session.GetString("UsuarioLogueadoEmail"), resenia);
+            sistema.AsociarPartidoResenia(resenia);
             sistema.AltaResenia(resenia);
             return RedirectToAction("ListarResenias", "Resenia");
         }

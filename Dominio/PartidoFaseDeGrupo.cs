@@ -55,7 +55,7 @@ namespace Dominio
 
         public override string ObtenerEtapa()
         {
-            return "SIN_ETAPA";
+            return this.grupo.ToString();
         }
 
         #endregion

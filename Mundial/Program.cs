@@ -86,8 +86,10 @@ namespace Mundial
             {
                 Console.WriteLine("###Registro de periodista###");
                 Console.WriteLine("");
-                Console.WriteLine("Ingrese nombre completo: ");
-                string nombreCompleto = Console.ReadLine();
+                Console.WriteLine("Ingrese nombre: ");
+                string nombre = Console.ReadLine();
+                Console.WriteLine("Ingrese apellido: ");
+                string apellido = Console.ReadLine();
                 Console.WriteLine("Ingrese email: ");
                 string email = Console.ReadLine();
                 Console.WriteLine("Ingrese contrasenia: ");
@@ -96,7 +98,7 @@ namespace Mundial
                 string rePassword = Console.ReadLine();
                 if (password == rePassword)
                 {
-                    Periodista periodista = new Periodista(nombreCompleto, email, password);
+                    Periodista periodista = new Periodista(nombre,apellido, email, password);
                     sistema.AltaPeriodista(periodista);
                     Console.WriteLine("Registro exitoso! ! !");
                 }else

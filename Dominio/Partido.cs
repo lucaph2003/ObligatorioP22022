@@ -149,6 +149,7 @@ namespace Dominio
             return "SIN_TIPO";
         }
 
+        //ESTE METODO EN FASE ELIMINATORIA DEVUELVE LA ETAPA Y EN FASE DE GRUPO DEVUELVE EL GRUPO
         public virtual string ObtenerEtapa()
         {
             return "SIN_ETAPA";

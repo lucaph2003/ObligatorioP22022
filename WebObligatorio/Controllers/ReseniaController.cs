@@ -19,11 +19,19 @@ namespace WebObligatorio.Controllers
             if(rol != null && rol == "Operador")
             {
                 List<Resenia> resenias = sistema.ObtenerReseniasPorPeriodista(email);
+                if (resenias.Count < 1)
+                {
+                    ViewBag.Error = "Aun no ha creado ninguna resenia";
+                }
                 return View(resenias);
             }
             else if(rol != null && rol == "Periodista")
             {
                 List<Resenia> resenias = sistema.ObtenerReseniasPorPeriodista(pEmail);
+                if (resenias.Count < 1)
+                {
+                    ViewBag.Error = "Aun no has creado ninguna resenia";
+                }
                 return View(resenias);
             }
             TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";

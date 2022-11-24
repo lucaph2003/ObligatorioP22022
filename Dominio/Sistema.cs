@@ -513,7 +513,7 @@ namespace Dominio
                 List<Partido> aux = new List<Partido>();
                 foreach (Partido p in Partidos)
                 {
-                    if (p.fechaHora >= f1 && p.fechaHora <= f2)
+                    if (p.fechaHora >= f1 && p.fechaHora <= f2 && p.esFinalizada)
                     {
                         p.ValidarFecha();
                         aux.Add(p);
@@ -619,17 +619,12 @@ namespace Dominio
         {
             AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"),GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
             AltaResenia(new Resenia(GetPeriodista("KesmanAlberto@gmail.com"), DateTime.Parse("2022 -11-22 10:00:00"), GetPartido(1), "Titulo Prueba", "Contenido de prueba"));
-            AltaResenia(new Resenia(GetPeriodista("lucapodesta47@gmail.com"), DateTime.Parse("2022-11-22 13:00:00"), GetPartido(2), "Titulo Prueba 2", "Contenido de prueba 3"));
         }
         private void PrecargaPeriodista()
         {
 
             AltaPeriodista(new Periodista("Alberto ", "Kesman", "Kesman123", "KesmanAlberto@gmail.com"));
-            AltaPeriodista(new Periodista("Andres ", "Da Silveira", "Toto1234", "DaSilveira@outlook.com"));
-            AltaPeriodista(new Periodista("Jorge ", "Da Silveira", "Toto1234", "DaSilveira@gmail.com"));
-            AltaPeriodista(new Periodista("Matias ", "Da Silveira", "Toto1234", "DaSilveira@hotmail.com"));
             AltaPeriodista(new Periodista("Luca", "Podesta", "Luca1234", "lucapodesta47@gmail.com"));
-            AltaPeriodista(new Periodista("julian", "Podesta", "Luca1234", "lucapodesta47@hotmail.com"));
         }
         private void PrecargaOperador()
         {

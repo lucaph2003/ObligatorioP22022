@@ -17,6 +17,10 @@ namespace WebObligatorio.Controllers
             if (rol != null && rol == ("Operador"))
             {
                 List<Periodista> periodistas = sistema.ObtenerPeriodistas();
+                if (periodistas.Count < 1)
+                {
+                    ViewBag.Error = "no hay periodistas registrados";
+                }
                 return View(periodistas);
             }
             else

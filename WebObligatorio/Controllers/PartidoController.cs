@@ -74,9 +74,13 @@ namespace WebObligatorio.Controllers
             string rol = HttpContext.Session.GetString("UsuarioRol");
             if (rol != null && rol == ("Operador"))
             {
-                if(f1 != null && f2 != null)
+                if(f1 != null && f2 != null && f1.Year != 0001 && f2.Year != 0001)
                 {
                     List<Partido> partidos = sistema.ObtenerPartidosEntre2Fechas(f1, f2);
+                    if(partidos.Count < 1)
+                    {
+                        ViewBag.Error = "No hay partidos entre estas fechas";
+                    }
                     return View(partidos);
                 }
                 else
@@ -100,6 +104,10 @@ namespace WebObligatorio.Controllers
                 if(email != null)
                 {
                     List<Partido> partidos = sistema.ObtenerPartidoRojaReseniaEmailPeriodista(email);
+                    if (partidos.Count < 1)
+                    {
+                        ViewBag.Error = "No hay partidos con roja reseniados por "+email;
+                    }
                     return View(partidos);
                 }
                 else

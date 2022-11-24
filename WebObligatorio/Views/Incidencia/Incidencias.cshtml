@@ -15,18 +15,20 @@
             <th scope="col">Incidencia</th>
             <th scope="col">Minuto</th>
             <th scope="col">Jugador</th>
+            <th scope="col">Seleccion</th>
         </tr>
     </thead>
     <tbody>
         @{
             foreach (Incidencia incidencia in Model)
             {
-                    <tr>
-                        <th scope="row">i</th>
-                        <td>@incidencia.incidencia</td>
-                        <td>@incidencia.minuto'</td>
-                        <td>@incidencia.jugador.nombreCompleto</td>
-                    </tr>
+                <tr>
+                    <th scope="row">i</th>
+                    <td>@incidencia.incidencia</td>
+                    <td>@incidencia.minuto'</td>
+                    <td>@incidencia.jugador.nombreCompleto</td>
+                    <td>@incidencia.jugador.pais.nombre</td>
+                </tr>
             }
         }
     </tbody>

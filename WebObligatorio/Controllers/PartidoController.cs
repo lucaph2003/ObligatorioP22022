@@ -49,10 +49,12 @@ namespace WebObligatorio.Controllers
         //Vista de los partidos finalizados
         public IActionResult ListadosPartidosFinalizados()
         {
+            //ViewBag.pe = sistema.ObtenerPartidoFaseEliminatoria();
             string rol = HttpContext.Session.GetString("UsuarioRol");
-            if(rol != null)
+            if (rol != null)
             {
-                List<Partido> partidos = sistema.ObtenerListaPartidosFinalizados();
+                ViewBag.pE = sistema.ObtenerPartidosFE();
+                List<Partido> partidos = sistema.ObtenerPartidosFG();
                 return View(partidos);
             }
             else
@@ -60,7 +62,7 @@ namespace WebObligatorio.Controllers
                 TempData["mensajeError"] = "No tienes permisos para acceder a esta página.";
                 return RedirectToAction("MostrarError", "Error");
             }
-            
+
         }
 
         //Vista de Finalizar la eliminatoria

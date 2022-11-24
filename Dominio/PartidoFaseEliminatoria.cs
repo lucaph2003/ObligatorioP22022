@@ -7,15 +7,18 @@ namespace Dominio
     public class PartidoFaseEliminatoria : Partido
     {
         #region Atributos PartidoFaseEliminatoria
+        public string etapa { get; set; }
         public bool alargue { get; set; }
         public bool penales { get; set; }
         public const string tipo = "FaseEliminatoria";
         #endregion
         #region Metodos PartidoFaseEliminatoria
-        public PartidoFaseEliminatoria(Seleccion pSeleccion1, Seleccion pSeleccion2,DateTime pFechaHora):base(pSeleccion1,pSeleccion2,pFechaHora)
+        public PartidoFaseEliminatoria(Seleccion pSeleccion1, Seleccion pSeleccion2,DateTime pFechaHora, string pEtapa):base(pSeleccion1,pSeleccion2,pFechaHora)
         {
+            this.etapa = pEtapa;
             this.alargue = false;
             this.penales = false;
+            
         }
 
         public void HuboAlargue()

@@ -7,23 +7,30 @@
 @using Dominio;
 @model List<Partido>
 
-@if (ViewBag.error != null)
-{
-<div class="alert alert-warning" role="alert">
-    @ViewBag.error
-</div> }
-            else
-            {
-                foreach (Partido p in Model)
-                {
-<div class="alert alert-primary" role="alert">
-    <p><strong>Fase:</strong> @p.ObtenerTipo()</p>
-    <p><strong>Fecha:</strong> @p.fechaHora</p>
-    <p><strong>Selección:</strong> @p.seleccion1.pais.nombre | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion1) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion1)</p>
-    <p><strong>Selección:</strong> @p.seleccion2.pais.nombre | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion2) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion2)</p>
-    <p><strong>Resultado del partido:</strong> @p.resultadoFinal</p>
-    @if (Context.Session.GetString("UsuarioRol") == "Periodista")
+@{
+    foreach (Partido p in Model)
     {
-<button type="button" class="btn btn-outline-primary">@Html.ActionLink("Registrar Reseña", "AltaResenia", "Resenia", new { idPartido = p.id })</button>                    }
-</div>}
-            }
+        <div class="alert alert-primary" role="alert">
+            <p><strong>Fase:</strong> @p.ObtenerTipo()</p>
+            <p><strong>Fecha:</strong> @p.fechaHora</p>
+            <p><strong>Selección:</strong> @p.seleccion1.pais.nombre | <strong>Goles:</strong> @p.resultado1 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion1) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion1)</p>
+            <p><strong>Selección:</strong> @p.seleccion2.pais.nombre | <strong>Goles:</strong> @p.resultado2 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion2) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion2)</p>
+            <p><strong>Resultado del partido:</strong> @p.resultadoFinal</p>
+            @if (Context.Session.GetString("UsuarioRol") == "Periodista")
+            {
+                <button type="button" class="btn btn-outline-primary">@Html.ActionLink("Registrar Reseña", "AltaResenia", "Resenia", new { idPartido = p.id })</button>}
+        </div>}
+}
+
+@{
+    foreach (PartidoFaseEliminatoria p in ViewBag.pE)
+    {
+        <div class="alert alert-primary" role="alert">
+            <p><strong>Fase:</strong> @p.ObtenerTipo()</p>
+            <p><strong>Fecha:</strong> @p.fechaHora</p>
+            <p><strong>Etapa:</strong> @p.etapa</p>
+            <p><strong>Selección:</strong> @p.seleccion1.pais.nombre | <strong>Goles:</strong> @p.resultado1 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion1) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion1)</p>
+            <p><strong>Selección:</strong> @p.seleccion2.pais.nombre | <strong>Goles:</strong> @p.resultado2 | <strong>Amarillas:</strong> @p.ObtenerAmonestacionesSeleccion(p.seleccion2) | <strong>Rojas:</strong>  @p.ObtenerExpulsionesSeleccion(p.seleccion2)</p>
+            <p><strong>Resultado del partido:</strong> @p.resultadoFinal</p>
+        </div>}
+}

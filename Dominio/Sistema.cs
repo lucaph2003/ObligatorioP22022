@@ -295,18 +295,49 @@ namespace Dominio
             }
             return partidos;
         }
-
-        public List<Partido> ObtenerListaPartidosFinalizados()
+        //VER SI ES NECESARIO
+        //public List<Partido> ObtenerListaPartidosFinalizados()
+        //{
+        //    List<Partido> partidosFinalizados = new List<Partido>();
+        //    foreach (Partido p in Partidos)
+        //    {
+        //        if (p.esFinalizada)
+        //        {
+        //            partidosFinalizados.Add(p);
+        //        }
+        //    }
+        //    return partidosFinalizados;
+        //}
+        public List<Partido> ObtenerPartidosFG()
         {
-            List<Partido> partidosFinalizados = new List<Partido>();
+            List<Partido> aux = new List<Partido>();
             foreach (Partido p in Partidos)
             {
-                if (p.esFinalizada)
+                if (p is PartidoFaseDeGrupo)
                 {
-                    partidosFinalizados.Add(p);
+                    if (p.esFinalizada)
+                    {
+                        aux.Add(p as PartidoFaseDeGrupo);
+                    }
                 }
             }
-            return partidosFinalizados;
+            return aux;
+        }
+
+        public List<Partido> ObtenerPartidosFE()
+        {
+            List<Partido> aux = new List<Partido>();
+            foreach (Partido p in Partidos)
+            {
+                if (p is PartidoFaseEliminatoria)
+                {
+                    if (p.esFinalizada)
+                    {
+                        aux.Add(p as PartidoFaseEliminatoria);
+                    }
+                }
+            }
+            return aux;
         }
 
         //Obtiene los partidos que jugo segun el id del jugador
@@ -694,13 +725,13 @@ namespace Dominio
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Uruguay"), DateTime.Parse("2022-11-28 16:00:00"), 'H'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
             AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Uruguay"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
-            AltaPartidoFaseDeGrupos(new PartidoFaseDeGrupo(GetSeleccion("Ghana"), GetSeleccion("Uruguay"), DateTime.Parse("2022-12-02 12:00:00"), 'H'));
+            
         }
         private void PrecargaPartidosFaseEliminatoria()
         {
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00")));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00")));
-            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00")));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Argentina"), GetSeleccion("Corea del Sur"), DateTime.Parse("2022-12-03 12:00:00"), "Octavos"));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Polonia"), DateTime.Parse("2022-12-03 16:00:00"), "Octavos"));
+            AltaPartidoFaseEliminatoria(new PartidoFaseEliminatoria(GetSeleccion("Uruguay"), GetSeleccion("Argentina"), DateTime.Parse("2022-12-09 12:00:00"), "Cuartos"));
         }
 
         private void PrecargaIncidencias()

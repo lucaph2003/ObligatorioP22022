@@ -27,7 +27,7 @@ namespace Dominio
             Jugadores.Add(pJugador);
         }
 
-        public string verNombre()
+        public string VerNombre()
         {
             return pais.nombre;
         }

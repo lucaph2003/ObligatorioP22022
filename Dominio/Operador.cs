@@ -40,7 +40,7 @@ namespace Dominio
             }
 
         }
-        public void ValidarEmail()
+        public override void ValidarEmail()
         {
             if (!this.email.Contains("@") || this.email.StartsWith("@") || this.email.EndsWith("@"))
             {
@@ -48,7 +48,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarPassword()
+        public override void ValidarPassword()
         {
             if (this.contrasena.Length < 7)
             {

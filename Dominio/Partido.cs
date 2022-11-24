@@ -140,7 +140,7 @@ namespace Dominio
         }
         public override string ToString()
         {
-            return $"Fecha: {this.fechaHora}" + " " + $"{this.seleccion1.verNombre()}" + " VS " + $"{this.seleccion2.verNombre()}" + " " + "Cantidad Incidencias: " + $"{this.Incidencias.Count}"; 
+            return $"Fecha: {this.fechaHora}" + " " + $"{this.seleccion1.VerNombre()}" + " VS " + $"{this.seleccion2.VerNombre()}" + " " + "Cantidad Incidencias: " + $"{this.Incidencias.Count}"; 
         }
 
         public virtual string ObtenerTipo()

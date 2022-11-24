@@ -173,13 +173,10 @@ namespace Dominio
             {
                 if (u is Periodista)
                 {
-                    foreach (Periodista p in Usuarios)
-                    {
-                        if (p.email == email)
-                        {
-                            return p;
-                        }
-                    }
+                   if (u.email == email)
+                   {
+                     return u as Periodista;
+                   }
                 }
             }
             return null;
